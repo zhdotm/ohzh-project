@@ -32,6 +32,11 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
     private String description;
 
     /**
+     * 转换器组件排序号
+     */
+    private Integer sort;
+
+    /**
      * 转换类型
      */
     private TransitionTypeEnum type;
@@ -79,6 +84,18 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
      */
     public TransitionBuilder id(String id) {
         this.id = id;
+
+        return this;
+    }
+
+    /**
+     * 设置转换器组件排序号
+     *
+     * @param sort 转换器组件排序号
+     * @return 转换器组件构造器
+     */
+    public TransitionBuilder sort(Integer sort) {
+        this.sort = sort;
 
         return this;
     }
@@ -251,6 +268,16 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
             public String getDescription() {
 
                 return description;
+            }
+
+            @Override
+            public Integer getSort() {
+                if (ObjectUtil.isNotEmpty(sort)) {
+
+                    return sort;
+                }
+                
+                return Transition.super.getSort();
             }
         };
     }
