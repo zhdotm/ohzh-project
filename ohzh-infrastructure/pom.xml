@@ -12,6 +12,9 @@
     <artifactId>ohzh-infrastructure</artifactId>
     <packaging>pom</packaging>
     <description>基础组件</description>
+    <modules>
+        <module>ohzh-statemachine</module>
+    </modules>
 
 
 </project>

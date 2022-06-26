@@ -6,7 +6,7 @@
 
     <groupId>io.github.zhdotm</groupId>
     <artifactId>ohzh-project</artifactId>
-    <version>${ohzh.version}</version>
+    <version>1.0-SNAPSHOT</version>
     <modules>
         <module>ohzh-infrastructure</module>
     </modules>
@@ -14,11 +14,10 @@
     <description>脚手架</description>
 
 
-
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <ohzh.version>1.0-SNAPSHOT</ohzh.version>
+        <hutool.version>5.8.3</hutool.version>
         <mybatis-spring-boot-starter.version>2.2.2</mybatis-spring-boot-starter.version>
         <mybatis-dynamic-sql.version>1.4.0</mybatis-dynamic-sql.version>
         <mybatis-generator.version>1.4.1</mybatis-generator.version>
