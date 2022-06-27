@@ -5,5 +5,5 @@ package io.github.zhdotm.ohzh.infrastructure.statemachine.model;
  *
  * @author zhihao.mao
  */
-public interface State extends Identity{
+public interface IState extends Identity{
 }

@@ -5,7 +5,7 @@ package io.github.zhdotm.ohzh.infrastructure.statemachine.builder;
  *
  * @author zhihao.mao
  */
-public interface Builder<T> {
+public interface IBuilder<T> {
 
     /**
      * 生成实现

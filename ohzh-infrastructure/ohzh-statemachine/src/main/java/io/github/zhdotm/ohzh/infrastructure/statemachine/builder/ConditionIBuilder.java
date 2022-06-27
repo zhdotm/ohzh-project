@@ -1,8 +1,8 @@
 package io.github.zhdotm.ohzh.infrastructure.statemachine.builder;
 
 import cn.hutool.core.lang.Assert;
-import io.github.zhdotm.ohzh.infrastructure.statemachine.model.Condition;
-import io.github.zhdotm.ohzh.infrastructure.statemachine.model.Event;
+import io.github.zhdotm.ohzh.infrastructure.statemachine.model.ICondition;
+import io.github.zhdotm.ohzh.infrastructure.statemachine.model.IEvent;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.function.Function;
@@ -13,7 +13,7 @@ import java.util.function.Function;
  * @author zhihao.mao
  */
 @Slf4j
-public class ConditionBuilder implements Builder<Condition> {
+public class ConditionIBuilder implements IBuilder<ICondition> {
 
     /**
      * 条件组件ID
@@ -28,16 +28,16 @@ public class ConditionBuilder implements Builder<Condition> {
     /**
      * 条件组件判断函数
      */
-    private Function<Event, Boolean> isAllowedFunction;
+    private Function<IEvent, Boolean> isAllowedFunction;
 
     /**
      * 新建条件组件构造器
      *
      * @return 条件组件构造器
      */
-    public static ConditionBuilder builder() {
+    public static ConditionIBuilder builder() {
 
-        return new ConditionBuilder();
+        return new ConditionIBuilder();
     }
 
     /**
@@ -46,7 +46,7 @@ public class ConditionBuilder implements Builder<Condition> {
      * @param id 条件组件ID
      * @return 条件组件构造器
      */
-    public ConditionBuilder id(String id) {
+    public ConditionIBuilder id(String id) {
         this.id = id;
 
         return this;
@@ -58,7 +58,7 @@ public class ConditionBuilder implements Builder<Condition> {
      * @param description 条件组件描述
      * @return 条件组件构造器
      */
-    public ConditionBuilder description(String description) {
+    public ConditionIBuilder description(String description) {
         this.description = description;
 
         return this;
@@ -71,7 +71,7 @@ public class ConditionBuilder implements Builder<Condition> {
      * @param isAllowedFunction 条件组件判断函数
      * @return 条件组件构造器
      */
-    public ConditionBuilder isAllowed(Function<Event, Boolean> isAllowedFunction) {
+    public ConditionIBuilder isAllowed(Function<IEvent, Boolean> isAllowedFunction) {
         this.isAllowedFunction = isAllowedFunction;
 
         return this;
@@ -83,15 +83,15 @@ public class ConditionBuilder implements Builder<Condition> {
      * @return 条件组件
      */
     @Override
-    public Condition build() {
+    public ICondition build() {
         Assert.notBlank(id, "构建条件组件失败: id为空");
         Assert.notNull(isAllowedFunction, "构建条件组件失败: 判断函数为空");
 
         log.info("开始构建条件组件: id[{}], description[{}]", id, description);
 
-        return new Condition() {
+        return new ICondition() {
             @Override
-            public Boolean isAllowed(Event event) {
+            public Boolean isAllowed(IEvent event) {
 
                 return isAllowedFunction.apply(event);
             }

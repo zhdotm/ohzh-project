@@ -1,8 +1,8 @@
 package io.github.zhdotm.ohzh.infrastructure.statemachine.builder;
 
 import cn.hutool.core.lang.Assert;
-import io.github.zhdotm.ohzh.infrastructure.statemachine.model.Action;
-import io.github.zhdotm.ohzh.infrastructure.statemachine.model.Event;
+import io.github.zhdotm.ohzh.infrastructure.statemachine.model.IAction;
+import io.github.zhdotm.ohzh.infrastructure.statemachine.model.IEvent;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.function.Consumer;
@@ -14,7 +14,7 @@ import java.util.function.Consumer;
  */
 
 @Slf4j
-public class ActionBuilder implements Builder<Action> {
+public class ActionIBuilder implements IBuilder<IAction> {
 
     /**
      * 动作组件ID
@@ -29,16 +29,16 @@ public class ActionBuilder implements Builder<Action> {
     /**
      * 动作组件事件处理函数
      */
-    private Consumer<Event> onEventFunction;
+    private Consumer<IEvent> onEventFunction;
 
     /**
      * 新建动作组件构造器
      *
      * @return 动作组件构造器
      */
-    public static ActionBuilder builder() {
+    public static ActionIBuilder builder() {
 
-        return new ActionBuilder();
+        return new ActionIBuilder();
     }
 
     /**
@@ -47,7 +47,7 @@ public class ActionBuilder implements Builder<Action> {
      * @param id 动作组件ID
      * @return 动作组件构造器
      */
-    public ActionBuilder id(String id) {
+    public ActionIBuilder id(String id) {
         this.id = id;
 
         return this;
@@ -59,7 +59,7 @@ public class ActionBuilder implements Builder<Action> {
      * @param description 动作组件描述
      * @return 动作组件构造器
      */
-    public ActionBuilder description(String description) {
+    public ActionIBuilder description(String description) {
         this.description = description;
 
         return this;
@@ -71,7 +71,7 @@ public class ActionBuilder implements Builder<Action> {
      * @param onEventFunction 事件处理函数
      * @return 动作组件构造器
      */
-    public ActionBuilder onEvent(Consumer<Event> onEventFunction) {
+    public ActionIBuilder onEvent(Consumer<IEvent> onEventFunction) {
         this.onEventFunction = onEventFunction;
 
         return this;
@@ -83,15 +83,15 @@ public class ActionBuilder implements Builder<Action> {
      * @return 动作组件
      */
     @Override
-    public Action build() {
+    public IAction build() {
         Assert.notBlank(id, "构建动作组件失败: id为空");
         Assert.notNull(onEventFunction, "构建动作组件失败: 事件处理函数为空");
 
         log.info("开始构建动作组件: id[{}], description[{}]", id, description);
 
-        return new Action() {
+        return new IAction() {
             @Override
-            public void onEvent(Event event) {
+            public void onEvent(IEvent event) {
                 onEventFunction.accept(event);
             }
 

@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.infrastructure.statemachine.builder;
 
 import cn.hutool.core.lang.Assert;
-import io.github.zhdotm.ohzh.infrastructure.statemachine.model.State;
+import io.github.zhdotm.ohzh.infrastructure.statemachine.model.IState;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author zhihao.mao
  */
 @Slf4j
-public class StateBuilder implements Builder<State> {
+public class StateIBuilder implements IBuilder<IState> {
 
     /**
      * 状态组件ID
@@ -27,9 +27,9 @@ public class StateBuilder implements Builder<State> {
      *
      * @return 状态组件构造器
      */
-    public static StateBuilder builder() {
+    public static StateIBuilder builder() {
 
-        return new StateBuilder();
+        return new StateIBuilder();
     }
 
     /**
@@ -38,7 +38,7 @@ public class StateBuilder implements Builder<State> {
      * @param id 状态组件ID
      * @return 状态组件构造器
      */
-    public StateBuilder id(String id) {
+    public StateIBuilder id(String id) {
         this.id = id;
 
         return this;
@@ -50,7 +50,7 @@ public class StateBuilder implements Builder<State> {
      * @param description 状态组件描述
      * @return 状态组件构造器
      */
-    public StateBuilder description(String description) {
+    public StateIBuilder description(String description) {
         this.description = description;
 
         return this;
@@ -63,12 +63,12 @@ public class StateBuilder implements Builder<State> {
      * @return 状态组件
      */
     @Override
-    public State build() {
+    public IState build() {
         Assert.notBlank(id, "构建状态组件失败: id为空");
 
         log.info("开始构建状态组件: id[{}], description[{}]", id, description);
 
-        return new State() {
+        return new IState() {
             @Override
             public String getId() {
 

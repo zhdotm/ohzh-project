@@ -5,7 +5,7 @@ package io.github.zhdotm.ohzh.infrastructure.statemachine.model;
  *
  * @author zhihao.mao
  */
-public interface Event extends Identity {
+public interface IEvent extends Identity {
 
     /**
      * 获取事件载荷

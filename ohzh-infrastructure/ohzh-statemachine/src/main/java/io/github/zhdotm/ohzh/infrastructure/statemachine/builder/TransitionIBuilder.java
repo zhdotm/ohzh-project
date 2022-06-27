@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 @Slf4j
-public class TransitionBuilder implements Builder<Transition>, Serializable {
+public class TransitionIBuilder implements IBuilder<ITransition>, Serializable {
 
     /**
      * 转换器组件ID
@@ -44,36 +44,36 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
     /**
      * 转换前状态
      */
-    private List<State> beginStates;
+    private List<IState> beginStates;
 
     /**
      * 转换后状态
      */
-    private State endState;
+    private IState endState;
 
     /**
      * 条件
      */
-    private Condition condition;
+    private ICondition condition;
 
     /**
      * 事件
      */
-    private Event event;
+    private IEvent event;
 
     /**
      * 动作
      */
-    private Action action;
+    private IAction action;
 
     /**
      * 新建转换器组件构造器
      *
      * @return 转换器组件构造器
      */
-    public static TransitionBuilder builder() {
+    public static TransitionIBuilder builder() {
 
-        return new TransitionBuilder();
+        return new TransitionIBuilder();
     }
 
     /**
@@ -82,7 +82,7 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
      * @param id 转换器组件ID
      * @return 转换器组件构造器
      */
-    public TransitionBuilder id(String id) {
+    public TransitionIBuilder id(String id) {
         this.id = id;
 
         return this;
@@ -94,7 +94,7 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
      * @param sort 转换器组件排序号
      * @return 转换器组件构造器
      */
-    public TransitionBuilder sort(Integer sort) {
+    public TransitionIBuilder sort(Integer sort) {
         this.sort = sort;
 
         return this;
@@ -106,7 +106,7 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
      * @param description 转换组件描述
      * @return 转换器组件构造器
      */
-    public TransitionBuilder description(String description) {
+    public TransitionIBuilder description(String description) {
         this.description = description;
 
         return this;
@@ -117,7 +117,7 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
      *
      * @return 转换器组件构造器
      */
-    public TransitionBuilder external() {
+    public TransitionIBuilder external() {
         type = TransitionTypeEnum.EXTERNAL;
 
         return this;
@@ -128,7 +128,7 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
      *
      * @return 转换器组件构造器
      */
-    public TransitionBuilder internal() {
+    public TransitionIBuilder internal() {
         type = TransitionTypeEnum.INTERNAL;
 
         return this;
@@ -140,7 +140,7 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
      * @param states 转换前状态
      * @return 转换器组件构造器
      */
-    public TransitionBuilder from(State... states) {
+    public TransitionIBuilder from(IState... states) {
         if (CollectionUtil.isEmpty(beginStates)) {
 
             beginStates = Lists.newArrayList();
@@ -160,7 +160,7 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
      * @param state 转换后状态
      * @return 转换器组件构造器
      */
-    public TransitionBuilder to(State state) {
+    public TransitionIBuilder to(IState state) {
         Assert.notNull(type, "设置转换后状态失败: 未设置转换类型");
         Assert.isTrue(type == TransitionTypeEnum.EXTERNAL, "设置转换后状态失败: 只有外部转换需要设置转换后状态");
         this.endState = state;
@@ -174,7 +174,7 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
      * @param condition 转换条件
      * @return 转换器组件构造器
      */
-    public TransitionBuilder on(Condition condition) {
+    public TransitionIBuilder on(ICondition condition) {
         this.condition = condition;
 
         return this;
@@ -186,7 +186,7 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
      * @param event 转换事件
      * @return 转换器组件构造器
      */
-    public TransitionBuilder when(Event event) {
+    public TransitionIBuilder when(IEvent event) {
         this.event = event;
 
         return this;
@@ -198,7 +198,7 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
      * @param action 转换动作
      * @return 转换器组件构造器
      */
-    public TransitionBuilder perform(Action action) {
+    public TransitionIBuilder perform(IAction action) {
         this.action = action;
 
         return this;
@@ -210,7 +210,7 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
      * @return 转换器组件
      */
     @Override
-    public Transition build() {
+    public ITransition build() {
         Assert.notBlank(id, "构建转换器组件失败: id为空");
         Assert.notNull(type, "构建转换器组件失败: 转换类型为空");
         Assert.notEmpty(beginStates, "构建转换器组件失败: 转换前状态为空");
@@ -221,7 +221,7 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
 
         log.info("开始构建转换器组件: id[{}], description[{}]", id, description);
 
-        return new Transition() {
+        return new ITransition() {
             @Override
             public TransitionTypeEnum getType() {
 
@@ -229,31 +229,31 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
             }
 
             @Override
-            public List<State> getFrom() {
+            public List<IState> getFrom() {
 
                 return beginStates;
             }
 
             @Override
-            public State getTo() {
+            public IState getTo() {
 
                 return endState;
             }
 
             @Override
-            public Event getEvent() {
+            public IEvent getEvent() {
 
                 return event;
             }
 
             @Override
-            public Condition getCondition() {
+            public ICondition getCondition() {
 
                 return condition;
             }
 
             @Override
-            public Action getAction() {
+            public IAction getAction() {
 
                 return action;
             }
@@ -277,7 +277,7 @@ public class TransitionBuilder implements Builder<Transition>, Serializable {
                     return sort;
                 }
                 
-                return Transition.super.getSort();
+                return ITransition.super.getSort();
             }
         };
     }

@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.infrastructure.statemachine.builder;
 
 import cn.hutool.core.lang.Assert;
-import io.github.zhdotm.ohzh.infrastructure.statemachine.model.Event;
+import io.github.zhdotm.ohzh.infrastructure.statemachine.model.IEvent;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author zhihao.mao
  */
 @Slf4j
-public class EventBuilder<T> implements Builder<Event> {
+public class EventIBuilder<T> implements IBuilder<IEvent> {
 
     /**
      * 事件组件ID
@@ -34,9 +34,9 @@ public class EventBuilder<T> implements Builder<Event> {
      * @param <T> 荷载类型
      * @return 事件组件构造器
      */
-    public static <T> EventBuilder<T> builder() {
+    public static <T> EventIBuilder<T> builder() {
 
-        return new EventBuilder<>();
+        return new EventIBuilder<>();
     }
 
     /**
@@ -45,7 +45,7 @@ public class EventBuilder<T> implements Builder<Event> {
      * @param id 事件组件ID
      * @return 事件组件构造器
      */
-    public EventBuilder<T> id(String id) {
+    public EventIBuilder<T> id(String id) {
         this.id = id;
 
         return this;
@@ -57,7 +57,7 @@ public class EventBuilder<T> implements Builder<Event> {
      * @param description 事件组件描述
      * @return 事件组件构造器
      */
-    public EventBuilder<T> description(String description) {
+    public EventIBuilder<T> description(String description) {
         this.description = description;
 
         return this;
@@ -69,7 +69,7 @@ public class EventBuilder<T> implements Builder<Event> {
      * @param payload 事件荷载
      * @return 事件组件构造器
      */
-    public EventBuilder<T> payload(T payload) {
+    public EventIBuilder<T> payload(T payload) {
         this.payload = payload;
 
         return this;
@@ -81,12 +81,12 @@ public class EventBuilder<T> implements Builder<Event> {
      * @return 事件组件
      */
     @Override
-    public Event build() {
+    public IEvent build() {
         Assert.notBlank(id, "构建事件组件失败: id为空");
 
         log.info("开始构建事件组件: id[{}], description[{}]", id, description);
         
-        return new Event() {
+        return new IEvent() {
 
             @Override
             public T getPayload() {

@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author zhihao.mao
  */
-public interface Transition extends Identity {
+public interface ITransition extends Identity {
 
     /**
      * 获取排序号
@@ -33,34 +33,34 @@ public interface Transition extends Identity {
      *
      * @return 转换前状态
      */
-    List<State> getFrom();
+    List<IState> getFrom();
 
     /**
      * 获取转换后状态
      *
      * @return 转换后状态
      */
-    State getTo();
+    IState getTo();
 
     /**
      * 获取事件
      *
      * @return 事件
      */
-    Event getEvent();
+    IEvent getEvent();
 
     /**
      * 获取条件
      *
      * @return 条件
      */
-    Condition getCondition();
+    ICondition getCondition();
 
     /**
      * 获取动作
      *
      * @return 动作
      */
-    Action getAction();
+    IAction getAction();
 
 }

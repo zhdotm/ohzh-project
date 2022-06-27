@@ -21,7 +21,7 @@ import java.util.Map;
  * @author zhihao.mao
  */
 @Slf4j
-public class StateMachineBuilder implements Builder<StateMachine>, Serializable {
+public class StateMachineIBuilder implements IBuilder<IStateMachine>, Serializable {
 
     /**
      * 状态机ID
@@ -36,21 +36,21 @@ public class StateMachineBuilder implements Builder<StateMachine>, Serializable 
     /**
      * 外部转换缓存
      */
-    private final Map<String, Transition> externalTransitionCache = new HashMap<>();
+    private final Map<String, ITransition> externalTransitionCache = new HashMap<>();
 
     /**
      * 内部转换缓存
      */
-    private final Map<String, List<Transition>> internalTransitionCache = new HashMap<>();
+    private final Map<String, List<ITransition>> internalTransitionCache = new HashMap<>();
 
     /**
      * 新建转换构造器
      *
      * @return 转换构造器
      */
-    public static StateMachineBuilder builder() {
+    public static StateMachineIBuilder builder() {
 
-        return new StateMachineBuilder();
+        return new StateMachineIBuilder();
     }
 
     /**
@@ -59,7 +59,7 @@ public class StateMachineBuilder implements Builder<StateMachine>, Serializable 
      * @param id 状态机ID
      * @return 状态机构造器
      */
-    public StateMachineBuilder id(String id) {
+    public StateMachineIBuilder id(String id) {
         this.id = id;
 
         return this;
@@ -71,7 +71,7 @@ public class StateMachineBuilder implements Builder<StateMachine>, Serializable 
      * @param description 状态机描述
      * @return 状态机构造器
      */
-    public StateMachineBuilder description(String description) {
+    public StateMachineIBuilder description(String description) {
         this.description = description;
 
         return this;
@@ -82,12 +82,12 @@ public class StateMachineBuilder implements Builder<StateMachine>, Serializable 
      *
      * @param transitions 转换
      */
-    public synchronized StateMachineBuilder addTransitions(Transition... transitions) {
-        for (Transition transition : transitions) {
+    public synchronized StateMachineIBuilder addTransitions(ITransition... transitions) {
+        for (ITransition transition : transitions) {
             TransitionTypeEnum type = transition.getType();
-            List<State> beginStates = transition.getFrom();
-            Event event = transition.getEvent();
-            for (State beginState : beginStates) {
+            List<IState> beginStates = transition.getFrom();
+            IEvent event = transition.getEvent();
+            for (IState beginState : beginStates) {
                 String cacheKey = cacheKey(beginState.getId(), event.getId());
 
                 //外部转换
@@ -100,9 +100,9 @@ public class StateMachineBuilder implements Builder<StateMachine>, Serializable 
 
                 //内部转换
                 if (type == TransitionTypeEnum.INTERNAL) {
-                    List<Transition> internalTransitionList = internalTransitionCache.getOrDefault(cacheKey, Lists.newArrayList());
+                    List<ITransition> internalTransitionList = internalTransitionCache.getOrDefault(cacheKey, Lists.newArrayList());
                     internalTransitionList.add(transition);
-                    internalTransitionList.sort(Comparator.comparingInt(Transition::getSort));
+                    internalTransitionList.sort(Comparator.comparingInt(ITransition::getSort));
                     internalTransitionCache.put(cacheKey, internalTransitionList);
                 }
             }
@@ -117,14 +117,14 @@ public class StateMachineBuilder implements Builder<StateMachine>, Serializable 
      * @return 状态机
      */
     @Override
-    public StateMachine build() {
+    public IStateMachine build() {
 
-        return new StateMachine() {
+        return new IStateMachine() {
             @Override
-            public State publishEvent(State from, Event event) {
+            public IState publishEvent(IState from, IEvent event) {
                 String cacheKey = cacheKey(from.getId(), event.getId());
-                List<Transition> internalTransitions = internalTransitionCache.get(cacheKey);
-                Transition externalTransition = externalTransitionCache.get(cacheKey);
+                List<ITransition> internalTransitions = internalTransitionCache.get(cacheKey);
+                ITransition externalTransition = externalTransitionCache.get(cacheKey);
                 if (CollectionUtil.isEmpty(internalTransitions) && ObjectUtil.isEmpty(externalTransition)) {
                     log.warn("状态机[{}]未找到对应转换组件: from[{}], event[{}]", getId(), from.getId(), event.getId());
 
@@ -132,24 +132,24 @@ public class StateMachineBuilder implements Builder<StateMachine>, Serializable 
                 }
 
                 if (CollectionUtil.isNotEmpty(internalTransitions)) {
-                    for (Transition internalTransition : internalTransitions) {
-                        Condition condition = internalTransition.getCondition();
+                    for (ITransition internalTransition : internalTransitions) {
+                        ICondition condition = internalTransition.getCondition();
                         if (!condition.isAllowed(event)) {
 
                             continue;
                         }
-                        Action action = internalTransition.getAction();
+                        IAction action = internalTransition.getAction();
                         action.onEvent(event);
                     }
                 }
 
                 if (ObjectUtil.isNotEmpty(externalTransition)) {
-                    Condition condition = externalTransition.getCondition();
+                    ICondition condition = externalTransition.getCondition();
                     if (!condition.isAllowed(event)) {
 
                         return null;
                     }
-                    Action action = externalTransition.getAction();
+                    IAction action = externalTransition.getAction();
                     action.onEvent(event);
 
                     return externalTransition.getTo();

@@ -5,28 +5,28 @@ import io.github.zhdotm.ohzh.infrastructure.statemachine.model.*;
 import org.junit.Test;
 
 
-public class StateMachineBuilderTest {
+public class IStateMachineIBuilderTest {
 
     @Test
     public void test() {
-        State beginState1 = StateBuilder
+        IState beginState1 = StateIBuilder
                 .builder()
                 .id("state:before:001")
                 .description("转换前状态1")
                 .build();
-        State beginState2 = StateBuilder
+        IState beginState2 = StateIBuilder
                 .builder()
                 .id("state:before:002")
                 .description("转换前状态2")
                 .build();
 
-        State endState1 = StateBuilder
+        IState endState1 = StateIBuilder
                 .builder()
                 .id("state:after:001")
                 .description("转换后状态1")
                 .build();
 
-        Condition condition1 = ConditionBuilder
+        ICondition condition1 = ConditionIBuilder
                 .builder()
                 .description("001一律允许的判断条件")
                 .id("condition:001")
@@ -38,7 +38,7 @@ public class StateMachineBuilderTest {
                 })
                 .build();
 
-        Condition condition2 = ConditionBuilder
+        ICondition condition2 = ConditionIBuilder
                 .builder()
                 .description("002一律不允许的判断条件")
                 .id("condition:002")
@@ -50,21 +50,21 @@ public class StateMachineBuilderTest {
                 })
                 .build();
 
-        Event event1 = EventBuilder
+        IEvent event1 = EventIBuilder
                 .builder()
                 .id("event:001")
                 .description("001号事件")
                 .payload("这是一个事件荷载001")
                 .build();
 
-        Event event2 = EventBuilder
+        IEvent event2 = EventIBuilder
                 .builder()
                 .id("event:002")
                 .description("002号事件")
                 .payload("这是一个事件荷载002")
                 .build();
 
-        Action action1 = ActionBuilder
+        IAction action1 = ActionIBuilder
                 .builder()
                 .id("action:001")
                 .description("001号动作")
@@ -74,7 +74,7 @@ public class StateMachineBuilderTest {
                 })
                 .build();
 
-        Action action2 = ActionBuilder
+        IAction action2 = ActionIBuilder
                 .builder()
                 .id("action:002")
                 .description("002号动作")
@@ -84,7 +84,7 @@ public class StateMachineBuilderTest {
                 })
                 .build();
 
-        Transition transition1 = TransitionBuilder
+        ITransition transition1 = TransitionIBuilder
                 .builder()
                 .id("transition:001")
                 .description("001号转换组件")
@@ -96,7 +96,7 @@ public class StateMachineBuilderTest {
                 .perform(action1)
                 .build();
 
-        Transition transition2 = TransitionBuilder
+        ITransition transition2 = TransitionIBuilder
                 .builder()
                 .id("transition:002")
                 .description("002号转换组件")
@@ -108,7 +108,7 @@ public class StateMachineBuilderTest {
                 .perform(action2)
                 .build();
 
-        StateMachine stateMachine = StateMachineBuilder
+        IStateMachine stateMachine = StateMachineIBuilder
                 .builder()
                 .id("stateMachine:001")
                 .description("001号状态机")

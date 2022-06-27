@@ -5,7 +5,7 @@ package io.github.zhdotm.ohzh.infrastructure.statemachine.model;
  *
  * @author zhihao.mao
  */
-public interface Condition extends Identity {
+public interface ICondition extends Identity {
 
     /**
      * 判断是否允许处理该事件
@@ -13,5 +13,5 @@ public interface Condition extends Identity {
      * @param event 事件
      * @return 是/否
      */
-    Boolean isAllowed(Event event);
+    Boolean isAllowed(IEvent event);
 }

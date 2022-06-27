@@ -5,12 +5,12 @@ package io.github.zhdotm.ohzh.infrastructure.statemachine.model;
  *
  * @author zhihao.mao
  */
-public interface Action extends Identity {
+public interface IAction extends Identity {
 
     /**
      * 执行事件
      *
      * @param event 事件
      */
-    void onEvent(Event event);
+    void onEvent(IEvent event);
 }

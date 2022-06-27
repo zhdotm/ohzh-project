@@ -5,7 +5,7 @@ package io.github.zhdotm.ohzh.infrastructure.statemachine.model;
  *
  * @author zhihao.mao
  */
-public interface StateMachine extends Identity {
+public interface IStateMachine extends Identity {
 
     /**
      * 发布事件
@@ -14,5 +14,5 @@ public interface StateMachine extends Identity {
      * @param event 事件
      * @return 执行后状态
      */
-    State publishEvent(State from, Event event);
+    IState publishEvent(IState from, IEvent event);
 }
