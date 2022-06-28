@@ -21,7 +21,7 @@ import java.util.Map;
  * @author zhihao.mao
  */
 @Slf4j
-public class StateMachineIBuilder implements IBuilder<IStateMachine>, Serializable {
+public class StateMachineBuilder implements IBuilder<IStateMachine>, Serializable {
 
     /**
      * 状态机ID
@@ -48,9 +48,9 @@ public class StateMachineIBuilder implements IBuilder<IStateMachine>, Serializab
      *
      * @return 转换构造器
      */
-    public static StateMachineIBuilder builder() {
+    public static StateMachineBuilder builder() {
 
-        return new StateMachineIBuilder();
+        return new StateMachineBuilder();
     }
 
     /**
@@ -59,7 +59,7 @@ public class StateMachineIBuilder implements IBuilder<IStateMachine>, Serializab
      * @param id 状态机ID
      * @return 状态机构造器
      */
-    public StateMachineIBuilder id(String id) {
+    public StateMachineBuilder id(String id) {
         this.id = id;
 
         return this;
@@ -71,7 +71,7 @@ public class StateMachineIBuilder implements IBuilder<IStateMachine>, Serializab
      * @param description 状态机描述
      * @return 状态机构造器
      */
-    public StateMachineIBuilder description(String description) {
+    public StateMachineBuilder description(String description) {
         this.description = description;
 
         return this;
@@ -82,7 +82,7 @@ public class StateMachineIBuilder implements IBuilder<IStateMachine>, Serializab
      *
      * @param transitions 转换
      */
-    public synchronized StateMachineIBuilder addTransitions(ITransition... transitions) {
+    public synchronized StateMachineBuilder addTransitions(ITransition... transitions) {
         for (ITransition transition : transitions) {
             TransitionTypeEnum type = transition.getType();
             List<IState> beginStates = transition.getFrom();

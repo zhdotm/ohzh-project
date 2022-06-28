@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author zhihao.mao
  */
 @Slf4j
-public class EventIBuilder<T> implements IBuilder<IEvent> {
+public class EventBuilder<T> implements IBuilder<IEvent> {
 
     /**
      * 事件组件ID
@@ -34,9 +34,9 @@ public class EventIBuilder<T> implements IBuilder<IEvent> {
      * @param <T> 荷载类型
      * @return 事件组件构造器
      */
-    public static <T> EventIBuilder<T> builder() {
+    public static <T> EventBuilder<T> builder() {
 
-        return new EventIBuilder<>();
+        return new EventBuilder<>();
     }
 
     /**
@@ -45,7 +45,7 @@ public class EventIBuilder<T> implements IBuilder<IEvent> {
      * @param id 事件组件ID
      * @return 事件组件构造器
      */
-    public EventIBuilder<T> id(String id) {
+    public EventBuilder<T> id(String id) {
         this.id = id;
 
         return this;
@@ -57,7 +57,7 @@ public class EventIBuilder<T> implements IBuilder<IEvent> {
      * @param description 事件组件描述
      * @return 事件组件构造器
      */
-    public EventIBuilder<T> description(String description) {
+    public EventBuilder<T> description(String description) {
         this.description = description;
 
         return this;
@@ -69,7 +69,7 @@ public class EventIBuilder<T> implements IBuilder<IEvent> {
      * @param payload 事件荷载
      * @return 事件组件构造器
      */
-    public EventIBuilder<T> payload(T payload) {
+    public EventBuilder<T> payload(T payload) {
         this.payload = payload;
 
         return this;

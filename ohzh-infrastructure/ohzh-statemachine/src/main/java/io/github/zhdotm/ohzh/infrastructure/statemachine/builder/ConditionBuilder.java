@@ -13,7 +13,7 @@ import java.util.function.Function;
  * @author zhihao.mao
  */
 @Slf4j
-public class ConditionIBuilder implements IBuilder<ICondition> {
+public class ConditionBuilder implements IBuilder<ICondition> {
 
     /**
      * 条件组件ID
@@ -35,9 +35,9 @@ public class ConditionIBuilder implements IBuilder<ICondition> {
      *
      * @return 条件组件构造器
      */
-    public static ConditionIBuilder builder() {
+    public static ConditionBuilder builder() {
 
-        return new ConditionIBuilder();
+        return new ConditionBuilder();
     }
 
     /**
@@ -46,7 +46,7 @@ public class ConditionIBuilder implements IBuilder<ICondition> {
      * @param id 条件组件ID
      * @return 条件组件构造器
      */
-    public ConditionIBuilder id(String id) {
+    public ConditionBuilder id(String id) {
         this.id = id;
 
         return this;
@@ -58,7 +58,7 @@ public class ConditionIBuilder implements IBuilder<ICondition> {
      * @param description 条件组件描述
      * @return 条件组件构造器
      */
-    public ConditionIBuilder description(String description) {
+    public ConditionBuilder description(String description) {
         this.description = description;
 
         return this;
@@ -71,7 +71,7 @@ public class ConditionIBuilder implements IBuilder<ICondition> {
      * @param isAllowedFunction 条件组件判断函数
      * @return 条件组件构造器
      */
-    public ConditionIBuilder isAllowed(Function<IEvent, Boolean> isAllowedFunction) {
+    public ConditionBuilder isAllowed(Function<IEvent, Boolean> isAllowedFunction) {
         this.isAllowedFunction = isAllowedFunction;
 
         return this;

@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author zhihao.mao
  */
 @Slf4j
-public class StateIBuilder implements IBuilder<IState> {
+public class StateBuilder implements IBuilder<IState> {
 
     /**
      * 状态组件ID
@@ -27,9 +27,9 @@ public class StateIBuilder implements IBuilder<IState> {
      *
      * @return 状态组件构造器
      */
-    public static StateIBuilder builder() {
+    public static StateBuilder builder() {
 
-        return new StateIBuilder();
+        return new StateBuilder();
     }
 
     /**
@@ -38,7 +38,7 @@ public class StateIBuilder implements IBuilder<IState> {
      * @param id 状态组件ID
      * @return 状态组件构造器
      */
-    public StateIBuilder id(String id) {
+    public StateBuilder id(String id) {
         this.id = id;
 
         return this;
@@ -50,7 +50,7 @@ public class StateIBuilder implements IBuilder<IState> {
      * @param description 状态组件描述
      * @return 状态组件构造器
      */
-    public StateIBuilder description(String description) {
+    public StateBuilder description(String description) {
         this.description = description;
 
         return this;

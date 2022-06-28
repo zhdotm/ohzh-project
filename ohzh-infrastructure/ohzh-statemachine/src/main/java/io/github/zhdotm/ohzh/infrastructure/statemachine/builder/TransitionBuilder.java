@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 @Slf4j
-public class TransitionIBuilder implements IBuilder<ITransition>, Serializable {
+public class TransitionBuilder implements IBuilder<ITransition>, Serializable {
 
     /**
      * 转换器组件ID
@@ -71,9 +71,9 @@ public class TransitionIBuilder implements IBuilder<ITransition>, Serializable {
      *
      * @return 转换器组件构造器
      */
-    public static TransitionIBuilder builder() {
+    public static TransitionBuilder builder() {
 
-        return new TransitionIBuilder();
+        return new TransitionBuilder();
     }
 
     /**
@@ -82,7 +82,7 @@ public class TransitionIBuilder implements IBuilder<ITransition>, Serializable {
      * @param id 转换器组件ID
      * @return 转换器组件构造器
      */
-    public TransitionIBuilder id(String id) {
+    public TransitionBuilder id(String id) {
         this.id = id;
 
         return this;
@@ -94,7 +94,7 @@ public class TransitionIBuilder implements IBuilder<ITransition>, Serializable {
      * @param sort 转换器组件排序号
      * @return 转换器组件构造器
      */
-    public TransitionIBuilder sort(Integer sort) {
+    public TransitionBuilder sort(Integer sort) {
         this.sort = sort;
 
         return this;
@@ -106,7 +106,7 @@ public class TransitionIBuilder implements IBuilder<ITransition>, Serializable {
      * @param description 转换组件描述
      * @return 转换器组件构造器
      */
-    public TransitionIBuilder description(String description) {
+    public TransitionBuilder description(String description) {
         this.description = description;
 
         return this;
@@ -117,7 +117,7 @@ public class TransitionIBuilder implements IBuilder<ITransition>, Serializable {
      *
      * @return 转换器组件构造器
      */
-    public TransitionIBuilder external() {
+    public TransitionBuilder external() {
         type = TransitionTypeEnum.EXTERNAL;
 
         return this;
@@ -128,7 +128,7 @@ public class TransitionIBuilder implements IBuilder<ITransition>, Serializable {
      *
      * @return 转换器组件构造器
      */
-    public TransitionIBuilder internal() {
+    public TransitionBuilder internal() {
         type = TransitionTypeEnum.INTERNAL;
 
         return this;
@@ -140,7 +140,7 @@ public class TransitionIBuilder implements IBuilder<ITransition>, Serializable {
      * @param states 转换前状态
      * @return 转换器组件构造器
      */
-    public TransitionIBuilder from(IState... states) {
+    public TransitionBuilder from(IState... states) {
         if (CollectionUtil.isEmpty(beginStates)) {
 
             beginStates = Lists.newArrayList();
@@ -160,7 +160,7 @@ public class TransitionIBuilder implements IBuilder<ITransition>, Serializable {
      * @param state 转换后状态
      * @return 转换器组件构造器
      */
-    public TransitionIBuilder to(IState state) {
+    public TransitionBuilder to(IState state) {
         Assert.notNull(type, "设置转换后状态失败: 未设置转换类型");
         Assert.isTrue(type == TransitionTypeEnum.EXTERNAL, "设置转换后状态失败: 只有外部转换需要设置转换后状态");
         this.endState = state;
@@ -174,7 +174,7 @@ public class TransitionIBuilder implements IBuilder<ITransition>, Serializable {
      * @param condition 转换条件
      * @return 转换器组件构造器
      */
-    public TransitionIBuilder on(ICondition condition) {
+    public TransitionBuilder on(ICondition condition) {
         this.condition = condition;
 
         return this;
@@ -186,7 +186,7 @@ public class TransitionIBuilder implements IBuilder<ITransition>, Serializable {
      * @param event 转换事件
      * @return 转换器组件构造器
      */
-    public TransitionIBuilder when(IEvent event) {
+    public TransitionBuilder when(IEvent event) {
         this.event = event;
 
         return this;
@@ -198,7 +198,7 @@ public class TransitionIBuilder implements IBuilder<ITransition>, Serializable {
      * @param action 转换动作
      * @return 转换器组件构造器
      */
-    public TransitionIBuilder perform(IAction action) {
+    public TransitionBuilder perform(IAction action) {
         this.action = action;
 
         return this;

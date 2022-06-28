@@ -14,7 +14,7 @@ import java.util.function.Consumer;
  */
 
 @Slf4j
-public class ActionIBuilder implements IBuilder<IAction> {
+public class ActionBuilder implements IBuilder<IAction> {
 
     /**
      * 动作组件ID
@@ -36,9 +36,9 @@ public class ActionIBuilder implements IBuilder<IAction> {
      *
      * @return 动作组件构造器
      */
-    public static ActionIBuilder builder() {
+    public static ActionBuilder builder() {
 
-        return new ActionIBuilder();
+        return new ActionBuilder();
     }
 
     /**
@@ -47,7 +47,7 @@ public class ActionIBuilder implements IBuilder<IAction> {
      * @param id 动作组件ID
      * @return 动作组件构造器
      */
-    public ActionIBuilder id(String id) {
+    public ActionBuilder id(String id) {
         this.id = id;
 
         return this;
@@ -59,7 +59,7 @@ public class ActionIBuilder implements IBuilder<IAction> {
      * @param description 动作组件描述
      * @return 动作组件构造器
      */
-    public ActionIBuilder description(String description) {
+    public ActionBuilder description(String description) {
         this.description = description;
 
         return this;
@@ -71,7 +71,7 @@ public class ActionIBuilder implements IBuilder<IAction> {
      * @param onEventFunction 事件处理函数
      * @return 动作组件构造器
      */
-    public ActionIBuilder onEvent(Consumer<IEvent> onEventFunction) {
+    public ActionBuilder onEvent(Consumer<IEvent> onEventFunction) {
         this.onEventFunction = onEventFunction;
 
         return this;
