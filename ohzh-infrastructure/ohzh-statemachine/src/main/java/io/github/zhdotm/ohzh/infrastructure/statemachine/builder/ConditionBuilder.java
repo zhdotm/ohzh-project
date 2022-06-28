@@ -87,8 +87,6 @@ public class ConditionBuilder implements IBuilder<ICondition> {
         Assert.notBlank(id, "构建条件组件失败: id为空");
         Assert.notNull(isAllowedFunction, "构建条件组件失败: 判断函数为空");
 
-        log.info("开始构建条件组件: id[{}], description[{}]", id, description);
-
         return new ICondition() {
             @Override
             public Boolean isAllowed(IEvent event) {

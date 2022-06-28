@@ -84,8 +84,6 @@ public class EventBuilder<T> implements IBuilder<IEvent> {
     public IEvent build() {
         Assert.notBlank(id, "构建事件组件失败: id为空");
 
-        log.info("开始构建事件组件: id[{}], description[{}]", id, description);
-        
         return new IEvent() {
 
             @Override

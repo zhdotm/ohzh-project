@@ -66,8 +66,6 @@ public class StateBuilder implements IBuilder<IState> {
     public IState build() {
         Assert.notBlank(id, "构建状态组件失败: id为空");
 
-        log.info("开始构建状态组件: id[{}], description[{}]", id, description);
-
         return new IState() {
             @Override
             public String getId() {

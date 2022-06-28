@@ -219,8 +219,6 @@ public class TransitionBuilder implements IBuilder<ITransition>, Serializable {
         Assert.notNull(event, "构建转换器组件失败: 事件组件为空");
         Assert.notNull(action, "构建转换器组件失败: 动作组件为空");
 
-        log.info("开始构建转换器组件: id[{}], description[{}]", id, description);
-
         return new ITransition() {
             @Override
             public TransitionTypeEnum getType() {
@@ -276,7 +274,7 @@ public class TransitionBuilder implements IBuilder<ITransition>, Serializable {
 
                     return sort;
                 }
-                
+
                 return ITransition.super.getSort();
             }
         };

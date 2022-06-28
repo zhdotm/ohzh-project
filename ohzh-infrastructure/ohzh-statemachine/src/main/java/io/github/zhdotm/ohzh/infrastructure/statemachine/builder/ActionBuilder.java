@@ -87,8 +87,6 @@ public class ActionBuilder implements IBuilder<IAction> {
         Assert.notBlank(id, "构建动作组件失败: id为空");
         Assert.notNull(onEventFunction, "构建动作组件失败: 事件处理函数为空");
 
-        log.info("开始构建动作组件: id[{}], description[{}]", id, description);
-
         return new IAction() {
             @Override
             public void onEvent(IEvent event) {
