@@ -1,0 +1,23 @@
+ohzh:
+  stateMachines:
+    - id: machine_id_001
+      description: 状态机描述_001
+      transitions:
+        - id: transition_001
+          description: 转换描述_001
+          type: EXTERNAL
+          beginStateIds:
+            - begin_state_01
+            - begin_state_02
+            - begin_state_03
+          endStateId: end_state_01
+          eventId: event_001
+        - id: transition_002
+          description: 转换描述002
+          type: EXTERNAL
+          beginStateIds:
+            - begin_state_01
+            - begin_state_02
+            - begin_state_03
+          endStateId: end_state_01
+          eventId: event_002

@@ -10,6 +10,7 @@
     <modules>
         <module>ohzh-infrastructure</module>
         <module>ohzh-starter</module>
+        <module>ohzh-example</module>
     </modules>
     <packaging>pom</packaging>
     <description>脚手架</description>
@@ -29,7 +30,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.7.0</version>
+                <version>2.2.6.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
