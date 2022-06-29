@@ -1,6 +1,5 @@
 package io.github.zhdotm.ohzh.starter.statemachine.config.properties;
 
-import io.github.zhdotm.ohzh.infrastructure.statemachine.constant.TransitionTypeEnum;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
