@@ -92,10 +92,10 @@ public class StateMachineBuilder implements IBuilder<IStateMachine>, Serializabl
 
                 //外部转换
                 if (type == TransitionTypeEnum.EXTERNAL) {
-                    Assert.isNull(externalTransitionCache.get(cacheKey), "添加转换失败[{}]: 相同启始状态和事件对应的外部转换有且仅允许存在一个", transition.getId());
+                    Assert.isNull(externalTransitionCache.get(cacheKey), "添加转换失败[{},{}]: 相同启始状态和事件对应的外部转换有且仅允许存在一个", id, transition.getId());
                     externalTransitionCache.put(cacheKey, transition);
 
-                    return this;
+                    continue;
                 }
 
                 //内部转换
