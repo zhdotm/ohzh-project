@@ -42,6 +42,7 @@ public class StateMachineApplicationRunner implements ApplicationRunner {
                 String transitionId = transitionProperties.getId();
                 String transitionDescription = transitionProperties.getDescription();
                 TransitionTypeEnum type = transitionProperties.getType();
+                Integer sort = transitionProperties.getSort();
                 List<String> beginStateIds = transitionProperties.getBeginStateIds();
                 IState[] beginStates = beginStateIds
                         .stream()
@@ -51,10 +52,13 @@ public class StateMachineApplicationRunner implements ApplicationRunner {
                                 .build())
                         .toArray(IState[]::new);
                 String endStateId = transitionProperties.getEndStateId();
-                IState endState = StateBuilder
-                        .builder()
-                        .id(endStateId)
-                        .build();
+                IState endState = null;
+                if (type == TransitionTypeEnum.EXTERNAL) {
+                    endState = StateBuilder
+                            .builder()
+                            .id(endStateId)
+                            .build();
+                }
                 String eventId = transitionProperties.getEventId();
                 IEvent event = EventBuilder
                         .builder()
@@ -71,6 +75,7 @@ public class StateMachineApplicationRunner implements ApplicationRunner {
                                 .builder()
                                 .id(transitionId)
                                 .description(transitionDescription)
+                                .sort(sort)
                                 .external()
                                 .from(beginStates)
                                 .to(endState)
@@ -87,7 +92,6 @@ public class StateMachineApplicationRunner implements ApplicationRunner {
                                 .description(transitionDescription)
                                 .internal()
                                 .from(beginStates)
-                                .to(endState)
                                 .on(condition)
                                 .when(event)
                                 .perform(action)

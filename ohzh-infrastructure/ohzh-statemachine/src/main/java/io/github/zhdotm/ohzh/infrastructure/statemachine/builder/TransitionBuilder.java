@@ -214,7 +214,9 @@ public class TransitionBuilder implements IBuilder<ITransition>, Serializable {
         Assert.notBlank(id, "构建转换器组件失败: id为空");
         Assert.notNull(type, "构建转换器组件失败: 转换类型为空");
         Assert.notEmpty(beginStates, "构建转换器组件失败: 转换前状态为空");
-        Assert.notNull(endState, "构建转换器组件失败: 转换后状态为空");
+        if (type == TransitionTypeEnum.EXTERNAL) {
+            Assert.notNull(endState, "构建转换器组件失败: 转换后状态为空");
+        }
         Assert.notNull(condition, "构建转换器组件失败: 条件组件为空");
         Assert.notNull(event, "构建转换器组件失败: 事件组件为空");
         Assert.notNull(action, "构建转换器组件失败: 动作组件为空");

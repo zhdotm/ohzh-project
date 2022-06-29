@@ -29,6 +29,11 @@ public class TransitionProperties {
     private TransitionTypeEnum type;
 
     /**
+     * 排序号
+     */
+    private Integer sort;
+
+    /**
      * 转换前状态ID
      */
     private List<String> beginStateIds;
