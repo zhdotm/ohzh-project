@@ -19,7 +19,7 @@ public class Action002 implements IAction {
 
     @Override
     public void onEvent(IEvent event) {
-        log.info("动作002接受到事件: {}", JSONUtil.toJsonStr(event));
+        log.info("动作002接受到事件: {}, {}", event.getId(), event.getPayload());
     }
 
     @Override

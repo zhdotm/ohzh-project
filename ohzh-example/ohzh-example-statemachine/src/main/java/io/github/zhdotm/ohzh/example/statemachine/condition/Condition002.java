@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class Condition002 implements ICondition {
     @Override
     public Boolean isAllowed(IEvent event) {
-        log.info("条件001接收到事件: {}", JSONUtil.toJsonStr(event));
+        log.info("条件001接收到事件: {}, {}", event.getId(), event.getPayload());
 
         return Boolean.TRUE;
     }
