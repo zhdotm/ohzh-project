@@ -8,9 +8,6 @@
     <artifactId>ohzh-project</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>ohzh-infrastructure</module>
-        <module>ohzh-starter</module>
-        <module>ohzh-example</module>
     </modules>
     <packaging>pom</packaging>
     <description>脚手架</description>
