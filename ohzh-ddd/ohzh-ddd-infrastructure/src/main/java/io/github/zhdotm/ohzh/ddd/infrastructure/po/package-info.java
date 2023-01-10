@@ -5,4 +5,5 @@
  *
  * @author zhihao.mao
  */
+
 package io.github.zhdotm.ohzh.ddd.infrastructure.po;

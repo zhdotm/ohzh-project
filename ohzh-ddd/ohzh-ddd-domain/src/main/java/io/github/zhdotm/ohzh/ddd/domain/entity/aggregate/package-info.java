@@ -10,4 +10,5 @@
  *
  * @author zhihao.mao
  */
-package io.github.zhdotm.ohzh.ddd.domain.aggregate;
+
+package io.github.zhdotm.ohzh.ddd.domain.entity.aggregate;
