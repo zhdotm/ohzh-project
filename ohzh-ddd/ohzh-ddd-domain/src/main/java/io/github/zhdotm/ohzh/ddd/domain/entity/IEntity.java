@@ -1,7 +1,10 @@
 package io.github.zhdotm.ohzh.ddd.domain.entity;
 
+import cn.hutool.extra.spring.SpringUtil;
+import io.github.zhdotm.ohzh.ddd.domain.repository.IRepository;
+
 /**
- * 实体接口
+ * 抽象实体
  *
  * @author zhihao.mao
  */
@@ -9,7 +12,15 @@ package io.github.zhdotm.ohzh.ddd.domain.entity;
 public interface IEntity {
 
     /**
-     * 持久化落库
+     * 获取仓储
+     *
+     * @param clazz 仓储类
+     * @param <T>   仓储类型
+     * @return 仓储
      */
-    void persist();
+    default <T extends IRepository> T getRepository(Class<T> clazz) {
+
+        return SpringUtil.getBean(clazz);
+    }
+
 }

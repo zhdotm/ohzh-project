@@ -17,10 +17,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <hutool.version>5.8.3</hutool.version>
-        <mybatis-spring-boot-starter.version>2.2.2</mybatis-spring-boot-starter.version>
-        <mybatis-dynamic-sql.version>1.4.0</mybatis-dynamic-sql.version>
-        <mybatis-generator.version>1.4.1</mybatis-generator.version>
+        <hutool.version>5.8.11</hutool.version>
     </properties>
 
     <dependencyManagement>
