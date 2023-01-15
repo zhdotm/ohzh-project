@@ -1,6 +1,6 @@
 package io.github.zhdotm.ohzh.ddd.infrastructure.exceptions;
 
-import io.github.zhdotm.ohzh.ddd.infrastructure.enums.ExpEnum;
+import io.github.zhdotm.ohzh.ddd.infrastructure.enums.ExceptionEnum;
 import lombok.Getter;
 
 /**
@@ -29,10 +29,10 @@ public class BizException extends RuntimeException {
         this.message = message;
     }
 
-    public BizException(ExpEnum expEnum) {
-        super(expEnum.getMessage());
-        this.code = expEnum.getCode();
-        this.message = expEnum.getMessage();
+    public BizException(ExceptionEnum exceptionEnum) {
+        super(exceptionEnum.getMessage());
+        this.code = exceptionEnum.getCode();
+        this.message = exceptionEnum.getMessage();
     }
 
 }

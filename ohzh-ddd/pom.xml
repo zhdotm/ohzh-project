@@ -18,6 +18,7 @@
         <module>ohzh-ddd-application</module>
         <module>ohzh-ddd-domain</module>
         <module>ohzh-ddd-infrastructure</module>
+        <module>ohzh-ddd-client</module>
     </modules>
 
     <properties>
@@ -37,13 +38,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
 
 </project>
