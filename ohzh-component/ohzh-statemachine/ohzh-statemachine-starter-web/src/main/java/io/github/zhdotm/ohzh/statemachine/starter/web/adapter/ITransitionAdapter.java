@@ -11,8 +11,8 @@ import io.github.zhdotm.ohzh.statemachine.core.domain.impl.TransitionImpl;
 import io.github.zhdotm.ohzh.statemachine.core.exception.StateMachineException;
 import io.github.zhdotm.ohzh.statemachine.core.exception.util.ExceptionUtil;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineAction;
-import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTransition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineCondition;
+import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTransition;
 import lombok.SneakyThrows;
 
 import java.lang.annotation.Annotation;
