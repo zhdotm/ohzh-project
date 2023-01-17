@@ -1,7 +1,8 @@
 package io.github.zhdotm.ohzh.ddd.domain.aggregate.entity;
 
 import cn.hutool.extra.spring.SpringUtil;
-import io.github.zhdotm.ohzh.ddd.domain.repository.IRepository;
+import io.github.zhdotm.ohzh.ddd.domain.extension.IDomainAbilityExtensionExecutor;
+import io.github.zhdotm.ohzh.ddd.domain.repository.IDomainRepository;
 
 import java.io.Serializable;
 
@@ -11,7 +12,7 @@ import java.io.Serializable;
  * @author zhihao.mao
  */
 
-public interface IDomainEntity extends Serializable {
+public interface IDomainEntity extends IDomainAbilityExtensionExecutor, Serializable {
 
     /**
      * 获取仓储
@@ -20,7 +21,7 @@ public interface IDomainEntity extends Serializable {
      * @param <T>   仓储类型
      * @return 仓储
      */
-    default <T extends IRepository> T getRepository(Class<T> clazz) {
+    default <T extends IDomainRepository> T getDomainRepository(Class<T> clazz) {
 
         return SpringUtil.getBean(clazz);
     }

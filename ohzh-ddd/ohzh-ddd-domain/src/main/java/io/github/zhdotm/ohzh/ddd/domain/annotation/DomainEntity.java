@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.ddd.domain.aggregate.entity;
+package io.github.zhdotm.ohzh.ddd.domain.annotation;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;

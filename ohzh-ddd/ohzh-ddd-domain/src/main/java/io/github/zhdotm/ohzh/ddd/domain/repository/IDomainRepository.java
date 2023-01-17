@@ -8,5 +8,5 @@ import java.io.Serializable;
  * @author zhihao.mao
  */
 
-public interface IRepository extends Serializable {
+public interface IDomainRepository extends Serializable {
 }

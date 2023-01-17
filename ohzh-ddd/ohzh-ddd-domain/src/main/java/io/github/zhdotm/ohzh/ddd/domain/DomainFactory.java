@@ -3,14 +3,14 @@ package io.github.zhdotm.ohzh.ddd.domain;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.extra.spring.SpringUtil;
-import io.github.zhdotm.ohzh.ddd.domain.aggregate.entity.AggregateRoot;
-import io.github.zhdotm.ohzh.ddd.domain.aggregate.entity.DomainEntity;
-import io.github.zhdotm.ohzh.ddd.domain.aggregate.entity.IAggregateRoot;
+import io.github.zhdotm.ohzh.ddd.domain.aggregate.entity.IDomainAggregateRoot;
 import io.github.zhdotm.ohzh.ddd.domain.aggregate.entity.IDomainEntity;
-import io.github.zhdotm.ohzh.ddd.domain.service.DomainService;
+import io.github.zhdotm.ohzh.ddd.domain.annotation.DomainAggregateRoot;
+import io.github.zhdotm.ohzh.ddd.domain.annotation.DomainEntity;
+import io.github.zhdotm.ohzh.ddd.domain.annotation.DomainService;
+import io.github.zhdotm.ohzh.ddd.domain.enums.DomainExceptionEnum;
+import io.github.zhdotm.ohzh.ddd.domain.exceptions.DomainException;
 import io.github.zhdotm.ohzh.ddd.domain.service.IDomainService;
-import io.github.zhdotm.ohzh.ddd.infrastructure.enums.ExceptionEnum;
-import io.github.zhdotm.ohzh.ddd.infrastructure.exceptions.CheckException;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -38,7 +38,7 @@ public class DomainFactory {
     @SneakyThrows
     public static <T extends IDomainEntity> T createDomainEntity(Class<T> clazz) {
         DomainEntity domainEntity = AnnotationUtils.getAnnotation(clazz, DomainEntity.class);
-        Assert.notNull(domainEntity, (Supplier<Throwable>) () -> new CheckException(ExceptionEnum.DOMAIN_ENTITY_ANNOTATION_NOT_EXIST));
+        Assert.notNull(domainEntity, (Supplier<Throwable>) () -> new DomainException(DomainExceptionEnum.DOMAIN_ENTITY_ANNOTATION_NOT_EXIST, clazz.getSimpleName()));
 
         return SpringUtil.getBean(clazz);
     }
@@ -51,9 +51,9 @@ public class DomainFactory {
      * @return 聚合根类型
      */
     @SneakyThrows
-    public static <T extends IAggregateRoot> T getAggregateRoot(Class<T> clazz) {
-        AggregateRoot aggregateRoot = AnnotationUtils.getAnnotation(clazz, AggregateRoot.class);
-        Assert.notNull(aggregateRoot, (Supplier<Throwable>) () -> new CheckException(ExceptionEnum.AGGREGATE_ROOT_ANNOTATION_NOT_EXIST));
+    public static <T extends IDomainAggregateRoot> T getAggregateRoot(Class<T> clazz) {
+        DomainAggregateRoot domainAggregateRoot = AnnotationUtils.getAnnotation(clazz, DomainAggregateRoot.class);
+        Assert.notNull(domainAggregateRoot, (Supplier<Throwable>) () -> new DomainException(DomainExceptionEnum.AGGREGATE_ROOT_ANNOTATION_NOT_EXIST, clazz.getSimpleName()));
 
         return SpringUtil.getBean(clazz);
     }
@@ -68,7 +68,7 @@ public class DomainFactory {
     @SneakyThrows
     public static <T extends IDomainService> T getDomainService(Class<T> clazz) {
         DomainService domainService = AnnotationUtils.getAnnotation(clazz, DomainService.class);
-        Assert.notNull(domainService, (Supplier<Throwable>) () -> new CheckException(ExceptionEnum.DOMAIN_SERVICE_ANNOTATION_NOT_EXIST));
+        Assert.notNull(domainService, (Supplier<Throwable>) () -> new DomainException(DomainExceptionEnum.DOMAIN_SERVICE_ANNOTATION_NOT_EXIST, clazz.getSimpleName()));
 
         return SpringUtil.getBean(clazz);
     }

@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.ddd.domain.service;
+package io.github.zhdotm.ohzh.ddd.domain.annotation;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;

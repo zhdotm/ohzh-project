@@ -1,7 +1,8 @@
 package io.github.zhdotm.ohzh.ddd.domain.service;
 
 import io.github.zhdotm.ohzh.ddd.domain.DomainFactory;
-import io.github.zhdotm.ohzh.ddd.domain.aggregate.entity.IAggregateRoot;
+import io.github.zhdotm.ohzh.ddd.domain.aggregate.entity.IDomainAggregateRoot;
+import io.github.zhdotm.ohzh.ddd.domain.extension.IDomainAbilityExtensionExecutor;
 import lombok.SneakyThrows;
 
 import java.io.Serializable;
@@ -13,7 +14,7 @@ import java.io.Serializable;
  * @author zhihao.mao
  */
 
-public interface IDomainService extends Serializable {
+public interface IDomainService extends IDomainAbilityExtensionExecutor, Serializable {
 
     /**
      * 获取领域聚合根
@@ -23,7 +24,7 @@ public interface IDomainService extends Serializable {
      * @return 聚合根类型
      */
     @SneakyThrows
-    default <T extends IAggregateRoot> T getAggregateRoot(Class<T> clazz) {
+    default <T extends IDomainAggregateRoot> T getAggregateRoot(Class<T> clazz) {
 
         return DomainFactory.getAggregateRoot(clazz);
     }

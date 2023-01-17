@@ -1,6 +1,7 @@
 package io.github.zhdotm.ohzh.ddd.domain.aggregate.entity;
 
 import io.github.zhdotm.ohzh.ddd.domain.DomainFactory;
+import io.github.zhdotm.ohzh.ddd.domain.extension.IDomainAbilityExtensionExecutor;
 
 import java.io.Serializable;
 
@@ -10,7 +11,7 @@ import java.io.Serializable;
  * @author zhihao.mao
  */
 
-public interface IAggregateRoot extends IDomainEntity, Serializable {
+public interface IDomainAggregateRoot extends IDomainEntity, IDomainAbilityExtensionExecutor, Serializable {
 
     /**
      * 创建领域实体

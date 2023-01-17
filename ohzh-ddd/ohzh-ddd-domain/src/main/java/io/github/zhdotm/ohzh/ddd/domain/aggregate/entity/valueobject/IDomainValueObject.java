@@ -8,5 +8,5 @@ import java.io.Serializable;
  * @author zhihao.mao
  */
 
-public interface IValueObject extends Serializable {
+public interface IDomainValueObject extends Serializable {
 }
