@@ -22,6 +22,8 @@ public enum CQRSExceptionEnum {
     COMMAND_EXECUTOR_LOOSE_MATCH_MANY(20004, "松散匹配到多个命令执行器: {}"),
     QUERY_EXECUTOR_STRICT_MATCH_MANY(20005, "严格匹配到多个查询执行器: {}"),
     QUERY_EXECUTOR_LOOSE_MATCH_MANY(20006, "松散匹配到多个查询执行器: {}"),
+    COMMAND_EXECUTOR_ANNOTATION_NOT_EXIST(20007, "{}未找到@CommandExecutor注解"),
+    QUERY_EXECUTOR_ANNOTATION_NOT_EXIST(20008, "{}未找到@QueryExecutor注解"),
     ;
 
     /**

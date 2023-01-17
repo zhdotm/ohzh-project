@@ -2,6 +2,7 @@ package io.github.zhdotm.ohzh.cqrs.starter.web;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import io.github.zhdotm.ohzh.biz.dto.BizScenario;
 import io.github.zhdotm.ohzh.cqrs.core.exception.CQRSException;
@@ -33,6 +34,10 @@ public class CQRSExecutorFactory {
      */
     @SneakyThrows
     public static void registerQueryExecutor(String name, IQueryExecutor queryExe) {
+        Assert.isTrue(queryExe.isExistQueryExecutorAnnotation(), (Supplier<Throwable>) () -> new CQRSException(CQRSExceptionEnum.QUERY_EXECUTOR_ANNOTATION_NOT_EXIST.getCode(), CQRSExceptionEnum.QUERY_EXECUTOR_ANNOTATION_NOT_EXIST.getMessage(queryExe.getClass().getSimpleName())));
+        if (StrUtil.isBlank(name)) {
+            name = queryExe.getCode();
+        }
 
         SpringUtil.registerBean(name, queryExe);
     }
@@ -45,6 +50,10 @@ public class CQRSExecutorFactory {
      */
     @SneakyThrows
     public static void registerCommandExecutor(String name, ICommandExecutor cmdExe) {
+        Assert.isTrue(cmdExe.isExistCommandExecutorAnnotation(), (Supplier<Throwable>) () -> new CQRSException(CQRSExceptionEnum.COMMAND_EXECUTOR_ANNOTATION_NOT_EXIST.getCode(), CQRSExceptionEnum.COMMAND_EXECUTOR_ANNOTATION_NOT_EXIST.getMessage(cmdExe.getClass().getSimpleName())));
+        if (StrUtil.isBlank(name)) {
+            name = cmdExe.getCode();
+        }
 
         SpringUtil.registerBean(name, cmdExe);
     }
