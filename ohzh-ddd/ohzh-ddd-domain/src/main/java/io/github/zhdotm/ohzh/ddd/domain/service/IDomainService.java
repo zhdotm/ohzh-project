@@ -26,7 +26,7 @@ public interface IDomainService extends IDomainAbilityExtensionExecutor, Seriali
     @SneakyThrows
     default <T extends IDomainAggregateRoot> T getAggregateRoot(Class<T> clazz) {
 
-        return DomainFactory.getAggregateRoot(clazz);
+        return DomainFactory.createAggregateRoot(clazz);
     }
 
 }

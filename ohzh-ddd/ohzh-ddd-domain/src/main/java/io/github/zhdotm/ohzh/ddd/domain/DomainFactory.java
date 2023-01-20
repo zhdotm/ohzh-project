@@ -51,7 +51,7 @@ public class DomainFactory {
      * @return 聚合根类型
      */
     @SneakyThrows
-    public static <T extends IDomainAggregateRoot> T getAggregateRoot(Class<T> clazz) {
+    public static <T extends IDomainAggregateRoot> T createAggregateRoot(Class<T> clazz) {
         DomainAggregateRoot domainAggregateRoot = AnnotationUtils.getAnnotation(clazz, DomainAggregateRoot.class);
         Assert.notNull(domainAggregateRoot, (Supplier<Throwable>) () -> new DomainException(DomainExceptionEnum.AGGREGATE_ROOT_ANNOTATION_NOT_EXIST, clazz.getSimpleName()));
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.lang.annotation.*;
 
 /**
- * 领域能力拓展
+ * 领域能力拓展点
  *
  * @author zhihao.mao
  */
@@ -18,8 +18,8 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
 @Component
-@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
-public @interface DomainAbilityExtension {
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public @interface DomainAbilityExtensionPoint {
 
     /**
      * 作用范围

@@ -18,34 +18,34 @@ public interface IDomainAbilityExtensionExecutor extends Serializable {
     /**
      * 执行拓展（无返回）
      *
-     * @param bizScenario       业务身份
-     * @param extensionClazz    拓展类型
-     * @param extensionConsumer 拓展消费者
-     * @param <T>               拓展类型
+     * @param bizScenario         业务身份
+     * @param extensionPointClazz 拓展点类型
+     * @param extensionConsumer   拓展消费者
+     * @param <T>                 拓展类型
      */
     @SneakyThrows
-    default <T extends IDomainAbilityExtension> void execute(BizScenario bizScenario,
-                                                             Class<T> extensionClazz,
-                                                             Consumer<T> extensionConsumer) {
+    default <T extends IDomainAbilityExtensionPoint> void execute(BizScenario bizScenario,
+                                                                  Class<T> extensionPointClazz,
+                                                                  Consumer<T> extensionConsumer) {
 
-        extensionConsumer.accept(DomainAbilityExtensionExecutors.getExtension(bizScenario, this.getClass(), extensionClazz));
+        extensionConsumer.accept(DomainAbilityExtensionExecutors.getExtensionPoint(bizScenario, this.getClass(), extensionPointClazz));
     }
 
     /**
      * 执行拓展（有返回）
      *
-     * @param bizScenario       业务身份
-     * @param extensionClazz    拓展类型
-     * @param extensionConsumer 拓展消费者
-     * @param <T>               拓展类型
+     * @param bizScenario         业务身份
+     * @param extensionPointClazz 拓展点类型
+     * @param extensionConsumer   拓展消费者
+     * @param <T>                 拓展类型
      * @return 出参
      */
     @SneakyThrows
-    default <T extends IDomainAbilityExtension, R> R execute(BizScenario bizScenario,
-                                                             Class<T> extensionClazz,
-                                                             Function<T, R> extensionConsumer) {
+    default <T extends IDomainAbilityExtensionPoint, R> R execute(BizScenario bizScenario,
+                                                                  Class<T> extensionPointClazz,
+                                                                  Function<T, R> extensionConsumer) {
 
-        return extensionConsumer.apply(DomainAbilityExtensionExecutors.getExtension(bizScenario, this.getClass(), extensionClazz));
+        return extensionConsumer.apply(DomainAbilityExtensionExecutors.getExtensionPoint(bizScenario, this.getClass(), extensionPointClazz));
     }
 
 }

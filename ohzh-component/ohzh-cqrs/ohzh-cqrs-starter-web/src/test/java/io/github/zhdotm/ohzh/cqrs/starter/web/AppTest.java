@@ -5,8 +5,8 @@ import io.github.zhdotm.ohzh.cqrs.core.query.IQuery;
 import io.github.zhdotm.ohzh.cqrs.starter.web.annotations.QueryExecutor;
 import io.github.zhdotm.ohzh.cqrs.starter.web.command.CreateAccountCommand;
 import io.github.zhdotm.ohzh.cqrs.starter.web.executor.CQRSExecutors;
-import io.github.zhdotm.ohzh.cqrs.starter.web.executor.CreateAccountCommandExe;
 import io.github.zhdotm.ohzh.cqrs.starter.web.executor.GetAccountQueryExe;
+import io.github.zhdotm.ohzh.cqrs.starter.web.executor.ICreateAccountCommandExecutor;
 import io.github.zhdotm.ohzh.cqrs.starter.web.executor.IQueryExecutor;
 import io.github.zhdotm.ohzh.cqrs.starter.web.query.GetAccountQuery;
 import io.github.zhdotm.ohzh.cqrs.starter.web.resp.GetAccountResp;
@@ -42,9 +42,9 @@ public class AppTest {
                 .setAccount("zhangsan")
                 .setPassword("123456");
         cqrsExecutors.execute(createAccountCommand.getBizScenario(),
-                CreateAccountCommandExe.class,
-                createAccountCommandExe -> {
-                    createAccountCommandExe.createAccount(createAccountCommand);
+                ICreateAccountCommandExecutor.class,
+                createAccountCommandExecutor -> {
+                    createAccountCommandExecutor.createAccount(createAccountCommand);
                 });
     }
 

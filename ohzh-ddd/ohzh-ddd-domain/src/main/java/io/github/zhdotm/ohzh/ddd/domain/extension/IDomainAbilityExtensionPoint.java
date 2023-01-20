@@ -4,7 +4,7 @@ import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import io.github.zhdotm.ohzh.biz.dto.BizScenario;
-import io.github.zhdotm.ohzh.ddd.domain.annotation.DomainAbilityExtension;
+import io.github.zhdotm.ohzh.ddd.domain.annotation.DomainAbilityExtensionPoint;
 import io.github.zhdotm.ohzh.ddd.domain.enums.DomainExceptionEnum;
 import io.github.zhdotm.ohzh.ddd.domain.exceptions.DomainException;
 import lombok.SneakyThrows;
@@ -14,43 +14,43 @@ import org.springframework.core.annotation.AnnotationUtils;
 import java.util.function.Supplier;
 
 /**
- * 拓展抽象
+ * 拓展点抽象
  *
  * @author zhihao.mao
  */
 
-public interface IDomainAbilityExtension {
+public interface IDomainAbilityExtensionPoint {
 
     /**
-     * 获取执行器名称
+     * 获取拓展点名称
      *
-     * @return 执行器名称
+     * @return 拓展点名称
      */
     default String getName() {
-        DomainAbilityExtension domainAbilityExtensionAnnotation = getDomainAbilityExtensionAnnotation();
+        DomainAbilityExtensionPoint domainAbilityExtensionPointAnnotation = getDomainAbilityExtensionPointAnnotation();
 
-        return domainAbilityExtensionAnnotation.name();
+        return domainAbilityExtensionPointAnnotation.name();
     }
 
     /**
-     * 获取执行器编码
+     * 获取拓展点编码
      *
-     * @return 执行器编码
+     * @return 拓展点编码
      */
     default String getCode() {
-        DomainAbilityExtension domainAbilityExtensionAnnotation = getDomainAbilityExtensionAnnotation();
+        DomainAbilityExtensionPoint domainAbilityExtensionPointAnnotation = getDomainAbilityExtensionPointAnnotation();
 
-        return domainAbilityExtensionAnnotation.code();
+        return domainAbilityExtensionPointAnnotation.code();
     }
 
     /**
-     * 获取领域能力注解
+     * 获取领域能力拓展点注解
      *
-     * @return 领域能力注解
+     * @return 领域能力拓展点注解
      */
     @SneakyThrows
-    default DomainAbilityExtension getDomainAbilityExtensionAnnotation() {
-        DomainAbilityExtension queryExecutor = AnnotationUtils.getAnnotation(this.getClass(), DomainAbilityExtension.class);
+    default DomainAbilityExtensionPoint getDomainAbilityExtensionPointAnnotation() {
+        DomainAbilityExtensionPoint queryExecutor = AnnotationUtils.getAnnotation(this.getClass(), DomainAbilityExtensionPoint.class);
         String simpleName = this.getClass().getSimpleName();
         Assert.notNull(queryExecutor, (Supplier<Throwable>) () -> new DomainException(DomainExceptionEnum.DOMAIN_ABILITY_EXTENSION_ANNOTATION_NOT_EXIST.getCode(), DomainExceptionEnum.DOMAIN_ABILITY_EXTENSION_ANNOTATION_NOT_EXIST.getMessage(simpleName)));
 
@@ -58,14 +58,14 @@ public interface IDomainAbilityExtension {
     }
 
     /**
-     * 是否存在DomainAbilityExtension注解
+     * 是否存在DomainAbilityExtensionPoint注解
      *
      * @return 是/否
      */
-    default Boolean isExistDomainAbilityExtensionAnnotation() {
-        DomainAbilityExtension domainAbilityExtensionAnnotation = AnnotationUtils.getAnnotation(this.getClass(), DomainAbilityExtension.class);
+    default Boolean isExistDomainAbilityExtensionPointAnnotation() {
+        DomainAbilityExtensionPoint domainAbilityExtensionPointAnnotation = AnnotationUtils.getAnnotation(this.getClass(), DomainAbilityExtensionPoint.class);
 
-        return ObjectUtil.isNotEmpty(domainAbilityExtensionAnnotation);
+        return ObjectUtil.isNotEmpty(domainAbilityExtensionPointAnnotation);
     }
 
     /**
@@ -96,9 +96,9 @@ public interface IDomainAbilityExtension {
      * @return 匹配key
      */
     default String getMatchKey() {
-        DomainAbilityExtension domainAbilityExtensionAnn = AnnotatedElementUtils.getMergedAnnotation(this.getClass(), DomainAbilityExtension.class);
+        DomainAbilityExtensionPoint domainAbilityExtensionPointAnn = AnnotatedElementUtils.getMergedAnnotation(this.getClass(), DomainAbilityExtensionPoint.class);
 
-        return domainAbilityExtensionAnn.bizId() + StrUtil.DOT + domainAbilityExtensionAnn.useCase() + StrUtil.DOT + domainAbilityExtensionAnn.scenario();
+        return domainAbilityExtensionPointAnn.bizId() + StrUtil.DOT + domainAbilityExtensionPointAnn.useCase() + StrUtil.DOT + domainAbilityExtensionPointAnn.scenario();
     }
 
 }

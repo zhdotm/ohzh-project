@@ -19,7 +19,7 @@ public class CreateAccountCommand implements ICommand {
     @Override
     public BizScenario getBizScenario() {
 
-        return BizScenario.valueOf("userCenter", "account", "enterprise111");
+        return BizScenario.valueOf("userCenter", "account", "002");
     }
 
 }
