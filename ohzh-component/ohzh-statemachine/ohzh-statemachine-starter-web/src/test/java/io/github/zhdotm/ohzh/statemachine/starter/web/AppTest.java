@@ -18,8 +18,8 @@ public class AppTest {
 
     @Test
     public void print() {
-        StateMachineSupport
+        System.out.println(StateMachineSupport
                 .getStateMachine("RENT_ORDER")
-                .print();
+                .getPlantUml());
     }
 }

@@ -1,6 +1,7 @@
 package io.github.zhdotm.ohzh.statemachine.core.domain;
 
 
+import io.github.zhdotm.ohzh.statemachine.core.constant.PlantUmlTypeEnum;
 import io.github.zhdotm.ohzh.statemachine.core.domain.impl.EventContextImpl;
 import io.github.zhdotm.ohzh.statemachine.core.domain.impl.EventImpl;
 import io.github.zhdotm.ohzh.statemachine.core.exception.StateMachineException;
@@ -115,13 +116,13 @@ public interface IStateMachine<M, S, E, C, A> {
             E eventId = event.getEventId();
             Object[] payload = event.getPayload();
 
-            StateMachineLog.info("状态机流程日志[%s, %s]: 当前状态[%s]收到携带负载[%s]的事件[%s]", STATEMACHINE_ID_THREAD_LOCAL.get(), TRACE_ID_THREAD_LOCAL.get(), stateId, Arrays.toString(payload), eventId);
+            StateMachineLog.info("状态机流程日志[%s, %s]: 当前%s状态收到携带负载[%s]的事件[%s]", STATEMACHINE_ID_THREAD_LOCAL.get(), TRACE_ID_THREAD_LOCAL.get(), stateId, Arrays.toString(payload), eventId);
 
             IState<S, E> state = getState(stateId);
-            ExceptionUtil.isTrue(state != null, StateMachineException.class, "状态机[%s, %s]发布事件[%s]失败: 不存在对应的状态[%s]", STATEMACHINE_ID_THREAD_LOCAL.get(), TRACE_ID_THREAD_LOCAL.get(), eventId, stateId);
+            ExceptionUtil.isTrue(state != null, StateMachineException.class, "状态机[%s, %s]发布事件[%s]失败: 不存在对应的%s状态", STATEMACHINE_ID_THREAD_LOCAL.get(), TRACE_ID_THREAD_LOCAL.get(), eventId, stateId);
 
             Collection<E> eventIds = state.getEventIds();
-            ExceptionUtil.isTrue(eventIds.contains(eventId), StateMachineException.class, "状态机[%s, %s]发布事件[%s]失败: 对应状态[%s]不存在指定事件[%s]", STATEMACHINE_ID_THREAD_LOCAL.get(), TRACE_ID_THREAD_LOCAL.get(), eventId, stateId, eventId);
+            ExceptionUtil.isTrue(eventIds.contains(eventId), StateMachineException.class, "状态机[%s, %s]发布事件[%s]失败: 对应%s状态不存在指定事件[%s]", STATEMACHINE_ID_THREAD_LOCAL.get(), TRACE_ID_THREAD_LOCAL.get(), eventId, stateId, eventId);
 
             List<ITransition<S, E, C, A>> satisfiedInternalTransitions = Optional.ofNullable(getInternalTransition(stateId, eventId))
                     .orElse(new ArrayList<>())
@@ -136,7 +137,7 @@ public interface IStateMachine<M, S, E, C, A> {
                     .filter(transition -> transition.getCondition().isSatisfied(eventContext))
                     .collect(Collectors.toList());
 
-            ExceptionUtil.isTrue(satisfiedExternalTransitions.size() <= 1, StateMachineException.class, "状态机[%s]发布事件[%s]失败: 状态[%s]指定事件[%S]对应的符合条件的外部转换超过一个", STATEMACHINE_ID_THREAD_LOCAL.get(), eventId, stateId, eventId);
+            ExceptionUtil.isTrue(satisfiedExternalTransitions.size() <= 1, StateMachineException.class, "状态机[%s]发布事件[%s]失败: %s状态指定事件[%S]对应的符合条件的外部转换超过一个", STATEMACHINE_ID_THREAD_LOCAL.get(), eventId, stateId, eventId);
 
             for (ITransition<S, E, C, A> internalTransition : satisfiedInternalTransitions) {
                 stateContext = internalTransition.transfer(eventContext);
@@ -157,45 +158,85 @@ public interface IStateMachine<M, S, E, C, A> {
 
     /**
      * 打印状态机内部结构
+     *
+     * @return uml
      */
-    default void print() {
-        StateMachineLog.info(StateMachineLog.tail("状态机结构日志: ---状态机[" + getStateMachineId() + "]", 100, "开始"));
-        getStateIds()
-                .forEach(stationId -> {
-                    StateMachineLog.info(StateMachineLog.tail("状态机结构日志: ------状态[" + stationId + "]", 90, "开始"));
-                    IState<S, E> state = getState(stationId);
-                    state.getEventIds()
-                            .forEach(eventId -> {
-                                StateMachineLog.info(StateMachineLog.tail("状态机结构日志: ---------事件[" + eventId + "]", 80, "开始"));
-                                List<ITransition<S, E, C, A>> internalTransitions = getInternalTransition(stationId, eventId);
-                                if (internalTransitions != null && internalTransitions.size() > 0) {
-                                    StateMachineLog.info(StateMachineLog.tail("状态机结构日志: ------------内部转换", 70, "开始"));
-                                    for (ITransition<S, E, C, A> internalTransition : internalTransitions) {
-                                        C conditionId = internalTransition.getCondition().getConditionId();
-                                        StateMachineLog.info("状态机结构日志: ---------------判断条件[%s]", conditionId);
-                                        A actionId = internalTransition.getAction().getActionId();
-                                        StateMachineLog.info("状态机结构日志: ------------------执行动作[%s]", actionId);
-                                    }
-                                    StateMachineLog.info(StateMachineLog.tail("状态机结构日志: ------------内部转换", 70, "结束"));
-                                }
-                                List<ITransition<S, E, C, A>> externalTransitions = getExternalTransition(stationId, eventId);
-                                if (externalTransitions != null && externalTransitions.size() > 0) {
-                                    StateMachineLog.info(StateMachineLog.tail("状态机结构日志: ------------外部转换", 70, "开始"));
-                                    for (ITransition<S, E, C, A> externalTransition : externalTransitions) {
-                                        C conditionId = externalTransition.getCondition().getConditionId();
-                                        StateMachineLog.info("状态机结构日志: ---------------判断条件[%s]", conditionId);
-                                        A actionId = externalTransition.getAction().getActionId();
-                                        StateMachineLog.info("状态机结构日志: ------------------执行动作[%s]", actionId);
-                                        S toStateId = externalTransition.getToStateId();
-                                        StateMachineLog.info("状态机结构日志: ------------------转换状态[%s]", toStateId);
-                                    }
-                                    StateMachineLog.info(StateMachineLog.tail("状态机结构日志: ------------外部转换", 70, "结束"));
-                                }
-                                StateMachineLog.info(StateMachineLog.tail("状态机结构日志: ---------事件[" + eventId + "]", 80, "结束"));
-                            });
-                    StateMachineLog.info(StateMachineLog.tail("状态机结构日志: ------状态[" + stationId + "]", 90, "结束"));
+    default String getPlantUml() {
+
+        return getPlantUml(PlantUmlTypeEnum.STATE_DIAGRAM);
+    }
+
+    /**
+     * 打印状态机内部结构
+     *
+     * @param plantUmlTypeEnum uml图类型
+     * @return uml
+     */
+    default String getPlantUml(PlantUmlTypeEnum plantUmlTypeEnum) {
+        StringBuilder plantUmlStringBuilder = new StringBuilder("@startuml \n");
+        if (plantUmlTypeEnum == PlantUmlTypeEnum.SEQUENCE_DIAGRAM
+                || plantUmlTypeEnum == PlantUmlTypeEnum.STATE_DIAGRAM) {
+            List<S> topStateIds = new ArrayList<>(getStateIds());
+            List<S> bottomStateIds = new ArrayList<>();
+            getStateIds()
+                    .forEach(stateId -> {
+                        IState<S, E> state = getState(stateId);
+                        state.getEventIds()
+                                .forEach(eventId -> {
+                                    Optional.ofNullable(getInternalTransition(stateId, eventId))
+                                            .orElse(new ArrayList<>())
+                                            .forEach(internalTransition -> {
+                                                C conditionId = internalTransition.getCondition().getConditionId();
+                                                A actionId = internalTransition.getAction().getActionId();
+
+                                                plantUmlStringBuilder
+                                                        .append(String.format("%s状态", stateId))
+                                                        .append(" --> ")
+                                                        .append(String.format("%s状态", stateId))
+                                                        .append(" : ")
+                                                        .append(String.format("发生%s事件, 判断%s条件, 执行%s动作", eventId, conditionId, actionId))
+                                                        .append(" \n");
+                                            });
+                                    Optional.ofNullable(getExternalTransition(stateId, eventId))
+                                            .orElse(new ArrayList<>())
+                                            .forEach(externalTransition -> {
+                                                C conditionId = externalTransition.getCondition().getConditionId();
+                                                A actionId = externalTransition.getAction().getActionId();
+                                                S toStateId = externalTransition.getToStateId();
+                                                topStateIds.remove(toStateId);
+                                                if (!getStateIds().contains(toStateId)) {
+                                                    bottomStateIds.add(toStateId);
+                                                }
+                                                plantUmlStringBuilder
+                                                        .append(String.format("%s状态", stateId))
+                                                        .append(" --> ")
+                                                        .append(String.format("%s状态", toStateId))
+                                                        .append(" : ")
+                                                        .append(String.format("发生%s事件, 判断%s条件, 执行%s动作", eventId, conditionId, actionId))
+                                                        .append(" \n");
+                                            });
+                                });
+                    });
+            if (plantUmlTypeEnum == PlantUmlTypeEnum.STATE_DIAGRAM) {
+                topStateIds.forEach(stateId -> {
+                    plantUmlStringBuilder
+                            .append(" [*] ")
+                            .append(" --> ")
+                            .append(String.format("%s状态", stateId))
+                            .append(" \n");
                 });
-        StateMachineLog.info(StateMachineLog.tail("状态机结构日志: ---状态机[" + getStateMachineId() + "]", 100, "结束"));
+                bottomStateIds.forEach(stateId -> {
+                    plantUmlStringBuilder
+                            .append(String.format("%s状态", stateId))
+                            .append(" --> ")
+                            .append(" [*] ")
+                            .append(" \n");
+                });
+            }
+        }
+        plantUmlStringBuilder.append("@enduml \n");
+
+        return plantUmlStringBuilder.toString();
     }
 
 }
