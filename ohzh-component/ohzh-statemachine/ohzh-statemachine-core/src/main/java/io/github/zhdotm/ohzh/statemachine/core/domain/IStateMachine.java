@@ -12,6 +12,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * 状态机
+ *
  * @author zhihao.mao
  */
 

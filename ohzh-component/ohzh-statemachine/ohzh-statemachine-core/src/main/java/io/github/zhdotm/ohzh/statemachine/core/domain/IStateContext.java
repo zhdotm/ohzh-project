@@ -1,6 +1,8 @@
 package io.github.zhdotm.ohzh.statemachine.core.domain;
 
 /**
+ * 状态上下文
+ *
  * @author zhihao.mao
  */
 

@@ -3,6 +3,8 @@ package io.github.zhdotm.ohzh.statemachine.core.exception.util;
 import lombok.SneakyThrows;
 
 /**
+ * 异常工具
+ *
  * @author zhihao.mao
  */
 

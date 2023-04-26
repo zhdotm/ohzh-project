@@ -2,6 +2,8 @@ package io.github.zhdotm.ohzh.statemachine.core.domain;
 
 
 /**
+ * 条件
+ *
  * @author zhihao.mao
  */
 

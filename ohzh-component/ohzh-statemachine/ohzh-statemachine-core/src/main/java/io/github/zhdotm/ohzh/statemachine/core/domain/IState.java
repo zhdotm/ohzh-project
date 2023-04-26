@@ -4,6 +4,8 @@ package io.github.zhdotm.ohzh.statemachine.core.domain;
 import java.util.Collection;
 
 /**
+ * 状态
+ *
  * @author zhihao.mao
  */
 

@@ -3,6 +3,8 @@ package io.github.zhdotm.ohzh.statemachine.core.log;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * 状态机日志
+ *
  * @author zhihao.mao
  */
 

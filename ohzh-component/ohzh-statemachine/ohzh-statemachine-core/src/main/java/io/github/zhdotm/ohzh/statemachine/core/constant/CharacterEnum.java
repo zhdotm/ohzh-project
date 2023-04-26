@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
+ * 字符常量
+ *
  * @author zhihao.mao
  */
 

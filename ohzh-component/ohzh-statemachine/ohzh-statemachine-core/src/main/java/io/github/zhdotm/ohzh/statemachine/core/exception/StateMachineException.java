@@ -2,6 +2,8 @@ package io.github.zhdotm.ohzh.statemachine.core.exception;
 
 
 /**
+ * 状态机异常
+ *
  * @author zhihao.mao
  */
 

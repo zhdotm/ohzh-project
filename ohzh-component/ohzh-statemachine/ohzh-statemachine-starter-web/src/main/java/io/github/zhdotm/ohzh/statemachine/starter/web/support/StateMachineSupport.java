@@ -29,7 +29,7 @@ public class StateMachineSupport implements BeanFactoryPostProcessor {
         beanFactory.registerSingleton(stateMachine.getStateMachineId().toString(), stateMachine);
     }
 
-    public static <M, S, E, C, A> IStateContext<S, E> fireEvent(M stateMachineId, S stateId, E eventId, Object... payload) {
+    public static <M, S, E> IStateContext<S, E> fireEvent(M stateMachineId, S stateId, E eventId, Object... payload) {
         EventContextImpl<S, E> eventContext = EventContextImpl.getInstance();
         EventImpl<E> event = EventImpl.getInstance();
         event.eventId(eventId)
