@@ -4,24 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 字符常量
+ * plantUml文件枚举
  *
  * @author zhihao.mao
  */
 
 @AllArgsConstructor
-public enum CharacterEnum {
+public enum PlantUmlFileEnum {
 
     /**
-     * 符号
+     * 文件尾缀
      */
-    HASH_TAG("#"),
-    EMPTY(""),
-    LEFT_SLASH("/"),
-    RIGHT_SLASH("\\"),
+    FILE_SUFFIX(".puml"),
     ;
-
     @Getter
     private final String value;
-
 }

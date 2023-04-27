@@ -1,6 +1,8 @@
 package io.github.zhdotm.ohzh.statemachine.core.domain;
 
 
+import io.github.zhdotm.ohzh.statemachine.core.constant.CharacterEnum;
+import io.github.zhdotm.ohzh.statemachine.core.constant.PlantUmlFileEnum;
 import io.github.zhdotm.ohzh.statemachine.core.constant.PlantUmlTypeEnum;
 import io.github.zhdotm.ohzh.statemachine.core.domain.impl.EventContextImpl;
 import io.github.zhdotm.ohzh.statemachine.core.domain.impl.EventImpl;
@@ -9,6 +11,9 @@ import io.github.zhdotm.ohzh.statemachine.core.exception.util.ExceptionUtil;
 import io.github.zhdotm.ohzh.statemachine.core.log.StateMachineLog;
 import lombok.SneakyThrows;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -154,6 +159,41 @@ public interface IStateMachine<M, S, E, C, A> {
         }
 
         return stateContext;
+    }
+
+    /**
+     * 导出状态机内部uml
+     */
+    @SneakyThrows
+    default void exportPlantUml() {
+
+        exportPlantUml("./", PlantUmlTypeEnum.STATE_DIAGRAM);
+    }
+
+    /**
+     * 导出状态机内部uml
+     *
+     * @param filePath 输出文件路径
+     */
+    @SneakyThrows
+    default void exportPlantUml(String filePath) {
+        if (!filePath.endsWith(CharacterEnum.LEFT_SLASH.getValue())) {
+            filePath = filePath + CharacterEnum.LEFT_SLASH.getValue();
+        }
+        exportPlantUml(filePath, PlantUmlTypeEnum.STATE_DIAGRAM);
+    }
+
+    /**
+     * 导出状态机内部uml
+     *
+     * @param filePath         输出文件路径
+     * @param plantUmlTypeEnum uml类型
+     */
+    @SneakyThrows
+    default void exportPlantUml(String filePath, PlantUmlTypeEnum plantUmlTypeEnum) {
+        String plantUml = getPlantUml(plantUmlTypeEnum);
+        Files.write(Paths.get(filePath + getStateMachineId() + PlantUmlFileEnum.FILE_SUFFIX.getValue()),
+                plantUml.getBytes(StandardCharsets.UTF_8));
     }
 
     /**

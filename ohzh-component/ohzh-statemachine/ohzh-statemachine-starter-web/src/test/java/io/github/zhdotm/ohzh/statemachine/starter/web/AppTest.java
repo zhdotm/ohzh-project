@@ -22,4 +22,12 @@ public class AppTest {
                 .getStateMachine("RENT_ORDER")
                 .getPlantUml());
     }
+
+    @Test
+    public void export() {
+        StateMachineSupport
+                .getStateMachine("RENT_ORDER")
+                .exportPlantUml();
+    }
+
 }
