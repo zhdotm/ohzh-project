@@ -26,5 +26,5 @@ public interface ISpringExtension extends IExtension, BeanNameGenerator {
 
         return AnnotatedElementUtils.getMergedAnnotation(this.getClass(), Extension.class);
     }
-    
+
 }
