@@ -55,7 +55,7 @@ public class DomainAbilityExtensionExecutors {
      *
      * @param bizScenario            业务身份
      * @param extensionExecutorClazz 拓展执行器类型
-     * @param extensionClazz         拓展类型
+     * @param extensionPointClazz    拓展点类型
      */
     @SneakyThrows
     public static <T extends IDomainAbilityExtensionExecutor, R extends IDomainAbilityExtensionPoint> R getExtensionPoint(BizScenario bizScenario,
