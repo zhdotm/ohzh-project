@@ -3,21 +3,18 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>ohzh-project</artifactId>
+        <artifactId>ohzh-component</artifactId>
         <groupId>io.github.zhdotm</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ohzh-component</artifactId>
+    <artifactId>ohzh-extension</artifactId>
     <packaging>pom</packaging>
-    <description>组件</description>
     <modules>
-        <module>ohzh-cqrs</module>
-        <module>ohzh-biz</module>
-        <module>ohzh-statemachine</module>
-        <module>ohzh-event</module>
-        <module>ohzh-extension</module>
+        <module>ohzh-extension-core</module>
+        <module>ohzh-extension-starter-web</module>
     </modules>
 
     <properties>
