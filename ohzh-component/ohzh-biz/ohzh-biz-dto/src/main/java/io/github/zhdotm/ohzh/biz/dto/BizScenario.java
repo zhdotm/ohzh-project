@@ -1,7 +1,8 @@
 package io.github.zhdotm.ohzh.biz.dto;
 
 
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.Accessors;
 
 
 /**
@@ -12,7 +13,12 @@ import lombok.ToString;
  * @see [相关类/方法]（可选）
  * @since [产品/模块版本] （可选）
  */
+@AllArgsConstructor
+@Accessors(chain = true)
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @ToString
+@Data
 public class BizScenario {
 
     public final static String DEFAULT_BIZ_ID = "defaultBizId";

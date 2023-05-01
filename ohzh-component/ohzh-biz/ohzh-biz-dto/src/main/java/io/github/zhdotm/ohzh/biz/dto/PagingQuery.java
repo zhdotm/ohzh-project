@@ -39,21 +39,21 @@ public class PagingQuery {
      */
     private Long lastMaxId;
 
-    public PagingQuery(){
+    public PagingQuery() {
         this(DEFAULT_LIMIT);
     }
 
-    public PagingQuery(int limit){
+    public PagingQuery(int limit) {
         this(0, limit);
     }
 
-    public PagingQuery(int offset, int limit){
+    public PagingQuery(int offset, int limit) {
         this.offset = offset;
         this.limit = limit;
     }
 
     public void setPagingParam(PagingParam pagingParam) {
-        if(pagingParam != null){
+        if (pagingParam != null) {
             this.setOffset(pagingParam.getOffset());
             this.setLimit(pagingParam.getLimit());
         }
@@ -64,7 +64,7 @@ public class PagingQuery {
     }
 
     public void setOffset(int offset) {
-        this.offset = offset < 0 ? 0: offset;
+        this.offset = offset < 0 ? 0 : offset;
     }
 
     public int getLimit() {
@@ -89,17 +89,18 @@ public class PagingQuery {
 
     /**
      * 新增排序字段
-     * @param column 列名
+     *
+     * @param column   列名
      * @param sortType 排序方式
      */
     public void addOrderBy(String column, Sort.SortType sortType) {
-        if(column == null || column.trim().length() == 0){
+        if (column == null || column.trim().length() == 0) {
             throw new IllegalArgumentException("列名不能为空");
         }
-        if(sortType == null){
+        if (sortType == null) {
             throw new IllegalArgumentException("排序方式不能为空");
         }
-        if(sorts == null){
+        if (sorts == null) {
             sorts = new ArrayList<Sort>(2);
         }
         //防止注入

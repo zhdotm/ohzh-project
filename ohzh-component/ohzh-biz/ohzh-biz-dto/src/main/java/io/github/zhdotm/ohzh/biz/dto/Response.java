@@ -33,31 +33,6 @@ public class Response extends DTO {
      */
     private String message;
 
-    public boolean isSuccess() {
-        return isSuccess;
-    }
-
-
-    public void setSuccess(boolean isSuccess) {
-        this.isSuccess = isSuccess;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     /**
      * 构建失败响应结果
      *
@@ -111,6 +86,30 @@ public class Response extends DTO {
         response.setSuccess(true);
         response.setMessage(message);
         return response;
+    }
+
+    public boolean isSuccess() {
+        return isSuccess;
+    }
+
+    public void setSuccess(boolean isSuccess) {
+        this.isSuccess = isSuccess;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override

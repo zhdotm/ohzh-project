@@ -71,14 +71,6 @@ public class Sort implements Serializable {
             this.message = message;
         }
 
-        public int getValue() {
-            return value;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
         /**
          * 通过枚举<code>value</code>获得枚举
          *
@@ -92,6 +84,14 @@ public class Sort implements Serializable {
                 }
             }
             return null;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public String getMessage() {
+            return message;
         }
 
         @Override

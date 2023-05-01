@@ -30,7 +30,7 @@ public @interface CommandExecutor {
     /**
      * 命令执行器编码
      *
-     * @return 命令执行器便啊嘛
+     * @return 命令执行器编码
      */
     @AliasFor(annotation = Component.class, attribute = "value")
     String code();
