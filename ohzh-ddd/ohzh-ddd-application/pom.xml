@@ -21,7 +21,6 @@
         <dependency>
             <groupId>io.github.zhdotm</groupId>
             <artifactId>ohzh-ddd-domain</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

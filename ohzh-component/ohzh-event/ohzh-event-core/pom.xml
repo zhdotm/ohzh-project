@@ -21,12 +21,10 @@
         <dependency>
             <groupId>io.github.zhdotm</groupId>
             <artifactId>ohzh-biz-dto</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-core</artifactId>
-            <version>${hutool.version}</version>
         </dependency>
     </dependencies>
 

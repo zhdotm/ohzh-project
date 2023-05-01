@@ -18,8 +18,28 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <spring.boot.version>2.3.8.RELEASE</spring.boot.version>
+        <spring.boot.version>2.3.12.RELEASE</spring.boot.version>
         <hutool.version>5.8.11</hutool.version>
+        <ohzh-biz.version>1.0-SNAPSHOT</ohzh-biz.version>
+        <ohzh-biz-dto.version>1.0-SNAPSHOT</ohzh-biz-dto.version>
+        <ohzh-cqrs.version>1.0-SNAPSHOT</ohzh-cqrs.version>
+        <ohzh-cqrs-core.version>1.0-SNAPSHOT</ohzh-cqrs-core.version>
+        <ohzh-cqrs-starter-web.version>1.0-SNAPSHOT</ohzh-cqrs-starter-web.version>
+        <ohzh-event.version>1.0-SNAPSHOT</ohzh-event.version>
+        <ohzh-event-core.version>1.0-SNAPSHOT</ohzh-event-core.version>
+        <ohzh-event-starter-web.version>1.0-SNAPSHOT</ohzh-event-starter-web.version>
+        <ohzh-extension.version>1.0-SNAPSHOT</ohzh-extension.version>
+        <ohzh-extension-core.version>1.0-SNAPSHOT</ohzh-extension-core.version>
+        <ohzh-extension-starter-web.version>1.0-SNAPSHOT</ohzh-extension-starter-web.version>
+        <ohzh-statemachine.version>1.0-SNAPSHOT</ohzh-statemachine.version>
+        <ohzh-statemachine-core.version>1.0-SNAPSHOT</ohzh-statemachine-core.version>
+        <ohzh-statemachine-starter-web.version>1.0-SNAPSHOT</ohzh-statemachine-starter-web.version>
+        <ohzh-ddd.version>1.0-SNAPSHOT</ohzh-ddd.version>
+        <ohzh-ddd-application.version>1.0-SNAPSHOT</ohzh-ddd-application.version>
+        <ohzh-ddd-client.version>1.0-SNAPSHOT</ohzh-ddd-client.version>
+        <ohzh-ddd-domain.version>1.0-SNAPSHOT</ohzh-ddd-domain.version>
+        <ohzh-ddd-infrastructure.version>1.0-SNAPSHOT</ohzh-ddd-infrastructure.version>
+        <ohzh-ddd-interfaces.version>1.0-SNAPSHOT</ohzh-ddd-interfaces.version>
     </properties>
 
     <dependencyManagement>
@@ -30,6 +50,116 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-core</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-extra</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-biz</artifactId>
+                <version>${ohzh-biz.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-biz-dto</artifactId>
+                <version>${ohzh-biz-dto.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-cqrs</artifactId>
+                <version>${ohzh-cqrs.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-cqrs-core</artifactId>
+                <version>${ohzh-cqrs-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-cqrs-starter-web</artifactId>
+                <version>${ohzh-cqrs-starter-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-event</artifactId>
+                <version>${ohzh-event.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-event-core</artifactId>
+                <version>${ohzh-event-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-event-starter-web</artifactId>
+                <version>${ohzh-event-starter-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-extension</artifactId>
+                <version>${ohzh-extension.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-extension-core</artifactId>
+                <version>${ohzh-extension-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-extension-starter-web</artifactId>
+                <version>${ohzh-extension-starter-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-statemachine</artifactId>
+                <version>${ohzh-statemachine.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-statemachine-core</artifactId>
+                <version>${ohzh-statemachine-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-statemachine-starter-web</artifactId>
+                <version>${ohzh-statemachine-starter-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-ddd</artifactId>
+                <version>${ohzh-ddd.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-ddd-application</artifactId>
+                <version>${ohzh-ddd-application.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-ddd-client</artifactId>
+                <version>${ohzh-ddd-client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-ddd-domain</artifactId>
+                <version>${ohzh-ddd-domain.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-ddd-infrastructure</artifactId>
+                <version>${ohzh-ddd-infrastructure.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-ddd-interfaces</artifactId>
+                <version>${ohzh-ddd-interfaces.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

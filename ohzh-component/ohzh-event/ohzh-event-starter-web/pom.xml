@@ -20,7 +20,6 @@
         <dependency>
             <groupId>io.github.zhdotm</groupId>
             <artifactId>ohzh-event-core</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -44,12 +43,10 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-core</artifactId>
-            <version>${hutool.version}</version>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-extra</artifactId>
-            <version>${hutool.version}</version>
         </dependency>
     </dependencies>
 

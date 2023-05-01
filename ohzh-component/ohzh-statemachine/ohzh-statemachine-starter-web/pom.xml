@@ -20,7 +20,6 @@
         <dependency>
             <groupId>io.github.zhdotm</groupId>
             <artifactId>ohzh-statemachine-core</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
