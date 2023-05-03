@@ -1,8 +1,8 @@
 package io.github.zhdotm.ohzh.extension.starter.web.annotation;
 
-import cn.hutool.core.annotation.AliasFor;
 import cn.hutool.core.util.StrUtil;
 import io.github.zhdotm.ohzh.extension.core.annotation.Extension;
+import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.*;

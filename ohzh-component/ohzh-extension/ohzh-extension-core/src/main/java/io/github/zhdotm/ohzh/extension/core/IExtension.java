@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * @author zhihao.mao
  */
 
-public interface IExtension {
+public interface IExtension extends IExtensionPoint {
 
     /**
      * 获取拓展名称
