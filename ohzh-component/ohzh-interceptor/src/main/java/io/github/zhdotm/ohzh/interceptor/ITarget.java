@@ -10,7 +10,7 @@ package io.github.zhdotm.ohzh.interceptor;
  */
 
 @FunctionalInterface
-public interface Target<Input, Output> {
+public interface ITarget<Input, Output> {
 
     /**
      * 执行请求

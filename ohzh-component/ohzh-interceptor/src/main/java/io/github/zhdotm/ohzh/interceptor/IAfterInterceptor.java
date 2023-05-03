@@ -9,7 +9,7 @@ package io.github.zhdotm.ohzh.interceptor;
  */
 
 @FunctionalInterface
-public interface AfterInterceptor<Input, Output> {
+public interface IAfterInterceptor<Input, Output> {
 
     /**
      * 排序

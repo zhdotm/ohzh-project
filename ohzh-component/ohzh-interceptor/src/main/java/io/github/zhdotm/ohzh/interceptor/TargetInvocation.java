@@ -19,23 +19,23 @@ public class TargetInvocation<Input, Output> {
     /**
      * 前值处理器
      */
-    private final List<BeforeInterceptor<Input>> beforeInterceptors = new ArrayList<>();
+    private final List<IBeforeInterceptor<Input>> beforeInterceptors = new ArrayList<>();
 
     /**
      * 后置处理器
      */
-    private final List<AfterInterceptor<Input, Output>> afterInterceptors = new ArrayList<>();
+    private final List<IAfterInterceptor<Input, Output>> afterInterceptors = new ArrayList<>();
 
     @Setter
-    private Target<Input, Output> target;
+    private ITarget<Input, Output> target;
 
     public Output invoke(Input input) {
 
-        for (BeforeInterceptor<Input> beforeInterceptor : beforeInterceptors) {
+        for (IBeforeInterceptor<Input> beforeInterceptor : beforeInterceptors) {
             input = beforeInterceptor.before(input);
         }
         Output output = target.execute(input);
-        for (AfterInterceptor<Input, Output> afterInterceptor : afterInterceptors) {
+        for (IAfterInterceptor<Input, Output> afterInterceptor : afterInterceptors) {
             output = afterInterceptor.after(input, output);
         }
 
@@ -43,19 +43,19 @@ public class TargetInvocation<Input, Output> {
     }
 
 
-    public void addInterceptor(Interceptor<Input, Output> interceptor) {
+    public void addInterceptor(IInterceptor<Input, Output> interceptor) {
         addBeforeInterceptor(interceptor);
         addAfterInterceptor(interceptor);
     }
 
-    public void addBeforeInterceptor(BeforeInterceptor<Input> beforeInterceptor) {
+    public void addBeforeInterceptor(IBeforeInterceptor<Input> beforeInterceptor) {
         beforeInterceptors.add(beforeInterceptor);
-        beforeInterceptors.sort(Comparator.comparingInt(BeforeInterceptor::order));
+        beforeInterceptors.sort(Comparator.comparingInt(IBeforeInterceptor::order));
     }
 
-    public void addAfterInterceptor(AfterInterceptor<Input, Output> afterInterceptor) {
+    public void addAfterInterceptor(IAfterInterceptor<Input, Output> afterInterceptor) {
         afterInterceptors.add(afterInterceptor);
-        afterInterceptors.sort(Comparator.comparingInt(AfterInterceptor::order));
+        afterInterceptors.sort(Comparator.comparingInt(IAfterInterceptor::order));
     }
 
 }

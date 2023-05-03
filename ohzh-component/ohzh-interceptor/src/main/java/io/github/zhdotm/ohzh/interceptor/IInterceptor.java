@@ -8,7 +8,7 @@ package io.github.zhdotm.ohzh.interceptor;
  * @author zhihao.mao
  */
 
-public interface Interceptor<Input, Output> extends BeforeInterceptor<Input>, AfterInterceptor<Input, Output> {
+public interface IInterceptor<Input, Output> extends IBeforeInterceptor<Input>, IAfterInterceptor<Input, Output> {
 
     /**
      * 排序

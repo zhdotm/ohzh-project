@@ -8,7 +8,7 @@ package io.github.zhdotm.ohzh.interceptor;
  */
 
 @FunctionalInterface
-public interface BeforeInterceptor<Input> {
+public interface IBeforeInterceptor<Input> {
 
     /**
      * 排序
