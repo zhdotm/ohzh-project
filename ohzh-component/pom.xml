@@ -16,6 +16,7 @@
         <module>ohzh-biz</module>
         <module>ohzh-statemachine</module>
         <module>ohzh-extension</module>
+        <module>ohzh-interceptor</module>
     </modules>
 
     <properties>
