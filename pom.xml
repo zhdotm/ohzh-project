@@ -22,9 +22,6 @@
         <hutool.version>5.8.11</hutool.version>
         <ohzh-biz.version>1.0-SNAPSHOT</ohzh-biz.version>
         <ohzh-biz-dto.version>1.0-SNAPSHOT</ohzh-biz-dto.version>
-        <ohzh-cqrs.version>1.0-SNAPSHOT</ohzh-cqrs.version>
-        <ohzh-cqrs-core.version>1.0-SNAPSHOT</ohzh-cqrs-core.version>
-        <ohzh-cqrs-starter-web.version>1.0-SNAPSHOT</ohzh-cqrs-starter-web.version>
         <ohzh-event.version>1.0-SNAPSHOT</ohzh-event.version>
         <ohzh-event-core.version>1.0-SNAPSHOT</ohzh-event-core.version>
         <ohzh-event-starter-web.version>1.0-SNAPSHOT</ohzh-event-starter-web.version>
@@ -70,21 +67,6 @@
                 <groupId>io.github.zhdotm</groupId>
                 <artifactId>ohzh-biz-dto</artifactId>
                 <version>${ohzh-biz-dto.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.zhdotm</groupId>
-                <artifactId>ohzh-cqrs</artifactId>
-                <version>${ohzh-cqrs.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.zhdotm</groupId>
-                <artifactId>ohzh-cqrs-core</artifactId>
-                <version>${ohzh-cqrs-core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.zhdotm</groupId>
-                <artifactId>ohzh-cqrs-starter-web</artifactId>
-                <version>${ohzh-cqrs-starter-web.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.zhdotm</groupId>
