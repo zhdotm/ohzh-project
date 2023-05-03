@@ -14,8 +14,6 @@ COLA：https://github.com/alibaba/COLA
 
 1、ohzh-biz（业务组件，包含一些常用类）
 
-2、ohzh-cqrs（命令查询的责任分离）
+2、ohzh-extension（拓展组件）
 
 3、ohzh-statemachine（状态机）
-
-4、ohzh-event（事件处理器）
