@@ -22,9 +22,6 @@
         <hutool.version>5.8.11</hutool.version>
         <ohzh-biz.version>1.0-SNAPSHOT</ohzh-biz.version>
         <ohzh-biz-dto.version>1.0-SNAPSHOT</ohzh-biz-dto.version>
-        <ohzh-event.version>1.0-SNAPSHOT</ohzh-event.version>
-        <ohzh-event-core.version>1.0-SNAPSHOT</ohzh-event-core.version>
-        <ohzh-event-starter-web.version>1.0-SNAPSHOT</ohzh-event-starter-web.version>
         <ohzh-extension.version>1.0-SNAPSHOT</ohzh-extension.version>
         <ohzh-extension-core.version>1.0-SNAPSHOT</ohzh-extension-core.version>
         <ohzh-extension-starter-web.version>1.0-SNAPSHOT</ohzh-extension-starter-web.version>
@@ -67,21 +64,6 @@
                 <groupId>io.github.zhdotm</groupId>
                 <artifactId>ohzh-biz-dto</artifactId>
                 <version>${ohzh-biz-dto.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.zhdotm</groupId>
-                <artifactId>ohzh-event</artifactId>
-                <version>${ohzh-event.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.zhdotm</groupId>
-                <artifactId>ohzh-event-core</artifactId>
-                <version>${ohzh-event-core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.zhdotm</groupId>
-                <artifactId>ohzh-event-starter-web</artifactId>
-                <version>${ohzh-event-starter-web.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.zhdotm</groupId>

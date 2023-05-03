@@ -15,7 +15,6 @@
     <modules>
         <module>ohzh-biz</module>
         <module>ohzh-statemachine</module>
-        <module>ohzh-event</module>
         <module>ohzh-extension</module>
     </modules>
 
