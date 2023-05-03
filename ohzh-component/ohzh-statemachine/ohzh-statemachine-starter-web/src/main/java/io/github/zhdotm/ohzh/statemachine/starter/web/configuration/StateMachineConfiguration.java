@@ -3,14 +3,14 @@ package io.github.zhdotm.ohzh.statemachine.starter.web.configuration;
 import io.github.zhdotm.ohzh.statemachine.starter.web.processor.StateMachineProcessor;
 import io.github.zhdotm.ohzh.statemachine.starter.web.runner.StateMachineRunner;
 import io.github.zhdotm.ohzh.statemachine.starter.web.support.StateMachineSupport;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author zhihao.mao
  */
 
-@Configuration
+@EnableAutoConfiguration
 public class StateMachineConfiguration {
 
     @Bean

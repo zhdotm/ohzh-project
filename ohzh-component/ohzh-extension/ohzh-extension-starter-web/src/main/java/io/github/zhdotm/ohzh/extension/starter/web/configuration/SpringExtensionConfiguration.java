@@ -4,13 +4,10 @@ import io.github.zhdotm.ohzh.extension.core.executor.IExtensionExecutor;
 import io.github.zhdotm.ohzh.extension.core.executor.impl.ExtensionExecutor;
 import io.github.zhdotm.ohzh.extension.core.register.IExtensionRegister;
 import io.github.zhdotm.ohzh.extension.core.register.impl.ExtensionRegister;
-import io.github.zhdotm.ohzh.extension.core.repository.IExtensionRepository;
 import io.github.zhdotm.ohzh.extension.starter.web.processor.SpringExtensionProcessor;
 import io.github.zhdotm.ohzh.extension.starter.web.repository.SpringExtensionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * 拓展配置
@@ -18,33 +15,43 @@ import org.springframework.context.annotation.Configuration;
  * @author zhihao.mao
  */
 
-@Configuration
+@EnableAutoConfiguration
 public class SpringExtensionConfiguration {
+
+    private final SpringExtensionRepository extensionRepository;
+    private final IExtensionRegister extensionRegister;
+    private final IExtensionExecutor extensionExecutor;
+    private final SpringExtensionProcessor springExtensionProcessor;
+
+    public SpringExtensionConfiguration() {
+        extensionRepository = SpringExtensionRepository.getInstance();
+        extensionRegister = ExtensionRegister.getInstance(extensionRepository);
+        extensionExecutor = ExtensionExecutor.getInstance(extensionRegister);
+        springExtensionProcessor = SpringExtensionProcessor.getInstance(extensionRepository);
+    }
+
+    @Bean
+    public SpringExtensionProcessor springExtensionProcessor() {
+
+        return springExtensionProcessor;
+    }
 
     @Bean
     public SpringExtensionRepository extensionRepository() {
 
-        return SpringExtensionRepository.getInstance();
+        return extensionRepository;
     }
 
     @Bean
-    @ConditionalOnBean(value = SpringExtensionRepository.class)
-    public IExtensionRegister extensionRegister(@Autowired IExtensionRepository extensionRepository) {
+    public IExtensionRegister extensionRegister() {
 
-        return ExtensionRegister.getInstance(extensionRepository);
+        return extensionRegister;
     }
 
     @Bean
-    @ConditionalOnBean(value = IExtensionRegister.class)
-    public IExtensionExecutor extensionExecutor(@Autowired IExtensionRegister extensionRegister) {
+    public IExtensionExecutor extensionExecutor() {
 
-        return ExtensionExecutor.getInstance(extensionRegister);
+        return extensionExecutor;
     }
 
-    @Bean
-    @ConditionalOnBean(value = SpringExtensionRepository.class)
-    public SpringExtensionProcessor springExtensionProcessor(@Autowired SpringExtensionRepository extensionRepository) {
-
-        return SpringExtensionProcessor.getInstance(extensionRepository);
-    }
 }

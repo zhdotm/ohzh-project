@@ -10,7 +10,7 @@ import io.github.zhdotm.ohzh.extension.starter.web.extension.ISpringExtension;
 import io.github.zhdotm.ohzh.extension.starter.web.repository.SpringExtensionRepository;
 import lombok.SneakyThrows;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.beans.factory.config.SmartInstantiationAwareBeanPostProcessor;
 
 import java.util.function.Supplier;
 
@@ -20,7 +20,7 @@ import java.util.function.Supplier;
  * @author zhihao.mao
  */
 
-public class SpringExtensionProcessor implements BeanPostProcessor {
+public class SpringExtensionProcessor implements SmartInstantiationAwareBeanPostProcessor {
 
     private static SpringExtensionProcessor springExtensionProcessor;
 
@@ -47,6 +47,6 @@ public class SpringExtensionProcessor implements BeanPostProcessor {
             springExtensionRepository.innerPut(springExtension);
         }
 
-        return BeanPostProcessor.super.postProcessAfterInitialization(bean, beanName);
+        return bean;
     }
 }

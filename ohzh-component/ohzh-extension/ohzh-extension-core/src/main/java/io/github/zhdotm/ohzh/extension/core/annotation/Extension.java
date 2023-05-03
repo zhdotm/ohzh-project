@@ -70,6 +70,6 @@ public @interface Extension {
          *
          * @return 拓展点目标接口
          */
-        Class<? extends IExtensionPoint> targetClazz();
+        Class<? extends IExtensionPoint> targetClazz() default IExtensionPoint.class;
     }
 }
