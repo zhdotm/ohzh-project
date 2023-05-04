@@ -1,5 +1,8 @@
 package io.github.zhdotm.ohzh.pipeline;
 
+import io.github.zhdotm.ohzh.pipeline.util.IAttributeMap;
+import io.github.zhdotm.ohzh.pipeline.valve.IValve;
+
 /**
  * 管道
  *
@@ -8,63 +11,52 @@ package io.github.zhdotm.ohzh.pipeline;
  * @author zhihao.mao
  */
 
-public interface IPipeline<Input, TempOutput, Output> {
+public interface IPipeline<Input, Output> extends IAttributeMap {
 
     /**
      * 获取头部阀门
      *
      * @return 头部阀门
      */
-    IValve<Input, TempOutput, Output> getHead();
-
-    /**
-     * 设置头部阀门
-     *
-     * @param head 头部阀门
-     */
-    void setHead(IValve<Input, TempOutput, Output> head);
+    IValve<Input, Output> getFirstValve();
 
     /**
      * 获取尾部阀门
      *
      * @return 尾部阀门
      */
-    IValve<Input, TempOutput, Output> getTail();
+    IValve<Input, Output> getLastValve();
 
     /**
-     * 设置尾部阀门
+     * 获取阀门
      *
-     * @param tail 尾部阀门
+     * @param name 阀门名称
+     * @return 阀门
      */
-    void setTail(IValve<Input, TempOutput, Output> tail);
+    IValve<Input, Output> getValve(String name);
 
     /**
-     * 添加阀门
+     * 添加头部阀门
      *
+     * @param name  阀门名称
      * @param valve 阀门
      */
-    default void addValve(IValve<Input, TempOutput, Output> valve) {
-        IValve<Input, TempOutput, Output> head = getHead();
-        if (head == null) {
-            setHead(valve);
-            setTail(valve);
-            return;
-        }
-        IValve<Input, TempOutput, Output> tail = getTail();
-        tail.setNext(valve);
-        setTail(valve);
-    }
+    void addFirstValve(String name, IValve<Input, Output> valve);
 
     /**
-     * 执行
+     * 添加尾部阀门
+     *
+     * @param name  阀门名称
+     * @param valve 阀门
+     */
+    void addLastValve(String name, IValve<Input, Output> valve);
+
+    /**
+     * 抽水
      *
      * @param input 输入
      * @return 输出
      */
-    default Output invoke(Input input) {
-        IValve<Input, TempOutput, Output> head = getHead();
-
-        return head.invoke(input, null);
-    }
+    Output drawOff(Input input);
 
 }
