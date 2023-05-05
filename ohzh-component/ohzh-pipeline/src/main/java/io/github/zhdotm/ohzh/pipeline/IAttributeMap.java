@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.pipeline.util;
+package io.github.zhdotm.ohzh.pipeline;
 
 import java.util.Collection;
 import java.util.Map;

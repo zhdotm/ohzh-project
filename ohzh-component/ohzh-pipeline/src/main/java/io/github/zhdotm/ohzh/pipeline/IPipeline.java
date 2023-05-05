@@ -1,8 +1,5 @@
 package io.github.zhdotm.ohzh.pipeline;
 
-import io.github.zhdotm.ohzh.pipeline.util.IAttributeMap;
-import io.github.zhdotm.ohzh.pipeline.valve.IValve;
-
 /**
  * 管道
  *

@@ -1,8 +1,4 @@
-package io.github.zhdotm.ohzh.pipeline.context;
-
-import io.github.zhdotm.ohzh.pipeline.IPipeline;
-import io.github.zhdotm.ohzh.pipeline.util.IAttributeMap;
-import io.github.zhdotm.ohzh.pipeline.valve.IValve;
+package io.github.zhdotm.ohzh.pipeline;
 
 import java.util.Collection;
 import java.util.Map;
