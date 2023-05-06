@@ -1,8 +1,8 @@
 package io.github.zhdotm.ohzh.interceptor;
 
 import lombok.Getter;
+import lombok.SneakyThrows;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -28,7 +28,8 @@ public class InterceptPointInvocation {
         this.args = args;
     }
 
-    public Object proceed() throws InvocationTargetException, IllegalAccessException {
+    @SneakyThrows
+    public Object proceed() {
         return method.invoke(target, args);
     }
 

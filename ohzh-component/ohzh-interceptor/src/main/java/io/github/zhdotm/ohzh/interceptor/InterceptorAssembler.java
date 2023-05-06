@@ -5,14 +5,12 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -32,7 +30,7 @@ public class InterceptorAssembler {
      * @param interceptor 拦截器
      * @return 装配拦截器后的对象
      */
-    public static Object assemble(Object target, IInterceptor interceptor) {
+    public static <T> T assemble(T target, IInterceptor interceptor) {
         Map<Class<?>, Set<Method>> interceptPointMap = getInterceptPointMap(interceptor);
         Class<?> targetClazz = target.getClass();
 
@@ -44,7 +42,7 @@ public class InterceptorAssembler {
 
         if (CollectionUtil.isNotEmpty(interfaces)) {
 
-            return Proxy.newProxyInstance(
+            return (T) Proxy.newProxyInstance(
                     targetClazz.getClassLoader(),
                     interfaces.toArray(new Class<?>[0]),
                     new InterceptorInvocationHandler(target, interceptor, interceptPointMap));
@@ -61,8 +59,8 @@ public class InterceptorAssembler {
      */
     @SneakyThrows
     private static Map<Class<?>, Set<Method>> getInterceptPointMap(IInterceptor interceptor) {
+        checkInterceptor(interceptor);
         Interceptor interceptorAnnotation = AnnotationUtil.getAnnotation(interceptor.getClass(), Interceptor.class);
-        Assert.isTrue(ObjectUtil.isNotEmpty(interceptorAnnotation), (Supplier<Throwable>) () -> new InterceptorException("No @Intercepts annotation was found in interceptor " + interceptor.getClass().getName()));
 
         return Arrays.stream(interceptorAnnotation.points())
                 .collect(Collectors.groupingBy(
@@ -77,6 +75,17 @@ public class InterceptorAssembler {
                                 },
                                 Collectors.toSet())
                 ));
+    }
+
+    @SneakyThrows
+    public static void checkInterceptor(IInterceptor interceptor) {
+        Interceptor interceptorAnnotation = AnnotationUtil.getAnnotation(interceptor.getClass(), Interceptor.class);
+        Assert.isTrue(ObjectUtil.isNotEmpty(interceptorAnnotation), (Supplier<Throwable>) () -> new InterceptorException(StrUtil.format("装配拦截器失败: {}拦截器上未携带@Interceptor注解", interceptor.getClass().getName())));
+        Optional<Interceptor.InterceptPoint> notInterfaceInterceptPointOptional = Arrays
+                .stream(interceptorAnnotation.points())
+                .filter(interceptPoint -> !ClassUtil.isInterface(interceptPoint.type()))
+                .findAny();
+        Assert.isFalse(notInterfaceInterceptPointOptional.isPresent(), (Supplier<Throwable>) () -> new InterceptorException(StrUtil.format("装配拦截器失败: {}拦截器上声明的拦截点type = {}非接口", interceptor.getClass().getName(), notInterfaceInterceptPointOptional.get().type())));
     }
 
 }

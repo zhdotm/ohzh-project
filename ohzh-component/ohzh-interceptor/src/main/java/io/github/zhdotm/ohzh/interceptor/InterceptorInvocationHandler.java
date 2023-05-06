@@ -1,6 +1,7 @@
 package io.github.zhdotm.ohzh.interceptor;
 
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -20,8 +21,9 @@ public class InterceptorInvocationHandler implements InvocationHandler {
     private final IInterceptor interceptor;
     private final Map<Class<?>, Set<Method>> interceptPointMap;
 
+    @SneakyThrows
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) {
         Set<Method> methods = interceptPointMap.get(method.getDeclaringClass());
         if (methods != null && methods.contains(method)) {
             return interceptor.intercept(new InterceptPointInvocation(target, method, args));

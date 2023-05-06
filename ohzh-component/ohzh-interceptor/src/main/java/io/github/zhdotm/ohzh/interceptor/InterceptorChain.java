@@ -1,9 +1,9 @@
 package io.github.zhdotm.ohzh.interceptor;
 
 import lombok.Getter;
+import lombok.SneakyThrows;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -17,7 +17,8 @@ public class InterceptorChain {
     @Getter
     private final List<IInterceptor> interceptors = new ArrayList<>();
 
-    public Object assembleAll(Object target) {
+    @SneakyThrows
+    public <T> T assembleAll(T target) {
         for (IInterceptor interceptor : interceptors) {
             target = interceptor.assemble(target);
         }
@@ -26,7 +27,7 @@ public class InterceptorChain {
 
     public void addInterceptor(IInterceptor interceptor) {
         interceptors.add(interceptor);
-        interceptors.sort(Comparator.comparingInt(IInterceptor::order));
+        interceptors.sort((interceptor1, interceptor2) -> interceptor2.order() - interceptor1.order());
     }
-    
+
 }

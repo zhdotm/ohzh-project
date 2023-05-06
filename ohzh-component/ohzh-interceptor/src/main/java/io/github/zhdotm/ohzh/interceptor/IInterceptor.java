@@ -32,6 +32,6 @@ public interface IInterceptor {
      * @param target 装配对象
      * @return 装配拦截器后的对象
      */
-    Object assemble(Object target);
+    <T> T assemble(T target);
 
 }
