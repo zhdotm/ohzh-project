@@ -1,24 +1,37 @@
 package io.github.zhdotm.ohzh.interceptor;
 
 /**
- * 拦截器接口
+ * 拦截器
  *
- * @param <Input>  入参
- * @param <Output> 出参
  * @author zhihao.mao
  */
 
-public interface IInterceptor<Input, Output> extends IBeforeInterceptor<Input>, IAfterInterceptor<Input, Output> {
+public interface IInterceptor {
 
     /**
-     * 排序
+     * 排序号
      *
-     * @return 排序
+     * @return 排序号
      */
-    @Override
     default Integer order() {
 
         return Integer.MAX_VALUE;
     }
+
+    /**
+     * 拦截
+     *
+     * @param interceptPointInvocation 拦截点调用信息
+     * @return 调用结果
+     */
+    Object intercept(InterceptPointInvocation interceptPointInvocation);
+
+    /**
+     * 装配
+     *
+     * @param target 装配对象
+     * @return 装配拦截器后的对象
+     */
+    Object assemble(Object target);
 
 }
