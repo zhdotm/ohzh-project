@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Set;
@@ -32,8 +31,8 @@ public class InterceptorInvocationHandler implements InvocationHandler {
                 return interceptor.intercept(new InterceptPointInvocation(target, method, args));
             }
             return method.invoke(target, args);
-        } catch (InvocationTargetException e) {
-            throw ExceptionUtil.getRootCause(e);
+        } catch (Exception e) {
+            throw ExceptionUtil.unwrap(e);
         }
     }
 
