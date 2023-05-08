@@ -53,7 +53,6 @@ public interface IExtension extends IExtensionPoint {
     default List<ExtensionCoordinate> getCoordinates() {
         Extension extensionAnnotation = getExtensionAnnotation();
         Extension.ExtensionPoint[] points = extensionAnnotation.points();
-        System.out.println(points.length);
 
         return Arrays.stream(points)
                 .map(point -> ExtensionCoordinate.create(BizScenario.valueOf(point.bizId(), point.useCase(), point.scenario()), point.targetClazz()))

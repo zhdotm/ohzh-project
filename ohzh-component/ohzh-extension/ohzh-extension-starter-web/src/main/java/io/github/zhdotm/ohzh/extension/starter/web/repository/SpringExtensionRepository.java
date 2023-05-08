@@ -6,6 +6,8 @@ import io.github.zhdotm.ohzh.extension.core.IExtension;
 import io.github.zhdotm.ohzh.extension.core.coordinate.ExtensionCoordinate;
 import io.github.zhdotm.ohzh.extension.core.repository.IExtensionRepository;
 import io.github.zhdotm.ohzh.extension.core.repository.impl.ExtensionRepository;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 拓展仓储
@@ -17,7 +19,9 @@ public class SpringExtensionRepository implements IExtensionRepository {
 
     private static SpringExtensionRepository springExtensionRepository;
 
-    private final IExtensionRepository innerExtensionRepository = ExtensionRepository.getInstance();
+    @Getter
+    @Setter
+    private IExtensionRepository innerExtensionRepository = ExtensionRepository.getInstance();
 
     private SpringExtensionRepository() {
     }

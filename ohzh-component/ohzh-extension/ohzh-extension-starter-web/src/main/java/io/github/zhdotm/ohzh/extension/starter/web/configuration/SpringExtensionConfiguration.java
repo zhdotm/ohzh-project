@@ -18,40 +18,28 @@ import org.springframework.context.annotation.Bean;
 @EnableAutoConfiguration
 public class SpringExtensionConfiguration {
 
-    private final SpringExtensionRepository extensionRepository;
-    private final IExtensionRegister extensionRegister;
-    private final IExtensionExecutor extensionExecutor;
-    private final SpringExtensionProcessor springExtensionProcessor;
-
-    public SpringExtensionConfiguration() {
-        extensionRepository = SpringExtensionRepository.getInstance();
-        extensionRegister = ExtensionRegister.getInstance(extensionRepository);
-        extensionExecutor = ExtensionExecutor.getInstance(extensionRegister);
-        springExtensionProcessor = SpringExtensionProcessor.getInstance(extensionRepository);
-    }
-
     @Bean
-    public SpringExtensionProcessor springExtensionProcessor() {
+    public static SpringExtensionProcessor springExtensionProcessor() {
 
-        return springExtensionProcessor;
+        return SpringExtensionProcessor.getInstance(SpringExtensionRepository.getInstance());
     }
 
     @Bean
     public SpringExtensionRepository extensionRepository() {
 
-        return extensionRepository;
+        return SpringExtensionRepository.getInstance();
     }
 
     @Bean
     public IExtensionRegister extensionRegister() {
 
-        return extensionRegister;
+        return ExtensionRegister.getInstance(SpringExtensionRepository.getInstance());
     }
 
     @Bean
     public IExtensionExecutor extensionExecutor() {
 
-        return extensionExecutor;
+        return ExtensionExecutor.getInstance(ExtensionRegister.getInstance());
     }
 
 }

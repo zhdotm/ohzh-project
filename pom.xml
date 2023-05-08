@@ -19,7 +19,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <spring.boot.version>2.3.12.RELEASE</spring.boot.version>
-        <hutool.version>5.8.11</hutool.version>
+        <hutool.version>5.8.15</hutool.version>
         <ohzh-biz.version>1.0-SNAPSHOT</ohzh-biz.version>
         <ohzh-biz-dto.version>1.0-SNAPSHOT</ohzh-biz-dto.version>
         <ohzh-extension.version>1.0-SNAPSHOT</ohzh-extension.version>
