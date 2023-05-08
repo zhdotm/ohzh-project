@@ -35,6 +35,14 @@ public class ExtensionRepository implements IExtensionRepository {
         this.coordinateExtensionMap = new HashMap<>();
     }
 
+    public static synchronized IExtensionRepository getInstance(IExtensionRepository extensionRepository) {
+        if (ObjectUtil.isEmpty(ExtensionRepository.extensionRepository)) {
+            ExtensionRepository.extensionRepository = new ExtensionRepository();
+        }
+
+        return ExtensionRepository.extensionRepository;
+    }
+
     public static synchronized IExtensionRepository getInstance() {
         if (ObjectUtil.isEmpty(extensionRepository)) {
             extensionRepository = new ExtensionRepository();

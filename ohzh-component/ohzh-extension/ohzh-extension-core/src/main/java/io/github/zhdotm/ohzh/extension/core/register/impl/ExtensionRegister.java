@@ -27,6 +27,14 @@ public class ExtensionRegister implements IExtensionRegister {
         this.extensionRepository = extensionRepository;
     }
 
+    public static synchronized IExtensionRegister getInstance(IExtensionRegister extensionRegister) {
+        if (ObjectUtil.isEmpty(ExtensionRegister.extensionRegister)) {
+            ExtensionRegister.extensionRegister = extensionRegister;
+        }
+
+        return ExtensionRegister.extensionRegister;
+    }
+
     public static IExtensionRegister getInstance() {
 
         return getInstance(ExtensionRepository.getInstance());

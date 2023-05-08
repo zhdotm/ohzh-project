@@ -31,6 +31,14 @@ public class ExtensionScanner implements IExtensionScanner {
         this.extensionRegister = extensionRegister;
     }
 
+    public static synchronized IExtensionScanner getInstance(IExtensionScanner extensionScanner) {
+        if (ObjectUtil.isEmpty(ExtensionScanner.extensionScanner)) {
+            ExtensionScanner.extensionScanner = extensionScanner;
+        }
+
+        return ExtensionScanner.extensionScanner;
+    }
+
     public static IExtensionScanner getInstance() {
 
         return getInstance(ExtensionRegister.getInstance());

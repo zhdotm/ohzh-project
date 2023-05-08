@@ -25,7 +25,7 @@ import java.util.function.Function;
  * @author zhihao.mao
  */
 
-public interface ITransitionAdapter {
+public interface ISpringTransition {
 
     default String getCurrentState() {
 

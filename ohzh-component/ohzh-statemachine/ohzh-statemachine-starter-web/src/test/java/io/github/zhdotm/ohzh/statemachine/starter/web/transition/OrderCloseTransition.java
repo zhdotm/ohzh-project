@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.statemachine.starter.web.transition;
 
 import io.github.zhdotm.ohzh.statemachine.core.constant.TransitionTypeEnum;
-import io.github.zhdotm.ohzh.statemachine.starter.web.adapter.ITransitionAdapter;
+import io.github.zhdotm.ohzh.statemachine.starter.web.adapter.ISpringTransition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineAction;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineCondition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTransition;
@@ -19,7 +19,7 @@ import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTra
         on = "EVENT_CLOSE",
         to = "STATE_CLOSED"
 )
-public class OrderCloseTransition implements ITransitionAdapter {
+public class OrderCloseTransition implements ISpringTransition {
 
     @StateMachineCondition(conditionId = "IS_ABLE_CLOSE")
     public Boolean check(String orderId) {

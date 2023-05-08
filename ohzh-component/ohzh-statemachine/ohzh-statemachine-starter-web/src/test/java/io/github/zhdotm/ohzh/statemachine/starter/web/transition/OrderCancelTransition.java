@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.statemachine.starter.web.transition;
 
 import io.github.zhdotm.ohzh.statemachine.core.constant.TransitionTypeEnum;
-import io.github.zhdotm.ohzh.statemachine.starter.web.adapter.ITransitionAdapter;
+import io.github.zhdotm.ohzh.statemachine.starter.web.adapter.ISpringTransition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineAction;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineCondition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTransition;
@@ -17,7 +17,7 @@ import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTra
         from = {"STATE_WAIT_INIT", "STATE_WAIT_PROMO", "STATE_WAIT_BALANCE", "STATE_WAIT_PAY"},
         on = "EVENT_CANCEL",
         to = "STATE_CANCELED")
-public class OrderCancelTransition implements ITransitionAdapter {
+public class OrderCancelTransition implements ISpringTransition {
 
     @StateMachineCondition(conditionId = "IS_ABLE_CANCEL")
     public Boolean check(String orderId) {

@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.statemachine.starter.web.transition;
 
 import io.github.zhdotm.ohzh.statemachine.core.constant.TransitionTypeEnum;
-import io.github.zhdotm.ohzh.statemachine.starter.web.adapter.ITransitionAdapter;
+import io.github.zhdotm.ohzh.statemachine.starter.web.adapter.ISpringTransition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineAction;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineCondition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTransition;
@@ -19,7 +19,7 @@ import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTra
         on = "EVENT_BALANCE",
         to = "STATE_WAIT_PAY"
 )
-public class OrderBalanceTransition implements ITransitionAdapter {
+public class OrderBalanceTransition implements ISpringTransition {
 
     @StateMachineCondition
     public Boolean isAbleBalance(String orderId) {

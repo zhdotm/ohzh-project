@@ -4,7 +4,7 @@ import io.github.zhdotm.ohzh.statemachine.core.constant.CharacterEnum;
 import io.github.zhdotm.ohzh.statemachine.core.constant.TransitionTypeEnum;
 import io.github.zhdotm.ohzh.statemachine.core.exception.StateMachineException;
 import io.github.zhdotm.ohzh.statemachine.core.exception.util.ExceptionUtil;
-import io.github.zhdotm.ohzh.statemachine.starter.web.adapter.ITransitionAdapter;
+import io.github.zhdotm.ohzh.statemachine.starter.web.adapter.ISpringTransition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTransition;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.SmartInstantiationAwareBeanPostProcessor;
@@ -28,7 +28,7 @@ public class StateMachineProcessor implements SmartInstantiationAwareBeanPostPro
                 ExceptionUtil.isTrue(!CharacterEnum.EMPTY.getValue().equalsIgnoreCase(stateMachineTransition.to()), StateMachineException.class, "构建Bean[%s]失败: 外部转换必须指定转换后状态", beanName);
             }
 
-            ExceptionUtil.isTrue(bean instanceof ITransitionAdapter, StateMachineException.class, "构建Bean[%s]失败: 携带@StateMachineComponent注解的Bean必须实现TransitionAdapter接口", beanName);
+            ExceptionUtil.isTrue(bean instanceof ISpringTransition, StateMachineException.class, "构建Bean[%s]失败: 携带@StateMachineComponent注解的Bean必须实现TransitionAdapter接口", beanName);
         }
 
         return bean;

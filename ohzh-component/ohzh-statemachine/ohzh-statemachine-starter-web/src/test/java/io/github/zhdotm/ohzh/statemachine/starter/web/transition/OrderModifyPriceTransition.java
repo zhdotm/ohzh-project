@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.statemachine.starter.web.transition;
 
 import io.github.zhdotm.ohzh.statemachine.core.constant.TransitionTypeEnum;
-import io.github.zhdotm.ohzh.statemachine.starter.web.adapter.ITransitionAdapter;
+import io.github.zhdotm.ohzh.statemachine.starter.web.adapter.ISpringTransition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineAction;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineCondition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTransition;
@@ -18,7 +18,7 @@ import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTra
         from = {"STATE_WAIT_PROMO", "STATE_WAIT_BALANCE", "STATE_WAIT_PAY"},
         on = "EVENT_MODIFY_PRICE"
 )
-public class OrderModifyPriceTransition implements ITransitionAdapter {
+public class OrderModifyPriceTransition implements ISpringTransition {
 
     @StateMachineCondition(conditionId = "IS_ABLE_MODIFY_PRICE")
     public Boolean check(String orderId, Long price) {

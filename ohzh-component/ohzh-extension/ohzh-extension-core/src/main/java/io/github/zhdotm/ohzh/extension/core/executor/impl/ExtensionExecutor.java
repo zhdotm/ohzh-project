@@ -40,6 +40,14 @@ public class ExtensionExecutor implements IExtensionExecutor {
         this.extensionRegister = extensionRegister;
     }
 
+    public static synchronized IExtensionExecutor getInstance(IExtensionExecutor extensionExecutor) {
+        if (ObjectUtil.isEmpty(extensionExecutor)) {
+            ExtensionExecutor.extensionExecutor = extensionExecutor;
+        }
+
+        return ExtensionExecutor.extensionExecutor;
+    }
+
     /**
      * 获取拓展执行器实例
      *

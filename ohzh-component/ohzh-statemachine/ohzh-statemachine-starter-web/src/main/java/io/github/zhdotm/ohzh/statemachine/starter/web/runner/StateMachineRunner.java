@@ -4,7 +4,7 @@ import io.github.zhdotm.ohzh.statemachine.core.domain.IStateMachine;
 import io.github.zhdotm.ohzh.statemachine.core.domain.ITransition;
 import io.github.zhdotm.ohzh.statemachine.core.support.StateMachineFactory;
 import io.github.zhdotm.ohzh.statemachine.core.support.builder.machine.IStateMachineBuilder;
-import io.github.zhdotm.ohzh.statemachine.starter.web.adapter.ITransitionAdapter;
+import io.github.zhdotm.ohzh.statemachine.starter.web.adapter.ISpringTransition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTransition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.support.StateMachineSupport;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +44,7 @@ public class StateMachineRunner implements ApplicationRunner {
         ConfigurableListableBeanFactory beanFactory = StateMachineSupport.getBeanFactory();
         Map<String, Object> beansWithAnnotation = beanFactory.getBeansWithAnnotation(StateMachineTransition.class);
         for (Object bean : beansWithAnnotation.values()) {
-            ITransitionAdapter transitionAdapter = (ITransitionAdapter) bean;
+            ISpringTransition transitionAdapter = (ISpringTransition) bean;
             String stateMachineId = transitionAdapter.getStateMachineId();
             List<ITransition<String, String, String, String>> transitions = stateMachineIdTransitionsMap.getOrDefault(stateMachineId, new ArrayList<>());
             ITransition<String, String, String, String> transition = transitionAdapter.getTransition();
