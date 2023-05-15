@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.pipeline;
+package io.github.zhdotm.ohzh.pipeline.core;
 
 /**
  * 管道

@@ -4,4 +4,4 @@
  * @author zhihao.mao
  */
 
-package io.github.zhdotm.ohzh.pipeline;
+package io.github.zhdotm.ohzh.pipeline.core;

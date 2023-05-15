@@ -28,6 +28,7 @@
         <ohzh-statemachine.version>1.0-SNAPSHOT</ohzh-statemachine.version>
         <ohzh-statemachine-core.version>1.0-SNAPSHOT</ohzh-statemachine-core.version>
         <ohzh-statemachine-starter-web.version>1.0-SNAPSHOT</ohzh-statemachine-starter-web.version>
+        <ohzh-pipeline-core.version>1.0-SNAPSHOT</ohzh-pipeline-core.version>
         <ohzh-ddd.version>1.0-SNAPSHOT</ohzh-ddd.version>
         <ohzh-ddd-application.version>1.0-SNAPSHOT</ohzh-ddd-application.version>
         <ohzh-ddd-client.version>1.0-SNAPSHOT</ohzh-ddd-client.version>
@@ -94,6 +95,11 @@
                 <groupId>io.github.zhdotm</groupId>
                 <artifactId>ohzh-statemachine-starter-web</artifactId>
                 <version>${ohzh-statemachine-starter-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-pipeline-core</artifactId>
+                <version>${ohzh-pipeline-core.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.zhdotm</groupId>
