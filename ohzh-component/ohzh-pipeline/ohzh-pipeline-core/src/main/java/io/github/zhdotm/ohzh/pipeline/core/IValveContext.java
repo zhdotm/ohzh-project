@@ -136,6 +136,11 @@ public interface IValveContext<Input, Output> extends IAttributeMap {
      */
     default Output fireDrawOff(Input input) {
         IValveContext<Input, Output> nextValveContext = getNext();
+        if (nextValveContext == null) {
+
+            return null;
+        }
+
         IValve<Input, Output> nextValve = nextValveContext.getValve();
 
         return nextValve.drawOff(nextValveContext, input);

@@ -12,12 +12,7 @@ import java.util.Map;
 
 public class Pipeline<Input, Output> implements IPipeline<Input, Output> {
 
-    private IValveContext<Input, Output> firstValveContext;
-
-    private IValveContext<Input, Output> lastValveContext;
-
     private final Map<String, IValveContext<Input, Output>> nameValveContextMap = new HashMap<>();
-
     private final InheritableThreadLocal<Map<String, Object>> attributesThreadLocal = new InheritableThreadLocal<Map<String, Object>>() {
         @Override
         protected Map<String, Object> initialValue() {
@@ -25,6 +20,8 @@ public class Pipeline<Input, Output> implements IPipeline<Input, Output> {
             return new HashMap<>();
         }
     };
+    private IValveContext<Input, Output> firstValveContext;
+    private IValveContext<Input, Output> lastValveContext;
 
     @Override
     public IValve<Input, Output> getFirstValve() {
@@ -58,7 +55,7 @@ public class Pipeline<Input, Output> implements IPipeline<Input, Output> {
     }
 
     @Override
-    public void addFirstValve(String name, IValve<Input, Output> valve) {
+    public synchronized void addFirstValve(String name, IValve<Input, Output> valve) {
         ValveContext<Input, Output> valveContext = ValveContext.create(name, this, valve);
         nameValveContextMap.put(name, valveContext);
         if (firstValveContext == null) {
@@ -73,7 +70,7 @@ public class Pipeline<Input, Output> implements IPipeline<Input, Output> {
     }
 
     @Override
-    public void addLastValve(String name, IValve<Input, Output> valve) {
+    public synchronized void addLastValve(String name, IValve<Input, Output> valve) {
         ValveContext<Input, Output> valveContext = ValveContext.create(name, this, valve);
         nameValveContextMap.put(name, valveContext);
         if (lastValveContext == null) {
