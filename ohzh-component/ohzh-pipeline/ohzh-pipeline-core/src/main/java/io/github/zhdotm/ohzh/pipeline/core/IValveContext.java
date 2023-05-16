@@ -1,7 +1,14 @@
 package io.github.zhdotm.ohzh.pipeline.core;
 
+import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.ObjectUtil;
+import io.github.zhdotm.ohzh.pipeline.core.exception.PipelineException;
+import io.github.zhdotm.ohzh.pipeline.core.exception.PipelineExceptionEnum;
+import lombok.SneakyThrows;
+
 import java.util.Collection;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * 阀门上下文
@@ -134,12 +141,10 @@ public interface IValveContext<Input, Output> extends IAttributeMap {
      * @param input 输入
      * @return 输出
      */
+    @SneakyThrows
     default Output fireDrawOff(Input input) {
         IValveContext<Input, Output> nextValveContext = getNext();
-        if (nextValveContext == null) {
-
-            return null;
-        }
+        Assert.isTrue(ObjectUtil.isNotEmpty(nextValveContext), (Supplier<Throwable>) () -> new PipelineException(PipelineExceptionEnum.NEXT_VALVE_NOT_EXIST.getCode(), PipelineExceptionEnum.NEXT_VALVE_NOT_EXIST.getMessage(getName())));
 
         IValve<Input, Output> nextValve = nextValveContext.getValve();
 

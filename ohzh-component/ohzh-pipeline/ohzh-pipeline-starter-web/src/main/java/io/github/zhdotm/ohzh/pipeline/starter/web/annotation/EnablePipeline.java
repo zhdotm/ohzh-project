@@ -16,6 +16,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Import({SpringUtil.class, SpringPipelineConfiguration.class})
-public @interface EnableSpringPipeline {
+public @interface EnablePipeline {
 
 }

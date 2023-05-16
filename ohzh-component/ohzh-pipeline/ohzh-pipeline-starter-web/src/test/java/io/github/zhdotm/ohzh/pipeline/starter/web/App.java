@@ -1,6 +1,6 @@
 package io.github.zhdotm.ohzh.pipeline.starter.web;
 
-import io.github.zhdotm.ohzh.pipeline.starter.web.annotation.EnableSpringPipeline;
+import io.github.zhdotm.ohzh.pipeline.starter.web.annotation.EnablePipeline;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 
 @SpringBootApplication
-@EnableSpringPipeline
+@EnablePipeline
 public class App {
 
     public static void main(String[] args) {

@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import io.github.zhdotm.ohzh.pipeline.core.Pipeline;
 import io.github.zhdotm.ohzh.pipeline.starter.web.adapter.ISpringValve;
-import io.github.zhdotm.ohzh.pipeline.starter.web.annotation.SpringValve;
+import io.github.zhdotm.ohzh.pipeline.starter.web.annotation.Valve;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -27,7 +27,7 @@ public class SpringPipelineRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         List<ISpringValve<?, ?>> valves = SpringUtil
                 .getConfigurableBeanFactory()
-                .getBeansWithAnnotation(SpringValve.class)
+                .getBeansWithAnnotation(Valve.class)
                 .values()
                 .stream()
                 .filter(obj -> obj instanceof ISpringValve)
@@ -44,6 +44,7 @@ public class SpringPipelineRunner implements ApplicationRunner {
         pipelineNameValvesMap.forEach((pipelineName, valvesTemp) -> {
             valvesTemp.sort(Comparator.comparingInt(ISpringValve::getOrder));
             Pipeline pipeline = new Pipeline();
+            pipeline.setName(pipelineName);
             valvesTemp.forEach(valve -> pipeline.addLastValve(valve.getName(), valve));
 
             SpringUtil.registerBean(pipelineName, pipeline);

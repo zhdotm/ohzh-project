@@ -1,8 +1,11 @@
 package io.github.zhdotm.ohzh.pipeline.core;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 管道
@@ -12,14 +15,17 @@ import java.util.Map;
 
 public class Pipeline<Input, Output> implements IPipeline<Input, Output> {
 
-    private final Map<String, IValveContext<Input, Output>> nameValveContextMap = new HashMap<>();
+    private final Map<String, IValveContext<Input, Output>> nameValveContextMap = new ConcurrentHashMap<>();
     private final InheritableThreadLocal<Map<String, Object>> attributesThreadLocal = new InheritableThreadLocal<Map<String, Object>>() {
         @Override
         protected Map<String, Object> initialValue() {
 
-            return new HashMap<>();
+            return new ConcurrentHashMap<>();
         }
     };
+    @Getter
+    @Setter
+    private String name;
     private IValveContext<Input, Output> firstValveContext;
     private IValveContext<Input, Output> lastValveContext;
 
@@ -55,7 +61,23 @@ public class Pipeline<Input, Output> implements IPipeline<Input, Output> {
     }
 
     @Override
-    public synchronized void addFirstValve(String name, IValve<Input, Output> valve) {
+    public void removeValve(String name) {
+        IValveContext<Input, Output> valveContext = nameValveContextMap.get(name);
+        if (valveContext == null) {
+            return;
+        }
+        IValveContext<Input, Output> beforeValveContext = valveContext.getBefore();
+        IValveContext<Input, Output> nextValveContext = valveContext.getNext();
+        if (beforeValveContext != null) {
+            beforeValveContext.setNext(nextValveContext);
+        }
+        if (nextValveContext != null) {
+            nextValveContext.setBefore(beforeValveContext);
+        }
+    }
+
+    @Override
+    public void addFirstValve(String name, IValve<Input, Output> valve) {
         ValveContext<Input, Output> valveContext = ValveContext.create(name, this, valve);
         nameValveContextMap.put(name, valveContext);
         if (firstValveContext == null) {
@@ -70,7 +92,20 @@ public class Pipeline<Input, Output> implements IPipeline<Input, Output> {
     }
 
     @Override
-    public synchronized void addLastValve(String name, IValve<Input, Output> valve) {
+    public void removeFirstValve() {
+        IValveContext<Input, Output> nextValveContext = firstValveContext.getNext();
+        if (nextValveContext != null) {
+            nextValveContext.setBefore(null);
+        }
+
+        firstValveContext = nextValveContext;
+        if (firstValveContext == null) {
+            lastValveContext = null;
+        }
+    }
+
+    @Override
+    public void addLastValve(String name, IValve<Input, Output> valve) {
         ValveContext<Input, Output> valveContext = ValveContext.create(name, this, valve);
         nameValveContextMap.put(name, valveContext);
         if (lastValveContext == null) {
@@ -82,6 +117,19 @@ public class Pipeline<Input, Output> implements IPipeline<Input, Output> {
         lastValveContext.setNext(valveContext);
         valveContext.setBefore(lastValveContext);
         lastValveContext = valveContext;
+    }
+
+    @Override
+    public void removeLastValve() {
+        IValveContext<Input, Output> beforeValveContext = lastValveContext.getBefore();
+        if (beforeValveContext != null) {
+            beforeValveContext.setNext(null);
+        }
+
+        lastValveContext = beforeValveContext;
+        if (lastValveContext == null) {
+            firstValveContext = null;
+        }
     }
 
     @Override

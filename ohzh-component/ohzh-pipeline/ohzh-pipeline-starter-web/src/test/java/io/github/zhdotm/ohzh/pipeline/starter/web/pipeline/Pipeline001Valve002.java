@@ -2,9 +2,9 @@ package io.github.zhdotm.ohzh.pipeline.starter.web.pipeline;
 
 import io.github.zhdotm.ohzh.pipeline.core.IValveContext;
 import io.github.zhdotm.ohzh.pipeline.starter.web.adapter.ISpringValve;
-import io.github.zhdotm.ohzh.pipeline.starter.web.annotation.SpringValve;
+import io.github.zhdotm.ohzh.pipeline.starter.web.annotation.Valve;
 
-@SpringValve(pipelineName = "pipeline001", name = "valve002", order = 2)
+@Valve(pipelineName = "pipeline001", name = "valve002", order = 2)
 public class Pipeline001Valve002 implements ISpringValve<String, Integer> {
 
     @Override
