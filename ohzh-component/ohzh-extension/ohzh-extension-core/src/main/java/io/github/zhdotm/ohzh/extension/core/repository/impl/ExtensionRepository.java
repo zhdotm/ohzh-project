@@ -37,7 +37,7 @@ public class ExtensionRepository implements IExtensionRepository {
 
     public static synchronized IExtensionRepository getInstance(IExtensionRepository extensionRepository) {
         if (ObjectUtil.isEmpty(ExtensionRepository.extensionRepository)) {
-            ExtensionRepository.extensionRepository = new ExtensionRepository();
+            ExtensionRepository.extensionRepository = extensionRepository;
         }
 
         return ExtensionRepository.extensionRepository;
