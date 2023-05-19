@@ -25,6 +25,9 @@
         <ohzh-extension.version>1.0-SNAPSHOT</ohzh-extension.version>
         <ohzh-extension-core.version>1.0-SNAPSHOT</ohzh-extension-core.version>
         <ohzh-extension-starter-web.version>1.0-SNAPSHOT</ohzh-extension-starter-web.version>
+        <ohzh-interceptor.version>1.0-SNAPSHOT</ohzh-interceptor.version>
+        <ohzh-interceptor-core.version>1.0-SNAPSHOT</ohzh-interceptor-core.version>
+        <ohzh-interceptor-starter-web.version>1.0-SNAPSHOT</ohzh-interceptor-starter-web.version>
         <ohzh-statemachine.version>1.0-SNAPSHOT</ohzh-statemachine.version>
         <ohzh-statemachine-core.version>1.0-SNAPSHOT</ohzh-statemachine-core.version>
         <ohzh-statemachine-starter-web.version>1.0-SNAPSHOT</ohzh-statemachine-starter-web.version>
@@ -80,6 +83,21 @@
                 <groupId>io.github.zhdotm</groupId>
                 <artifactId>ohzh-extension-starter-web</artifactId>
                 <version>${ohzh-extension-starter-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-interceptor</artifactId>
+                <version>${ohzh-interceptor.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-interceptor-core</artifactId>
+                <version>${ohzh-interceptor-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-interceptor-starter-web</artifactId>
+                <version>${ohzh-interceptor-starter-web.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.zhdotm</groupId>
