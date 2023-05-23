@@ -11,6 +11,7 @@
         <module>ohzh-component</module>
     </modules>
     <packaging>pom</packaging>
+    <name>ohzh-project</name>
     <description>脚手架</description>
     <url>https://github.com/zhdotm/ohzh-project</url>
     <developers>
