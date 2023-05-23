@@ -10,103 +10,6 @@ import java.util.Arrays;
 public class AppTest {
 
 
-    /**
-     * 状态机
-     */
-    public enum StateMachineEnum {
-        /**
-         * 退款状态机
-         */
-        REFUND_STATEMACHINE,
-        ;
-    }
-
-    /**
-     * 退款状态
-     */
-    public enum RefundStateEnum {
-
-        /**
-         * 退款初始化
-         */
-        STATE_REFUND_INIT,
-
-        /**
-         * 待审核
-         */
-        STATE_WAIT_APPROVE,
-
-        /**
-         * 审核失败
-         */
-        STATE_APPROVE_FAIL,
-
-        /**
-         * 审核通过待开始
-         */
-        STATE_WAIT_START,
-
-        /**
-         * 待退款回调
-         */
-        STATE_WAIT_REFUND_CALLBACK,
-
-        /**
-         * 退款失败
-         */
-        STATE_REFUND_FAIL,
-
-        /**
-         * 退款回调成功
-         */
-        STATE_REFUND_SUCCESS,
-        ;
-    }
-
-
-    /**
-     * 退款事件
-     */
-    public enum RefundEventEnum {
-
-        /**
-         * 初始化退款订单事件
-         */
-        EVENT_INIT,
-
-        /**
-         * 添加审核意见事件
-         */
-        EVENT_APPROVE_ADD_SUGGESTION,
-
-        /**
-         * 审核失败事件
-         */
-        EVENT_APPROVE_FAIL,
-
-        /**
-         * 审核成功事件
-         */
-        EVENT_APPROVE_SUCCESS,
-
-        /**
-         * 执行退款事件
-         */
-        EVENT_EXECUTE_REFUND,
-
-        /**
-         * 退款回调成功事件
-         */
-        EVENT_REFUND_CALLBACK_SUCCESS,
-
-        /**
-         * 退款回调失败事件
-         */
-        EVENT_REFUND_CALLBACK_FAIL,
-        ;
-    }
-
-
     public static void main(String[] args) {
         IStateMachineBuilder<StateMachineEnum, RefundStateEnum, RefundEventEnum, String, String> stateMachineBuilder = StateMachineFactory.create();
         //初始化退款订单
@@ -217,5 +120,102 @@ public class AppTest {
         //发布事件
         IStateContext<RefundStateEnum, RefundEventEnum> stateContext = stateMachine.fireEvent(RefundStateEnum.STATE_REFUND_INIT, RefundEventEnum.EVENT_INIT, "xxxzzz");
         System.out.println(stateContext.getPayload() + "");
+    }
+
+    /**
+     * 状态机
+     */
+    public enum StateMachineEnum {
+        /**
+         * 退款状态机
+         */
+        REFUND_STATEMACHINE,
+        ;
+    }
+
+
+    /**
+     * 退款状态
+     */
+    public enum RefundStateEnum {
+
+        /**
+         * 退款初始化
+         */
+        STATE_REFUND_INIT,
+
+        /**
+         * 待审核
+         */
+        STATE_WAIT_APPROVE,
+
+        /**
+         * 审核失败
+         */
+        STATE_APPROVE_FAIL,
+
+        /**
+         * 审核通过待开始
+         */
+        STATE_WAIT_START,
+
+        /**
+         * 待退款回调
+         */
+        STATE_WAIT_REFUND_CALLBACK,
+
+        /**
+         * 退款失败
+         */
+        STATE_REFUND_FAIL,
+
+        /**
+         * 退款回调成功
+         */
+        STATE_REFUND_SUCCESS,
+        ;
+    }
+
+
+    /**
+     * 退款事件
+     */
+    public enum RefundEventEnum {
+
+        /**
+         * 初始化退款订单事件
+         */
+        EVENT_INIT,
+
+        /**
+         * 添加审核意见事件
+         */
+        EVENT_APPROVE_ADD_SUGGESTION,
+
+        /**
+         * 审核失败事件
+         */
+        EVENT_APPROVE_FAIL,
+
+        /**
+         * 审核成功事件
+         */
+        EVENT_APPROVE_SUCCESS,
+
+        /**
+         * 执行退款事件
+         */
+        EVENT_EXECUTE_REFUND,
+
+        /**
+         * 退款回调成功事件
+         */
+        EVENT_REFUND_CALLBACK_SUCCESS,
+
+        /**
+         * 退款回调失败事件
+         */
+        EVENT_REFUND_CALLBACK_FAIL,
+        ;
     }
 }
