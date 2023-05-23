@@ -112,7 +112,7 @@ public interface IStateMachine<M, S, E, C, A> {
     @SneakyThrows
     default IStateContext<S, E> fireEvent(IEventContext<S, E> eventContext) {
         STATEMACHINE_ID_THREAD_LOCAL.set(String.valueOf(getStateMachineId()));
-        TRACE_ID_THREAD_LOCAL.set(String.valueOf(System.currentTimeMillis()));
+        TRACE_ID_THREAD_LOCAL.set(UUID.randomUUID().toString());
         CURRENT_STATE_THREAD_LOCAL.set(String.valueOf(eventContext.getStateId()));
         IStateContext<S, E> stateContext = null;
         try {
