@@ -1,6 +1,9 @@
 package io.github.zhdotm.ohzh.statemachine.starter.web;
 
 
+import io.github.zhdotm.ohzh.statemachine.starter.web.constant.RefundEventConstant;
+import io.github.zhdotm.ohzh.statemachine.starter.web.constant.RefundStateConstant;
+import io.github.zhdotm.ohzh.statemachine.starter.web.constant.StateMachineConstant;
 import io.github.zhdotm.ohzh.statemachine.starter.web.support.StateMachineSupport;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,20 +16,20 @@ public class AppTest {
 
     @Test
     public void fireEvent() {
-        StateMachineSupport.fireEvent("RENT_ORDER", "STATE_WAIT_BALANCE", "EVENT_CLOSE", "订单:000011111");
+        StateMachineSupport.fireEvent(StateMachineConstant.REFUND_STATEMACHINE, RefundStateConstant.REFUND_INIT, RefundEventConstant.HAPPEN_INIT, "123456789");
     }
 
     @Test
     public void print() {
         System.out.println(StateMachineSupport
-                .getStateMachine("RENT_ORDER")
+                .getStateMachine(StateMachineConstant.REFUND_STATEMACHINE)
                 .getPlantUml());
     }
 
     @Test
     public void export() {
         StateMachineSupport
-                .getStateMachine("RENT_ORDER")
+                .getStateMachine(StateMachineConstant.REFUND_STATEMACHINE)
                 .exportPlantUml();
     }
 
