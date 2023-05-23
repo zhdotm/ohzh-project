@@ -8,7 +8,6 @@
     <artifactId>ohzh-project</artifactId>
     <version>1.0.1</version>
     <modules>
-        <module>ohzh-ddd</module>
         <module>ohzh-component</module>
     </modules>
     <packaging>pom</packaging>
@@ -36,12 +35,6 @@
         <ohzh-statemachine-core.version>1.0.1</ohzh-statemachine-core.version>
         <ohzh-statemachine-starter-web.version>1.0.1</ohzh-statemachine-starter-web.version>
         <ohzh-pipeline-core.version>1.0.1</ohzh-pipeline-core.version>
-        <ohzh-ddd.version>1.0.1</ohzh-ddd.version>
-        <ohzh-ddd-application.version>1.0.1</ohzh-ddd-application.version>
-        <ohzh-ddd-client.version>1.0.1</ohzh-ddd-client.version>
-        <ohzh-ddd-domain.version>1.0.1</ohzh-ddd-domain.version>
-        <ohzh-ddd-infrastructure.version>1.0.1</ohzh-ddd-infrastructure.version>
-        <ohzh-ddd-interfaces.version>1.0.1</ohzh-ddd-interfaces.version>
     </properties>
 
     <dependencyManagement>
@@ -117,36 +110,6 @@
                 <groupId>io.github.zhdotm</groupId>
                 <artifactId>ohzh-pipeline-core</artifactId>
                 <version>${ohzh-pipeline-core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.zhdotm</groupId>
-                <artifactId>ohzh-ddd</artifactId>
-                <version>${ohzh-ddd.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.zhdotm</groupId>
-                <artifactId>ohzh-ddd-application</artifactId>
-                <version>${ohzh-ddd-application.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.zhdotm</groupId>
-                <artifactId>ohzh-ddd-client</artifactId>
-                <version>${ohzh-ddd-client.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.zhdotm</groupId>
-                <artifactId>ohzh-ddd-domain</artifactId>
-                <version>${ohzh-ddd-domain.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.zhdotm</groupId>
-                <artifactId>ohzh-ddd-infrastructure</artifactId>
-                <version>${ohzh-ddd-infrastructure.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.zhdotm</groupId>
-                <artifactId>ohzh-ddd-interfaces</artifactId>
-                <version>${ohzh-ddd-interfaces.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
