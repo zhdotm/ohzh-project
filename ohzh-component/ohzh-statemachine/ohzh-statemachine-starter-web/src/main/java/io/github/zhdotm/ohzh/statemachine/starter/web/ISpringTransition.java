@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.statemachine.starter.web.adapter;
+package io.github.zhdotm.ohzh.statemachine.starter.web;
 
 import io.github.zhdotm.ohzh.statemachine.core.constant.TransitionTypeEnum;
 import io.github.zhdotm.ohzh.statemachine.core.domain.IEvent;
