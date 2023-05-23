@@ -6,7 +6,7 @@
 
     <groupId>io.github.zhdotm</groupId>
     <artifactId>ohzh-project</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <modules>
         <module>ohzh-component</module>
     </modules>
@@ -25,17 +25,17 @@
         <maven.compiler.target>8</maven.compiler.target>
         <spring.boot.version>2.3.12.RELEASE</spring.boot.version>
         <hutool.version>5.8.15</hutool.version>
-        <ohzh-biz.version>1.0.1</ohzh-biz.version>
-        <ohzh-biz-dto.version>1.0.1</ohzh-biz-dto.version>
-        <ohzh-extension.version>1.0.1</ohzh-extension.version>
-        <ohzh-extension-core.version>1.0.1</ohzh-extension-core.version>
-        <ohzh-extension-starter-web.version>1.0.1</ohzh-extension-starter-web.version>
-        <ohzh-interceptor.version>1.0.1</ohzh-interceptor.version>
-        <ohzh-interceptor-core.version>1.0.1</ohzh-interceptor-core.version>
-        <ohzh-statemachine.version>1.0.1</ohzh-statemachine.version>
-        <ohzh-statemachine-core.version>1.0.1</ohzh-statemachine-core.version>
-        <ohzh-statemachine-starter-web.version>1.0.1</ohzh-statemachine-starter-web.version>
-        <ohzh-pipeline-core.version>1.0.1</ohzh-pipeline-core.version>
+        <ohzh-biz.version>1.0.2</ohzh-biz.version>
+        <ohzh-biz-dto.version>1.0.2</ohzh-biz-dto.version>
+        <ohzh-extension.version>1.0.2</ohzh-extension.version>
+        <ohzh-extension-core.version>1.0.2</ohzh-extension-core.version>
+        <ohzh-extension-starter-web.version>1.0.2</ohzh-extension-starter-web.version>
+        <ohzh-interceptor.version>1.0.2</ohzh-interceptor.version>
+        <ohzh-interceptor-core.version>1.0.2</ohzh-interceptor-core.version>
+        <ohzh-statemachine.version>1.0.2</ohzh-statemachine.version>
+        <ohzh-statemachine-core.version>1.0.2</ohzh-statemachine-core.version>
+        <ohzh-statemachine-starter-web.version>1.0.2</ohzh-statemachine-starter-web.version>
+        <ohzh-pipeline-core.version>1.0.2</ohzh-pipeline-core.version>
     </properties>
 
     <dependencyManagement>

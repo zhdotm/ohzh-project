@@ -307,7 +307,7 @@ public class OrderBalanceService implements ISpringTransition {
 <dependency>
     <groupId>io.github.zhdotm</groupId>
     <artifactId>ohzh-statemachine-core</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
@@ -404,7 +404,7 @@ stateMachine.exportPlantUml("./uml/");
 <dependency>
     <groupId>io.github.zhdotm</groupId>
     <artifactId>ohzh-statemachine-starter-web</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
