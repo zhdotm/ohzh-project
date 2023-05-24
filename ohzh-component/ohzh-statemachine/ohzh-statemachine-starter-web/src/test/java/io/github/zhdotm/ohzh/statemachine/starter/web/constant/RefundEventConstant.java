@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.statemachine.starter.web.constant;
 
 /**
- * 退款状态
+ * 退款事件
  */
 
 public class RefundEventConstant {

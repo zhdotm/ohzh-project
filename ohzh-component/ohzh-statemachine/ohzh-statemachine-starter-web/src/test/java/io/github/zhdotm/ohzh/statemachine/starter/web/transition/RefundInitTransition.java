@@ -11,6 +11,12 @@ import io.github.zhdotm.ohzh.statemachine.starter.web.constant.StateMachineConst
 
 import java.util.UUID;
 
+/**
+ * 退款订单初始化
+ *
+ * @author zhihao.mao
+ */
+
 @StateMachineTransition(
         stateMachineId = StateMachineConstant.REFUND_STATEMACHINE,
         type = TransitionTypeEnum.EXTERNAL,

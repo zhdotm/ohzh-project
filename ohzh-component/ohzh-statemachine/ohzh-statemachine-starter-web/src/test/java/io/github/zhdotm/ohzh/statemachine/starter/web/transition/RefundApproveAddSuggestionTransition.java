@@ -9,6 +9,12 @@ import io.github.zhdotm.ohzh.statemachine.starter.web.constant.RefundEventConsta
 import io.github.zhdotm.ohzh.statemachine.starter.web.constant.RefundStateConstant;
 import io.github.zhdotm.ohzh.statemachine.starter.web.constant.StateMachineConstant;
 
+/**
+ * 添加审核意见（内部转换）
+ *
+ * @author zhihao.mao
+ */
+
 @StateMachineTransition(
         stateMachineId = StateMachineConstant.REFUND_STATEMACHINE,
         type = TransitionTypeEnum.INTERNAL,

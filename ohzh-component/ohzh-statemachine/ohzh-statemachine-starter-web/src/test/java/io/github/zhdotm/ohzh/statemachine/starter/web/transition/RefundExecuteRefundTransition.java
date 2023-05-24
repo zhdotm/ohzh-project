@@ -9,6 +9,13 @@ import io.github.zhdotm.ohzh.statemachine.starter.web.constant.RefundEventConsta
 import io.github.zhdotm.ohzh.statemachine.starter.web.constant.RefundStateConstant;
 import io.github.zhdotm.ohzh.statemachine.starter.web.constant.StateMachineConstant;
 
+
+/**
+ * 执行退款（外部转换）
+ *
+ * @author zhihao.mao
+ */
+
 @StateMachineTransition(
         stateMachineId = StateMachineConstant.REFUND_STATEMACHINE,
         type = TransitionTypeEnum.EXTERNAL,
