@@ -4,8 +4,6 @@
 
 参考：https://blog.csdn.net/significantfrank/article/details/104996419
 
-![image.png](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdGEyLWltZy5jbi1oYW5nemhvdS5vc3MtcHViLmFsaXl1bi1pbmMuY29tLzFjZTA1ODVlOGUwZjk2MzdkNzhmZDU5Yjg2MmM1Yzg1LnBuZw?x-oss-process=image/format,png)
-
 ## 区别
 
 ohzh-statemachine灵感来源于https://github.com/alibaba/COLA/tree/master/cola-components/cola-component-statemachine
