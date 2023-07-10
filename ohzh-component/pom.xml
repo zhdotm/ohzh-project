@@ -18,6 +18,7 @@
         <module>ohzh-extension</module>
         <module>ohzh-interceptor</module>
         <module>ohzh-pipeline</module>
+        <module>ohzh-sieve</module>
     </modules>
 
     <properties>
