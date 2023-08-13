@@ -1,6 +1,7 @@
 package io.github.zhdotm.ohzh.sieve.starter.web.annotation;
 
 import cn.hutool.extra.spring.SpringUtil;
+import io.github.zhdotm.ohzh.sieve.starter.web.configuration.SpringSieveConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -14,6 +15,6 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(value = {SpringUtil.class})
-public @interface EnableSieve {
+@Import(value = {SpringSieveConfiguration.class, SpringUtil.class})
+public @interface EnableSpringSieve {
 }

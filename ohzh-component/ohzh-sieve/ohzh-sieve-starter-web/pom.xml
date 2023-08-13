@@ -19,13 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>io.github.zhdotm</groupId>
-            <artifactId>ohzh-sieve-core</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.jsqlparser</groupId>
-            <artifactId>jsqlparser</artifactId>
-            <version>${jsqlparser.version}</version>
+            <artifactId>ohzh-sieve-mybatis</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
@@ -38,6 +32,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
