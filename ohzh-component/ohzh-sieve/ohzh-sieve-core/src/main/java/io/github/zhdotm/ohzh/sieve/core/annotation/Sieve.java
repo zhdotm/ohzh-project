@@ -1,7 +1,5 @@
 package io.github.zhdotm.ohzh.sieve.core.annotation;
 
-import io.github.zhdotm.ohzh.sieve.core.getter.IValueGetter;
-
 import java.lang.annotation.*;
 
 /**
@@ -30,11 +28,11 @@ public @interface Sieve {
     String column();
 
     /**
-     * 获取器类
+     * 值获取器类名称
      *
      * @return 获取器类
      */
-    Class<? extends IValueGetter> getterClazz();
+    String valueGetterName();
 
     /**
      * 用途描述（没有实际作用，只是为了方便梳理逻辑）

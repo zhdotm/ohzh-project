@@ -11,6 +11,13 @@ import java.util.Collection;
 public interface IValueGetter {
 
     /**
+     * 获取值获取器名称
+     *
+     * @return 值获取器名称
+     */
+    String getName();
+
+    /**
      * 获取值
      *
      * @return 值
