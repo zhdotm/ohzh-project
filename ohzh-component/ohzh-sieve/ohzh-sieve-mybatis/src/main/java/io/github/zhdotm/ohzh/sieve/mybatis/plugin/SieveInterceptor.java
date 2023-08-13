@@ -5,6 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import io.github.zhdotm.ohzh.sieve.core.sql.rule.ISieveRule;
 import io.github.zhdotm.ohzh.sieve.core.sql.rule.impl.SieveSelectRuleImpl;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.statement.Statement;
@@ -28,6 +29,7 @@ import java.util.function.Supplier;
  * @author zhihao.mao
  */
 
+@Slf4j
 @AllArgsConstructor
 @Intercepts({
         @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class,
@@ -65,13 +67,16 @@ public class SieveInterceptor implements Interceptor {
             boundSql = (BoundSql) args[5];
         }
         String sql = boundSql.getSql();
+        log.debug("[数据筛子]SQL增强前: {}", sql);
         Statement statement = CCJSqlParserUtil.parse(sql);
         sieveConditionMap.forEach((tableName, expression) -> {
             ISieveRule sieveRule = new SieveSelectRuleImpl(tableName, expression);
             sieveRule.accept(statement);
         });
+        String newSql = statement.toString();
+        log.debug("[数据筛子]SQL增强后: {}", newSql);
 
-        boundSql = new BoundSql(ms.getConfiguration(), statement.toString(), boundSql.getParameterMappings(), boundSql.getParameterObject());
+        boundSql = new BoundSql(ms.getConfiguration(), newSql, boundSql.getParameterMappings(), boundSql.getParameterObject());
 
         CacheKey cacheKey = executor.createCacheKey(ms, parameter, rowBounds, boundSql);
 
