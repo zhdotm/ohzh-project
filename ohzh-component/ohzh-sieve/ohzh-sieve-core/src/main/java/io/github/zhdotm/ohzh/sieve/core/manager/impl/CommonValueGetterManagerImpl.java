@@ -1,9 +1,9 @@
-package io.github.zhdotm.ohzh.sieve.core.getter.impl;
+package io.github.zhdotm.ohzh.sieve.core.manager.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import io.github.zhdotm.ohzh.sieve.core.getter.IValueGetter;
-import io.github.zhdotm.ohzh.sieve.core.getter.IValueGetterManager;
+import io.github.zhdotm.ohzh.sieve.core.manager.IValueGetterManager;
 
 import java.util.HashMap;
 import java.util.Map;

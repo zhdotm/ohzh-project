@@ -1,4 +1,6 @@
-package io.github.zhdotm.ohzh.sieve.core.getter;
+package io.github.zhdotm.ohzh.sieve.core.manager;
+
+import io.github.zhdotm.ohzh.sieve.core.getter.IValueGetter;
 
 /**
  * @author zhihao.mao
