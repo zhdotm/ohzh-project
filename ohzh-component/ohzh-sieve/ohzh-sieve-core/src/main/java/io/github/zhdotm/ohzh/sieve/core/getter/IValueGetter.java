@@ -13,9 +13,8 @@ public interface IValueGetter {
     /**
      * 获取值
      *
-     * @param <T> 值类型
      * @return 值
      */
-    <T> Collection<T> get();
+    Collection<String> get();
 
 }
