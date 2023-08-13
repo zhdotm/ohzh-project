@@ -36,7 +36,7 @@ import java.util.function.Supplier;
                 RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class})})
 public class SieveInterceptor implements Interceptor {
 
-    private final Supplier<Map<Supplier<String>, Supplier<Expression>>> sieveConditionMapSupplier;
+    private final Supplier<Map<String, Expression>> sieveConditionMapSupplier;
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -45,7 +45,7 @@ public class SieveInterceptor implements Interceptor {
             return invocation.proceed();
         }
 
-        Map<Supplier<String>, Supplier<Expression>> sieveConditionMap = sieveConditionMapSupplier.get();
+        Map<String, Expression> sieveConditionMap = sieveConditionMapSupplier.get();
         if (ObjectUtil.isEmpty(sieveConditionMap) || CollectionUtil.isEmpty(sieveConditionMap)) {
 
             return invocation.proceed();
@@ -66,11 +66,11 @@ public class SieveInterceptor implements Interceptor {
         }
         String sql = boundSql.getSql();
         Statement statement = CCJSqlParserUtil.parse(sql);
-        sieveConditionMap.forEach((tableNameSupplier, expressionSupplier) -> {
-            ISieveRule sieveRule = new SieveSelectRuleImpl(tableNameSupplier.get(), expressionSupplier.get());
+        sieveConditionMap.forEach((tableName, expression) -> {
+            ISieveRule sieveRule = new SieveSelectRuleImpl(tableName, expression);
             sieveRule.accept(statement);
         });
-        
+
         boundSql = new BoundSql(ms.getConfiguration(), statement.toString(), boundSql.getParameterMappings(), boundSql.getParameterObject());
 
         CacheKey cacheKey = executor.createCacheKey(ms, parameter, rowBounds, boundSql);
