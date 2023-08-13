@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * @author zhihao.mao
@@ -35,7 +35,7 @@ public class CommonValueGetterManagerImplTest {
             }
 
             @Override
-            public Collection<String> get() {
+            public List<String> get() {
                 return ListUtil.of("1", "2", "3");
             }
         });
@@ -48,7 +48,7 @@ public class CommonValueGetterManagerImplTest {
             }
 
             @Override
-            public Collection<String> get() {
+            public List<String> get() {
                 return ListUtil.of("a", "b", "c");
             }
         });
@@ -61,7 +61,7 @@ public class CommonValueGetterManagerImplTest {
             }
 
             @Override
-            public Collection<String> get() {
+            public List<String> get() {
                 return ListUtil.of("x", "y", "z");
             }
         });

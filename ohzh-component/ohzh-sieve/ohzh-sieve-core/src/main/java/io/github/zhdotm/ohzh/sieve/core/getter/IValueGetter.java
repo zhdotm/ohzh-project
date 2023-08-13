@@ -1,6 +1,7 @@
 package io.github.zhdotm.ohzh.sieve.core.getter;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * 值获取器
@@ -22,6 +23,6 @@ public interface IValueGetter {
      *
      * @return 值
      */
-    Collection<String> get();
+    List<String> get();
 
 }

@@ -18,14 +18,14 @@ public @interface Sieve {
      *
      * @return 表
      */
-    String table();
+    String tableName();
 
     /**
      * 指定字段
      *
      * @return 字段
      */
-    String column();
+    String columnName();
 
     /**
      * 值获取器类名称

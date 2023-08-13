@@ -31,7 +31,7 @@ public class CommonValueGetterManagerImpl implements IValueGetterManager {
     }
 
     @Override
-    public void putValueGetter(IValueGetter valueGetter) {
+    public synchronized void putValueGetter(IValueGetter valueGetter) {
         if (ObjectUtil.isEmpty(valueGetter)) {
 
             return;
@@ -47,7 +47,7 @@ public class CommonValueGetterManagerImpl implements IValueGetterManager {
     }
 
     @Override
-    public void removeValueGetter(String valueGetterName) {
+    public synchronized void removeValueGetter(String valueGetterName) {
         if (StrUtil.isEmpty(valueGetterName)) {
             return;
         }
@@ -56,12 +56,12 @@ public class CommonValueGetterManagerImpl implements IValueGetterManager {
     }
 
     @Override
-    public void removeValueGetter(IValueGetter valueGetter) {
+    public synchronized void removeValueGetter(IValueGetter valueGetter) {
         if (ObjectUtil.isEmpty(valueGetter)) {
 
             return;
         }
-        
+
         removeValueGetter(valueGetter.getName());
     }
 
