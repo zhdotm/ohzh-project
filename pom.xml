@@ -38,6 +38,10 @@
         <ohzh-statemachine-core.version>1.0.2</ohzh-statemachine-core.version>
         <ohzh-statemachine-starter-web.version>1.0.2</ohzh-statemachine-starter-web.version>
         <ohzh-pipeline-core.version>1.0.2</ohzh-pipeline-core.version>
+        <ohzh-pipeline-starter-web.version>1.0.2</ohzh-pipeline-starter-web.version>
+        <ohzh-sieve-core.version>1.0.1-SNAPSHOT</ohzh-sieve-core.version>
+        <ohzh-sieve-mybatis.version>1.0.1-SNAPSHOT</ohzh-sieve-mybatis.version>
+        <ohzh-sieve-starter-web.version>1.0.1-SNAPSHOT</ohzh-sieve-starter-web.version>
     </properties>
 
     <dependencyManagement>
@@ -123,6 +127,26 @@
                 <groupId>io.github.zhdotm</groupId>
                 <artifactId>ohzh-pipeline-core</artifactId>
                 <version>${ohzh-pipeline-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-pipeline-starter-web</artifactId>
+                <version>${ohzh-pipeline-starter-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-sieve-core</artifactId>
+                <version>${ohzh-sieve-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-sieve-mybatis</artifactId>
+                <version>${ohzh-sieve-mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-sieve-starter-web</artifactId>
+                <version>${ohzh-sieve-starter-web.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
