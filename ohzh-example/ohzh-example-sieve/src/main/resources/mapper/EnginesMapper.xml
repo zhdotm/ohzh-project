@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.zhdotm.ohzh.example.sieve.mapper.EnginesMapper">
+
+    <resultMap id="BaseResultMap" type="io.github.zhdotm.ohzh.example.sieve.domain.Engines">
+        <result property="engine" column="ENGINE" jdbcType="VARCHAR"/>
+        <result property="support" column="SUPPORT" jdbcType="VARCHAR"/>
+        <result property="comment" column="COMMENT" jdbcType="VARCHAR"/>
+        <result property="transactions" column="TRANSACTIONS" jdbcType="VARCHAR"/>
+        <result property="xa" column="XA" jdbcType="VARCHAR"/>
+        <result property="savepoints" column="SAVEPOINTS" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ENGINE
+        ,SUPPORT,COMMENT,
+        TRANSACTIONS,XA,SAVEPOINTS
+    </sql>
+</mapper>
