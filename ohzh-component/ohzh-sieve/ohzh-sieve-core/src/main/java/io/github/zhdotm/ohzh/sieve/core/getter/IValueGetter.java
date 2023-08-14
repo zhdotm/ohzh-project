@@ -1,6 +1,5 @@
 package io.github.zhdotm.ohzh.sieve.core.getter;
 
-import java.util.Collection;
 import java.util.List;
 
 /**

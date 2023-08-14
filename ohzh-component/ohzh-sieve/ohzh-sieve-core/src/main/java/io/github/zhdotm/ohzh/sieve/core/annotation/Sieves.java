@@ -14,10 +14,16 @@ import java.lang.annotation.*;
 public @interface Sieves {
 
     /**
-     * 筛子
+     * 值筛子
      *
      * @return 筛子
      */
-    Sieve[] sieves();
+    ValueSieve[] valueSieves() default {};
 
+    /**
+     * 表达式筛子
+     *
+     * @return 筛子
+     */
+    ExpressionSieve[] expressionSieves() default {};
 }

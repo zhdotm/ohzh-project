@@ -13,7 +13,7 @@ import org.junit.Test;
  * @author zhihao.mao
  */
 
-public class SieveSelectRuleImplTest {
+public class ValueSieveSelectRuleImplTest {
 
     private ISieveRule rule;
 

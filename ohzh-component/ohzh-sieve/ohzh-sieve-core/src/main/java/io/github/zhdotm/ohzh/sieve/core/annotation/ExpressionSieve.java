@@ -3,7 +3,7 @@ package io.github.zhdotm.ohzh.sieve.core.annotation;
 import java.lang.annotation.*;
 
 /**
- * 筛子
+ * 表达式筛子
  *
  * @author zhihao.mao
  */
@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
-public @interface Sieve {
+public @interface ExpressionSieve {
 
     /**
      * 指定表
@@ -19,13 +19,6 @@ public @interface Sieve {
      * @return 表
      */
     String tableName();
-
-    /**
-     * 指定字段
-     *
-     * @return 字段
-     */
-    String columnName();
 
     /**
      * 值获取器类名称

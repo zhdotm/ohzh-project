@@ -1,8 +1,11 @@
 package io.github.zhdotm.ohzh.sieve.starter.web.aspect;
 
 import cn.hutool.core.collection.CollectionUtil;
-import io.github.zhdotm.ohzh.sieve.core.annotation.Sieve;
+import cn.hutool.core.util.ArrayUtil;
+import io.github.zhdotm.ohzh.sieve.core.annotation.ExpressionSieve;
 import io.github.zhdotm.ohzh.sieve.core.annotation.Sieves;
+import io.github.zhdotm.ohzh.sieve.core.annotation.ValueSieve;
+import io.github.zhdotm.ohzh.sieve.core.getter.IExpressionTextValueGetter;
 import io.github.zhdotm.ohzh.sieve.core.getter.IValueGetter;
 import io.github.zhdotm.ohzh.sieve.core.getter.impl.EqualToExpressionGetterImpl;
 import io.github.zhdotm.ohzh.sieve.core.getter.impl.ExpressionTextGetterImpl;
@@ -33,13 +36,28 @@ public class SieveAspect {
     public void sievesPointcut() {
     }
 
-    @Pointcut("@annotation(io.github.zhdotm.ohzh.sieve.core.annotation.Sieve)")
-    public void sievePointcut() {
+    @Pointcut("@annotation(io.github.zhdotm.ohzh.sieve.core.annotation.ValueSieve)")
+    public void valueSievePointcut() {
+    }
+
+    @Pointcut("@annotation(io.github.zhdotm.ohzh.sieve.core.annotation.ExpressionSieve)")
+    public void expressionSievePointcut() {
     }
 
     @SneakyThrows
-    @Around("sievePointcut() && @annotation(sieve)")
-    public Object sieveAround(ProceedingJoinPoint pjp, Sieve sieve) {
+    @Around("valueSievePointcut() && @annotation(sieve)")
+    public Object valueSieveAround(ProceedingJoinPoint pjp, ValueSieve sieve) {
+
+        addCondition(sieve);
+        Object proceed = pjp.proceed(pjp.getArgs());
+        clearConditions();
+
+        return proceed;
+    }
+
+    @SneakyThrows
+    @Around("expressionSievePointcut() && @annotation(sieve)")
+    public Object expressionsieveAround(ProceedingJoinPoint pjp, ExpressionSieve sieve) {
 
         addCondition(sieve);
         Object proceed = pjp.proceed(pjp.getArgs());
@@ -59,7 +77,7 @@ public class SieveAspect {
         return proceed;
     }
 
-    private void addCondition(Sieve sieve) {
+    private void addCondition(ValueSieve sieve) {
         String tableName = sieve.tableName();
         String columnName = sieve.columnName();
         String valueGetterName = sieve.valueGetterName();
@@ -80,9 +98,32 @@ public class SieveAspect {
         SieveConditionHolder.addCondition(tableName, expression);
     }
 
+    private void addCondition(ExpressionSieve sieve) {
+        String tableName = sieve.tableName();
+        String valueGetterName = sieve.valueGetterName();
+        IValueGetter valueGetter = springValueGetterManager.getValueGetter(valueGetterName);
+        if (!(valueGetter instanceof IExpressionTextValueGetter)) {
+
+            return;
+        }
+        IExpressionTextValueGetter expressionTextValueGetter = (IExpressionTextValueGetter) valueGetter;
+        Expression expression = expressionTextValueGetter.getExpression();
+
+        SieveConditionHolder.addCondition(tableName, expression);
+    }
+
     private void addConditions(Sieves sieves) {
-        for (Sieve sieve : sieves.sieves()) {
-            addCondition(sieve);
+        ValueSieve[] valueSieves = sieves.valueSieves();
+        if (ArrayUtil.isNotEmpty(valueSieves)) {
+            for (ValueSieve valueSieve : valueSieves) {
+                addCondition(valueSieve);
+            }
+        }
+        ExpressionSieve[] expressionSieves = sieves.expressionSieves();
+        if (ArrayUtil.isNotEmpty(expressionSieves)) {
+            for (ExpressionSieve expressionSieve : expressionSieves) {
+                addCondition(expressionSieve);
+            }
         }
     }
 
