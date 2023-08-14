@@ -11,12 +11,12 @@ import java.util.List;
  */
 
 @Component
-public class EnginesSupportValueGetter implements ISpringValueGetter {
+public class EnginesEngineValueGetter implements ISpringValueGetter {
 
     @Override
     public List<String> get() {
 
-        return ListUtil.of("YES", "DEFAULT");
+        return ListUtil.of("MyISAM", "InnoDB", "MEMORY");
     }
 
 }

@@ -11,12 +11,10 @@ import java.util.List;
  */
 
 @Component
-public class EnginesSupportValueGetter implements ISpringValueGetter {
-
+public class InnodbTablestatsNumRowsValueGetter implements ISpringValueGetter {
     @Override
     public List<String> get() {
 
-        return ListUtil.of("YES", "DEFAULT");
+        return ListUtil.of("0", "2", "30");
     }
-
 }

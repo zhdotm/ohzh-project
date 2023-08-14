@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.zhdotm.ohzh.example.sieve.mapper.InnodbTablestatsMapper">
+
+    <resultMap id="BaseResultMap" type="io.github.zhdotm.ohzh.example.sieve.domain.InnodbTablestats">
+        <result property="tableId" column="TABLE_ID" jdbcType="BIGINT"/>
+        <result property="name" column="NAME" jdbcType="VARCHAR"/>
+        <result property="statsInitialized" column="STATS_INITIALIZED" jdbcType="VARCHAR"/>
+        <result property="numRows" column="NUM_ROWS" jdbcType="BIGINT"/>
+        <result property="clustIndexSize" column="CLUST_INDEX_SIZE" jdbcType="BIGINT"/>
+        <result property="otherIndexSize" column="OTHER_INDEX_SIZE" jdbcType="BIGINT"/>
+        <result property="modifiedCounter" column="MODIFIED_COUNTER" jdbcType="BIGINT"/>
+        <result property="autoinc" column="AUTOINC" jdbcType="BIGINT"/>
+        <result property="refCount" column="REF_COUNT" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        TABLE_ID
+        ,NAME,STATS_INITIALIZED,
+        NUM_ROWS,CLUST_INDEX_SIZE,OTHER_INDEX_SIZE,
+        MODIFIED_COUNTER,AUTOINC,REF_COUNT
+    </sql>
+</mapper>

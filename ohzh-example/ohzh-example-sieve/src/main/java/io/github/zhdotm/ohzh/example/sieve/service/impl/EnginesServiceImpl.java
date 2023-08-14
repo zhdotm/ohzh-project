@@ -23,7 +23,8 @@ public class EnginesServiceImpl implements EnginesService {
 
     @Sieves(
             sieves = {
-                    @Sieve(tableName = "engines", columnName = "support", valueGetterName = "enginesSupportValueGetter")
+                    @Sieve(tableName = "engines", columnName = "support", valueGetterName = "enginesSupportValueGetter"),
+                    @Sieve(tableName = "engines", columnName = "engine", valueGetterName = "enginesEngineValueGetter")
             }
     )
     @Override
