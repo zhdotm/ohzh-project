@@ -3,8 +3,9 @@ package io.github.zhdotm.ohzh.example.sieve.service.impl;
 import io.github.zhdotm.ohzh.example.sieve.domain.Engines;
 import io.github.zhdotm.ohzh.example.sieve.mapper.EnginesMapper;
 import io.github.zhdotm.ohzh.example.sieve.service.EnginesService;
-import io.github.zhdotm.ohzh.sieve.core.annotation.Sieve;
+import io.github.zhdotm.ohzh.sieve.core.annotation.ExpressionSieve;
 import io.github.zhdotm.ohzh.sieve.core.annotation.Sieves;
+import io.github.zhdotm.ohzh.sieve.core.annotation.ValueSieve;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +23,12 @@ public class EnginesServiceImpl implements EnginesService {
     private EnginesMapper enginesMapper;
 
     @Sieves(
-            sieves = {
-                    @Sieve(tableName = "engines", columnName = "support", valueGetterName = "enginesSupportValueGetter"),
-                    @Sieve(tableName = "engines", columnName = "engine", valueGetterName = "enginesEngineValueGetter")
+            valueSieves = {
+                    @ValueSieve(tableName = "engines", columnName = "support", valueGetterName = "enginesSupportValueGetter"),
+                    @ValueSieve(tableName = "engines", columnName = "engine", valueGetterName = "enginesEngineValueGetter")
+            },
+            expressionSieves = {
+                    @ExpressionSieve(tableName = "engines", valueGetterName = "enginesSupportExpressionTextValueGetter")
             }
     )
     @Override

@@ -3,8 +3,8 @@ package io.github.zhdotm.ohzh.example.sieve.service.impl;
 import io.github.zhdotm.ohzh.example.sieve.dto.SimpleInnodbTablestatsDTO;
 import io.github.zhdotm.ohzh.example.sieve.mapper.InnodbTablestatsMapper;
 import io.github.zhdotm.ohzh.example.sieve.service.InnodbTablestatsService;
-import io.github.zhdotm.ohzh.sieve.core.annotation.Sieve;
 import io.github.zhdotm.ohzh.sieve.core.annotation.Sieves;
+import io.github.zhdotm.ohzh.sieve.core.annotation.ValueSieve;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,9 +21,9 @@ public class InnodbTablestatsServiceImpl implements InnodbTablestatsService {
     private InnodbTablestatsMapper innodbTablestatsMapper;
 
     @Sieves(
-            sieves = {
-                    @Sieve(tableName = "INNODB_TABLES", columnName = "TABLE_ID", valueGetterName = "innodbTablesTableIdValueGetter"),
-                    @Sieve(tableName = "INNODB_TABLESTATS", columnName = "NUM_ROWS", valueGetterName = "innodbTablestatsNumRowsValueGetter")
+            valueSieves = {
+                    @ValueSieve(tableName = "INNODB_TABLES", columnName = "TABLE_ID", valueGetterName = "innodbTablesTableIdValueGetter"),
+                    @ValueSieve(tableName = "INNODB_TABLESTATS", columnName = "NUM_ROWS", valueGetterName = "innodbTablestatsNumRowsValueGetter")
             }
     )
     @Override
