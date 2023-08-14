@@ -65,7 +65,7 @@ public class SieveAspect {
         String valueGetterName = sieve.valueGetterName();
         IValueGetter valueGetter = springValueGetterManager.getValueGetter(valueGetterName);
         List<String> values = valueGetter.get();
-        Expression expression = null;
+        Expression expression;
         if (CollectionUtil.isEmpty(values)) {
             expression = new ExpressionTextGetterImpl(" 1 != 1 ")
                     .getExpression();

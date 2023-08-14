@@ -1,6 +1,7 @@
 package io.github.zhdotm.ohzh.sieve.mybatis.plugin;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.util.ObjectUtil;
 import io.github.zhdotm.ohzh.sieve.core.sql.rule.ISieveRule;
 import io.github.zhdotm.ohzh.sieve.core.sql.rule.impl.SieveSelectRuleImpl;
@@ -20,7 +21,9 @@ import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 /**
@@ -38,7 +41,7 @@ import java.util.function.Supplier;
                 RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class})})
 public class SieveInterceptor implements Interceptor {
 
-    private final Supplier<Map<String, Expression>> sieveConditionMapSupplier;
+    private final Supplier<Map<String, List<Expression>>> sieveConditionMapSupplier;
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -47,7 +50,7 @@ public class SieveInterceptor implements Interceptor {
             return invocation.proceed();
         }
 
-        Map<String, Expression> sieveConditionMap = sieveConditionMapSupplier.get();
+        Map<String, List<Expression>> sieveConditionMap = sieveConditionMapSupplier.get();
         if (ObjectUtil.isEmpty(sieveConditionMap) || CollectionUtil.isEmpty(sieveConditionMap)) {
 
             return invocation.proceed();
@@ -69,9 +72,13 @@ public class SieveInterceptor implements Interceptor {
         String sql = boundSql.getSql();
         log.debug("[数据筛子]SQL增强前: {}", sql);
         Statement statement = CCJSqlParserUtil.parse(sql);
-        sieveConditionMap.forEach((tableName, expression) -> {
-            ISieveRule sieveRule = new SieveSelectRuleImpl(tableName, expression);
-            sieveRule.accept(statement);
+        sieveConditionMap.forEach((tableName, expressions) -> {
+            Optional.ofNullable(expressions)
+                    .orElse(ListUtil.empty())
+                    .forEach(expression -> {
+                        ISieveRule sieveRule = new SieveSelectRuleImpl(tableName, expression);
+                        sieveRule.accept(statement);
+                    });
         });
         String newSql = statement.toString();
         log.debug("[数据筛子]SQL增强后: {}", newSql);

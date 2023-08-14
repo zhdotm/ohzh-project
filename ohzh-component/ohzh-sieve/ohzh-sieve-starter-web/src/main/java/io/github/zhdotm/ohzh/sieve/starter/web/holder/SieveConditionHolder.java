@@ -13,14 +13,14 @@ import java.util.Map;
 
 public class SieveConditionHolder {
 
-    private static final ThreadLocal<Map<String, Expression>> CONDITION_MAP_THREAD_LOCAL = ThreadLocal.withInitial(MapUtil::newHashMap);
+    private static final ThreadLocal<Map<String, List<Expression>>> CONDITION_MAP_THREAD_LOCAL = ThreadLocal.withInitial(MapUtil::newHashMap);
 
-    public static Map<String, Expression> getConditionMap() {
+    public static Map<String, List<Expression>> getConditionMap() {
 
         return CONDITION_MAP_THREAD_LOCAL.get();
     }
 
-    public static Expression getExpression(String tableName) {
+    public static List<Expression> getExpression(String tableName) {
 
         return getConditionMap().get(tableName);
     }
@@ -31,8 +31,10 @@ public class SieveConditionHolder {
     }
 
     public static void addCondition(String tableName, Expression expression) {
-
-        getConditionMap().put(tableName, expression);
+        List<Expression> expressions = getConditionMap().getOrDefault(tableName, ListUtil.list(Boolean.FALSE));
+        expressions.add(expression);
+        
+        getConditionMap().put(tableName, expressions);
     }
 
     public static void clear() {
