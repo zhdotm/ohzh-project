@@ -34,7 +34,7 @@ public class SieveFromItemVisitorImpl extends FromItemVisitorAdapter implements 
         boolean isAcceptable = Boolean.FALSE;
         if (leftFromItem instanceof Table) {
             String tableName = ((Table) leftFromItem).getName();
-            isAcceptable = StrUtil.equals(acceptTableName, tableName);
+            isAcceptable = StrUtil.equalsIgnoreCase(acceptTableName, tableName);
         }
         leftFromItem.accept(this);
         List<Join> joins = subjoin.getJoinList();
@@ -47,7 +47,7 @@ public class SieveFromItemVisitorImpl extends FromItemVisitorAdapter implements 
             FromItem rightItem = join.getRightItem();
             if (!isAcceptable && (rightItem instanceof Table)) {
                 String tableName = ((Table) rightItem).getName();
-                isAcceptable = StrUtil.equals(acceptTableName, tableName);
+                isAcceptable = StrUtil.equalsIgnoreCase(acceptTableName, tableName);
             }
             if (isAcceptable) {
                 addAndExpression4Join(join, acceptExpression);

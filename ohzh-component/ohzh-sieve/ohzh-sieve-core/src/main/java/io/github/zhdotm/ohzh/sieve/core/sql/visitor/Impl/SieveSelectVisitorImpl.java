@@ -33,7 +33,7 @@ public class SieveSelectVisitorImpl extends SelectVisitorAdapter implements ISie
         if (fromItem instanceof Table) {
             Table table = (Table) fromItem;
             String tableName = table.getName();
-            if (StrUtil.equals(acceptTableName, tableName)) {
+            if (StrUtil.equalsIgnoreCase(acceptTableName, tableName)) {
                 addAndExpression4Where(plainSelect, acceptExpression);
             }
         }
@@ -45,7 +45,7 @@ public class SieveSelectVisitorImpl extends SelectVisitorAdapter implements ISie
             FromItem rightItem = join.getRightItem();
             if (rightItem instanceof Table) {
                 String tableName = ((Table) rightItem).getName();
-                if (StrUtil.equals(acceptTableName, tableName)) {
+                if (StrUtil.equalsIgnoreCase(acceptTableName, tableName)) {
                     addAndExpression4Join(join, acceptExpression);
                 }
             }
