@@ -1,8 +1,8 @@
-package io.github.zhdotm.ohzh.sieve.core.getter.impl;
+package io.github.zhdotm.ohzh.sieve.core.getter.expression.impl;
 
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.lang.Assert;
-import io.github.zhdotm.ohzh.sieve.core.getter.IExpressionGetter;
+import io.github.zhdotm.ohzh.sieve.core.getter.expression.IExpressionGetter;
 import org.junit.Before;
 import org.junit.Test;
 

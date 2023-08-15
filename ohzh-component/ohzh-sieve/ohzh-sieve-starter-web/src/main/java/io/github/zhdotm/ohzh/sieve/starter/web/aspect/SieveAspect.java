@@ -5,11 +5,11 @@ import cn.hutool.core.util.ArrayUtil;
 import io.github.zhdotm.ohzh.sieve.core.annotation.ExpressionSieve;
 import io.github.zhdotm.ohzh.sieve.core.annotation.Sieves;
 import io.github.zhdotm.ohzh.sieve.core.annotation.ValueSieve;
-import io.github.zhdotm.ohzh.sieve.core.getter.IExpressionTextValueGetter;
-import io.github.zhdotm.ohzh.sieve.core.getter.IValueGetter;
-import io.github.zhdotm.ohzh.sieve.core.getter.impl.EqualToExpressionGetterImpl;
-import io.github.zhdotm.ohzh.sieve.core.getter.impl.ExpressionTextGetterImpl;
-import io.github.zhdotm.ohzh.sieve.core.getter.impl.InExpressionGetterImpl;
+import io.github.zhdotm.ohzh.sieve.core.getter.value.IExpressionTextSieveValueGetter;
+import io.github.zhdotm.ohzh.sieve.core.getter.value.ISieveValueGetter;
+import io.github.zhdotm.ohzh.sieve.core.getter.expression.impl.EqualToExpressionGetterImpl;
+import io.github.zhdotm.ohzh.sieve.core.getter.expression.impl.ExpressionTextGetterImpl;
+import io.github.zhdotm.ohzh.sieve.core.getter.expression.impl.InExpressionGetterImpl;
 import io.github.zhdotm.ohzh.sieve.starter.web.holder.SieveConditionHolder;
 import io.github.zhdotm.ohzh.sieve.starter.web.manager.ISpringValueGetterManager;
 import lombok.AllArgsConstructor;
@@ -81,7 +81,7 @@ public class SieveAspect {
         String tableName = sieve.tableName();
         String columnName = sieve.columnName();
         String valueGetterName = sieve.valueGetterName();
-        IValueGetter valueGetter = springValueGetterManager.getValueGetter(valueGetterName);
+        ISieveValueGetter valueGetter = springValueGetterManager.getValueGetter(valueGetterName);
         List<String> values = valueGetter.get();
         Expression expression;
         if (CollectionUtil.isEmpty(values)) {
@@ -101,12 +101,12 @@ public class SieveAspect {
     private void addCondition(ExpressionSieve sieve) {
         String tableName = sieve.tableName();
         String valueGetterName = sieve.valueGetterName();
-        IValueGetter valueGetter = springValueGetterManager.getValueGetter(valueGetterName);
-        if (!(valueGetter instanceof IExpressionTextValueGetter)) {
+        ISieveValueGetter valueGetter = springValueGetterManager.getValueGetter(valueGetterName);
+        if (!(valueGetter instanceof IExpressionTextSieveValueGetter)) {
 
             return;
         }
-        IExpressionTextValueGetter expressionTextValueGetter = (IExpressionTextValueGetter) valueGetter;
+        IExpressionTextSieveValueGetter expressionTextValueGetter = (IExpressionTextSieveValueGetter) valueGetter;
         Expression expression = expressionTextValueGetter.getExpression();
 
         SieveConditionHolder.addCondition(tableName, expression);

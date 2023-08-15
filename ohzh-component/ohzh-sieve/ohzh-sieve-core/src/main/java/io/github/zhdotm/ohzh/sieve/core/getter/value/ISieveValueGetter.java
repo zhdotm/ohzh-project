@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.sieve.core.getter;
+package io.github.zhdotm.ohzh.sieve.core.getter.value;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * @author zhihao.mao
  */
 
-public interface IValueGetter {
+public interface ISieveValueGetter {
 
     /**
      * 获取值获取器名称

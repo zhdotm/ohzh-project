@@ -22,8 +22,8 @@ public class InnodbTablestatsServiceImpl implements InnodbTablestatsService {
 
     @Sieves(
             valueSieves = {
-                    @ValueSieve(tableName = "INNODB_TABLES", columnName = "TABLE_ID", valueGetterName = "innodbTablesTableIdValueGetter"),
-                    @ValueSieve(tableName = "INNODB_TABLESTATS", columnName = "NUM_ROWS", valueGetterName = "innodbTablestatsNumRowsValueGetter")
+                    @ValueSieve(tableName = "INNODB_TABLES", columnName = "TABLE_ID", valueGetterName = "innodbTablesTableIdSieveValueGetter"),
+                    @ValueSieve(tableName = "INNODB_TABLESTATS", columnName = "NUM_ROWS", valueGetterName = "innodbTablestatsNumRowsSieveValueGetter")
             }
     )
     @Override

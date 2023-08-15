@@ -1,7 +1,8 @@
-package io.github.zhdotm.ohzh.sieve.core.getter;
+package io.github.zhdotm.ohzh.sieve.core.getter.value;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
+import io.github.zhdotm.ohzh.sieve.core.getter.expression.IExpressionTextGetter;
 import lombok.SneakyThrows;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
@@ -13,7 +14,7 @@ import java.util.List;
  * @author zhihao.mao
  */
 
-public interface IExpressionTextValueGetter extends IExpressionTextGetter, IValueGetter {
+public interface IExpressionTextSieveValueGetter extends IExpressionTextGetter, ISieveValueGetter {
 
     @SneakyThrows
     @Override

@@ -1,6 +1,6 @@
-package io.github.zhdotm.ohzh.sieve.core.getter.impl;
+package io.github.zhdotm.ohzh.sieve.core.getter.expression.impl;
 
-import io.github.zhdotm.ohzh.sieve.core.getter.IExpressionTextGetter;
+import io.github.zhdotm.ohzh.sieve.core.getter.expression.IExpressionTextGetter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

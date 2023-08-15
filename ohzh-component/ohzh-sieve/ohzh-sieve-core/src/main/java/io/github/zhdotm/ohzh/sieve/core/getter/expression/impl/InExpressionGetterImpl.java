@@ -1,7 +1,7 @@
-package io.github.zhdotm.ohzh.sieve.core.getter.impl;
+package io.github.zhdotm.ohzh.sieve.core.getter.expression.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
-import io.github.zhdotm.ohzh.sieve.core.getter.IInExpressionGetter;
+import io.github.zhdotm.ohzh.sieve.core.getter.expression.IInExpressionGetter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import net.sf.jsqlparser.expression.StringValue;

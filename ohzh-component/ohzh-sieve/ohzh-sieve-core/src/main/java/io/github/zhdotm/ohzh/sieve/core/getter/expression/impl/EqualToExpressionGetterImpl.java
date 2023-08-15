@@ -1,6 +1,6 @@
-package io.github.zhdotm.ohzh.sieve.core.getter.impl;
+package io.github.zhdotm.ohzh.sieve.core.getter.expression.impl;
 
-import io.github.zhdotm.ohzh.sieve.core.getter.IEqualToExpressionGetter;
+import io.github.zhdotm.ohzh.sieve.core.getter.expression.IEqualToExpressionGetter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import net.sf.jsqlparser.expression.StringValue;

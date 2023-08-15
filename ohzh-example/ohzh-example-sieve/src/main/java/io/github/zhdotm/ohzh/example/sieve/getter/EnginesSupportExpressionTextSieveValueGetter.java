@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.example.sieve.getter;
 
 import cn.hutool.core.collection.ListUtil;
-import io.github.zhdotm.ohzh.sieve.starter.web.getter.ISpringExpressionTextValueGetter;
+import io.github.zhdotm.ohzh.sieve.starter.web.getter.ISpringExpressionTextSieveValueGetter;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 @Component
-public class EnginesSupportExpressionTextValueGetter implements ISpringExpressionTextValueGetter {
+public class EnginesSupportExpressionTextSieveValueGetter implements ISpringExpressionTextSieveValueGetter {
 
     @Override
     public List<String> get() {

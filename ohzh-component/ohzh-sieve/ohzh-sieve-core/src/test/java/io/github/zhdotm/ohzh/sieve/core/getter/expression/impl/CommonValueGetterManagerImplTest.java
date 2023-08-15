@@ -1,9 +1,9 @@
-package io.github.zhdotm.ohzh.sieve.core.getter.impl;
+package io.github.zhdotm.ohzh.sieve.core.getter.expression.impl;
 
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ObjectUtil;
-import io.github.zhdotm.ohzh.sieve.core.getter.IValueGetter;
+import io.github.zhdotm.ohzh.sieve.core.getter.value.ISieveValueGetter;
 import io.github.zhdotm.ohzh.sieve.core.manager.IValueGetterManager;
 import io.github.zhdotm.ohzh.sieve.core.manager.impl.CommonValueGetterManagerImpl;
 import org.junit.Before;
@@ -27,7 +27,7 @@ public class CommonValueGetterManagerImplTest {
 
     @Test
     public void putValueGetter() {
-        valueGetterManager.putValueGetter(new IValueGetter() {
+        valueGetterManager.putValueGetter(new ISieveValueGetter() {
             @Override
             public String getName() {
 
@@ -40,7 +40,7 @@ public class CommonValueGetterManagerImplTest {
             }
         });
 
-        valueGetterManager.putValueGetter(new IValueGetter() {
+        valueGetterManager.putValueGetter(new ISieveValueGetter() {
             @Override
             public String getName() {
 
@@ -53,7 +53,7 @@ public class CommonValueGetterManagerImplTest {
             }
         });
 
-        valueGetterManager.putValueGetter(new IValueGetter() {
+        valueGetterManager.putValueGetter(new ISieveValueGetter() {
             @Override
             public String getName() {
 

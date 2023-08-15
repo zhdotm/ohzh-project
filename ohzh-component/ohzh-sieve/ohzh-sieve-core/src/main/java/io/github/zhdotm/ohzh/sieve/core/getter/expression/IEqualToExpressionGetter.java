@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.sieve.core.getter;
+package io.github.zhdotm.ohzh.sieve.core.getter.expression;
 
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.operators.relational.EqualsTo;

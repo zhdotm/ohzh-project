@@ -2,7 +2,7 @@ package io.github.zhdotm.ohzh.sieve.core.manager.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import io.github.zhdotm.ohzh.sieve.core.getter.IValueGetter;
+import io.github.zhdotm.ohzh.sieve.core.getter.value.ISieveValueGetter;
 import io.github.zhdotm.ohzh.sieve.core.manager.IValueGetterManager;
 
 import java.util.HashMap;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class CommonValueGetterManagerImpl implements IValueGetterManager {
 
-    private static final Map<String, IValueGetter> VALUE_GETTER_MAP = new HashMap<>();
+    private static final Map<String, ISieveValueGetter> VALUE_GETTER_MAP = new HashMap<>();
 
     private static CommonValueGetterManagerImpl commonValueGetterManager;
 
@@ -31,7 +31,7 @@ public class CommonValueGetterManagerImpl implements IValueGetterManager {
     }
 
     @Override
-    public synchronized void putValueGetter(IValueGetter valueGetter) {
+    public synchronized void putValueGetter(ISieveValueGetter valueGetter) {
         if (ObjectUtil.isEmpty(valueGetter)) {
 
             return;
@@ -41,7 +41,7 @@ public class CommonValueGetterManagerImpl implements IValueGetterManager {
     }
 
     @Override
-    public IValueGetter getValueGetter(String valueGetterName) {
+    public ISieveValueGetter getValueGetter(String valueGetterName) {
 
         return VALUE_GETTER_MAP.get(valueGetterName);
     }
@@ -56,7 +56,7 @@ public class CommonValueGetterManagerImpl implements IValueGetterManager {
     }
 
     @Override
-    public synchronized void removeValueGetter(IValueGetter valueGetter) {
+    public synchronized void removeValueGetter(ISieveValueGetter valueGetter) {
         if (ObjectUtil.isEmpty(valueGetter)) {
 
             return;
