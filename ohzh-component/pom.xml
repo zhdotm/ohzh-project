@@ -19,6 +19,7 @@
         <module>ohzh-interceptor</module>
         <module>ohzh-pipeline</module>
         <module>ohzh-sieve</module>
+        <module>ohzh-idempotent</module>
     </modules>
 
     <properties>
