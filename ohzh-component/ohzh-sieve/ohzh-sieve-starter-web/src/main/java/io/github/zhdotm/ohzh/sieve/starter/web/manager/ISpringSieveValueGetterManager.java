@@ -11,12 +11,10 @@ import org.springframework.beans.factory.support.BeanNameGenerator;
 
 public interface ISpringSieveValueGetterManager extends ISieveValueGetterManager, BeanNameGenerator {
 
-    String NAME = "springValueGetterManager";
-
     @Override
     default String generateBeanName(BeanDefinition beanDefinition, BeanDefinitionRegistry beanDefinitionRegistry) {
 
-        return NAME;
+        return getName();
     }
 
 }

@@ -1,5 +1,7 @@
 package io.github.zhdotm.ohzh.sieve.core.manager;
 
+import cn.hutool.core.util.ClassUtil;
+import cn.hutool.core.util.StrUtil;
 import io.github.zhdotm.ohzh.sieve.core.getter.value.ISieveValueGetter;
 
 /**
@@ -7,6 +9,16 @@ import io.github.zhdotm.ohzh.sieve.core.getter.value.ISieveValueGetter;
  */
 
 public interface ISieveValueGetterManager {
+
+    /**
+     * 值获取器管理器
+     *
+     * @return 值获取器管理器
+     */
+    default String getName() {
+
+        return StrUtil.lowerFirst(ClassUtil.getClassName(this, Boolean.TRUE));
+    }
 
     /**
      * 添加值获取器

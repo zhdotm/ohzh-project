@@ -1,5 +1,8 @@
 package io.github.zhdotm.ohzh.sieve.core.getter.value;
 
+import cn.hutool.core.util.ClassUtil;
+import cn.hutool.core.util.StrUtil;
+
 import java.util.List;
 
 /**
@@ -15,7 +18,10 @@ public interface ISieveValueGetter {
      *
      * @return 值获取器名称
      */
-    String getName();
+    default String getName() {
+
+        return StrUtil.lowerFirst(ClassUtil.getClassName(this, Boolean.TRUE));
+    }
 
     /**
      * 获取值
