@@ -33,7 +33,7 @@ public class SieveConditionHolder {
     public static void addCondition(String tableName, Expression expression) {
         List<Expression> expressions = getConditionMap().getOrDefault(tableName, ListUtil.list(Boolean.FALSE));
         expressions.add(expression);
-        
+
         getConditionMap().put(tableName, expressions);
     }
 

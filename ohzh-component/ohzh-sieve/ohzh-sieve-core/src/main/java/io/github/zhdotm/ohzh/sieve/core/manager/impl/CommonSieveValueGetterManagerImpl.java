@@ -17,17 +17,17 @@ public class CommonSieveValueGetterManagerImpl implements ISieveValueGetterManag
 
     private static final Map<String, ISieveValueGetter> VALUE_GETTER_MAP = new HashMap<>();
 
-    private static CommonSieveValueGetterManagerImpl commonValueGetterManager;
+    private static volatile CommonSieveValueGetterManagerImpl commonValueGetterManager;
+
+    private CommonSieveValueGetterManagerImpl() {
+
+    }
 
     public synchronized static ISieveValueGetterManager getValueGetterManager() {
         commonValueGetterManager = Optional.ofNullable(commonValueGetterManager)
                 .orElse(new CommonSieveValueGetterManagerImpl());
 
         return commonValueGetterManager;
-    }
-
-    private CommonSieveValueGetterManagerImpl() {
-
     }
 
     @Override

@@ -57,5 +57,5 @@ public class SieveSelectVisitorImpl extends SelectVisitorAdapter implements ISie
             where.accept(new SieveExpressionVisitorImpl(this));
         }
     }
-    
+
 }

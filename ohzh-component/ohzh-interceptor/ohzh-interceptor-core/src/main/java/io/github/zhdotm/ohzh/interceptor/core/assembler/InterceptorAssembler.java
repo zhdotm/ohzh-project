@@ -10,7 +10,7 @@ import cn.hutool.core.util.ObjectUtil;
 
 public class InterceptorAssembler implements IInterceptorAssembler {
 
-    private static IInterceptorAssembler interceptorAssembler;
+    private static volatile IInterceptorAssembler interceptorAssembler;
 
     private InterceptorAssembler() {
     }

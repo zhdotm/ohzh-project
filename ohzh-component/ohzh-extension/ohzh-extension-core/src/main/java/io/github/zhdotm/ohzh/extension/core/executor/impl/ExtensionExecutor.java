@@ -28,7 +28,7 @@ public class ExtensionExecutor implements IExtensionExecutor {
     /**
      * 拓展执行器
      */
-    private static IExtensionExecutor extensionExecutor;
+    private static volatile IExtensionExecutor extensionExecutor;
 
     /**
      * 拓展注册器

@@ -60,24 +60,6 @@ public class IdempotentPoint {
      */
     private Long lockTimeoutMilli;
 
-    /**
-     * 获取键
-     *
-     * @return 键
-     */
-    public String getKey() {
-        if (ObjectUtil.isEmpty(keyGetter)) {
-
-            key = keyExpressionText;
-        }
-        if (StrUtil.isBlank(key)) {
-
-            key = keyGetter.get(target, method, args, keyExpressionText);
-        }
-
-        return key;
-    }
-
     public static IdempotentPoint create(String bizId,
                                          Object target,
                                          Method method,
@@ -95,5 +77,23 @@ public class IdempotentPoint {
                 .setKeyExpressionText(keyExpressionText)
                 .setKeyGetter(keyGetter)
                 .setLockTimeoutMilli(lockTimeoutMilli);
+    }
+
+    /**
+     * 获取键
+     *
+     * @return 键
+     */
+    public String getKey() {
+        if (ObjectUtil.isEmpty(keyGetter)) {
+
+            key = keyExpressionText;
+        }
+        if (StrUtil.isBlank(key)) {
+
+            key = keyGetter.get(target, method, args, keyExpressionText);
+        }
+
+        return key;
     }
 }

@@ -23,7 +23,7 @@ import java.util.function.Supplier;
 
 public class ExtensionRepository implements IExtensionRepository {
 
-    private static IExtensionRepository extensionRepository;
+    private static volatile IExtensionRepository extensionRepository;
 
     /**
      * 坐标拓展映射

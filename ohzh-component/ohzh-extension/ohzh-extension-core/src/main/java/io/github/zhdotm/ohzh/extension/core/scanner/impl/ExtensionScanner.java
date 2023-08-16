@@ -23,7 +23,7 @@ import java.util.Set;
 
 public class ExtensionScanner implements IExtensionScanner {
 
-    private static IExtensionScanner extensionScanner;
+    private static volatile IExtensionScanner extensionScanner;
 
     private final IExtensionRegister extensionRegister;
 

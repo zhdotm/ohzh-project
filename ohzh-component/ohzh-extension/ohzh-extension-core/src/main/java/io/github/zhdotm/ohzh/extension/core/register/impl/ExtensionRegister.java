@@ -18,7 +18,7 @@ import java.util.Arrays;
 
 public class ExtensionRegister implements IExtensionRegister {
 
-    private static IExtensionRegister extensionRegister;
+    private static volatile IExtensionRegister extensionRegister;
 
     private final IExtensionRepository extensionRepository;
 

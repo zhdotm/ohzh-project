@@ -17,7 +17,7 @@ import lombok.Setter;
 
 public class SpringExtensionRepository implements IExtensionRepository {
 
-    private static SpringExtensionRepository springExtensionRepository;
+    private static volatile SpringExtensionRepository springExtensionRepository;
 
     @Getter
     @Setter

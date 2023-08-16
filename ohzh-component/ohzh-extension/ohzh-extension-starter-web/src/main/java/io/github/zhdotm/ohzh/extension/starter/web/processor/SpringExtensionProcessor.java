@@ -22,7 +22,7 @@ import java.util.function.Supplier;
 
 public class SpringExtensionProcessor implements SmartInstantiationAwareBeanPostProcessor {
 
-    private static SpringExtensionProcessor springExtensionProcessor;
+    private static volatile SpringExtensionProcessor springExtensionProcessor;
 
     private final SpringExtensionRepository springExtensionRepository;
 
