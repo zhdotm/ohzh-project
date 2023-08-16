@@ -42,63 +42,61 @@ public interface IIdempotentHandler {
     void unlock(IdempotentPoint idempotentPoint);
 
     /**
-     * 处理获取锁成功逻辑
-     *
-     * @param idempotentPoint 幂等点
-     */
-    void lockSuccess(IdempotentPoint idempotentPoint);
-
-    /**
      * 处理获取锁失败逻辑
      *
      * @param idempotentPoint 幂等点
+     * @return 执行结果
      */
-    void lockFail(IdempotentPoint idempotentPoint);
+    Object handlerFail(IdempotentPoint idempotentPoint);
 
     /**
-     * 处理完成
+     * 处理获取锁成功且业务执行成功逻辑
      *
      * @param idempotentPoint 幂等点
      * @param result          业务逻辑处理结果
+     * @return 执行结果
      */
-    void handleComplete(IdempotentPoint idempotentPoint, Object result);
+    Object handleSuccess(IdempotentPoint idempotentPoint, Object result);
 
     /**
      * 处理异常
      *
      * @param idempotentPoint 幂等点
      * @param throwable       抛出的异常
+     * @return 执行结果
      */
-    void handleException(IdempotentPoint idempotentPoint, Throwable throwable);
+    Object handleException(IdempotentPoint idempotentPoint, Throwable throwable);
 
     /**
      * 幂等处理
      *
      * @param idempotentPoint 幂等点
+     * @return 执行结果
      */
     @SneakyThrows
-    default void handle(IdempotentPoint idempotentPoint) {
+    default Object handle(IdempotentPoint idempotentPoint) {
+        Object target = idempotentPoint.getTarget();
+        Method method = idempotentPoint.getMethod();
+        Object[] args = idempotentPoint.getArgs();
         if (ObjectUtil.isEmpty(idempotentPoint)) {
 
-            return;
+            return method.invoke(target, args);
         }
         if (tryLock(idempotentPoint)) {
-            lockSuccess(idempotentPoint);
             try {
-                Object target = idempotentPoint.getTarget();
-                Method method = idempotentPoint.getMethod();
-                Object[] args = idempotentPoint.getArgs();
                 Object result = method.invoke(target, args);
-                handleComplete(idempotentPoint, result);
+
+                return handleSuccess(idempotentPoint, result);
             } catch (Throwable throwable) {
-                handleException(idempotentPoint, throwable);
-                throw throwable;
+
+                return handleException(idempotentPoint, throwable);
             } finally {
+
                 unlock(idempotentPoint);
             }
-        } else {
-            lockFail(idempotentPoint);
         }
+
+        return handlerFail(idempotentPoint);
     }
 
 }
