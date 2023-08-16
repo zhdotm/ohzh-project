@@ -6,7 +6,7 @@ import io.github.zhdotm.ohzh.sieve.core.getter.value.ISieveValueGetter;
  * @author zhihao.mao
  */
 
-public interface IValueGetterManager {
+public interface ISieveValueGetterManager {
 
     /**
      * 添加值获取器

@@ -4,10 +4,10 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import io.github.zhdotm.ohzh.sieve.core.getter.value.ISieveValueGetter;
-import io.github.zhdotm.ohzh.sieve.core.manager.IValueGetterManager;
-import io.github.zhdotm.ohzh.sieve.core.manager.impl.CommonValueGetterManagerImpl;
+import io.github.zhdotm.ohzh.sieve.core.manager.ISieveValueGetterManager;
+import io.github.zhdotm.ohzh.sieve.core.manager.impl.CommonSieveValueGetterManagerImpl;
 import io.github.zhdotm.ohzh.sieve.starter.web.getter.ISpringSieveValueGetter;
-import io.github.zhdotm.ohzh.sieve.starter.web.manager.ISpringValueGetterManager;
+import io.github.zhdotm.ohzh.sieve.starter.web.manager.ISpringSieveValueGetterManager;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 
@@ -17,9 +17,9 @@ import java.util.Map;
  * @author zhihao.mao
  */
 
-public class SpringValueGetterManagerImpl implements ISpringValueGetterManager, ApplicationRunner {
+public class SpringSieveValueGetterManagerImpl implements ISpringSieveValueGetterManager, ApplicationRunner {
 
-    private IValueGetterManager valueGetterManager;
+    private ISieveValueGetterManager valueGetterManager;
 
     @Override
     public void putValueGetter(ISieveValueGetter valueGetter) {
@@ -59,7 +59,7 @@ public class SpringValueGetterManagerImpl implements ISpringValueGetterManager, 
             return;
         }
         if (ObjectUtil.isEmpty(valueGetterManager)) {
-            valueGetterManager = CommonValueGetterManagerImpl.getValueGetterManager();
+            valueGetterManager = CommonSieveValueGetterManagerImpl.getValueGetterManager();
         }
         nameValueGetterMap.values().forEach(valueGetterManager::putValueGetter);
     }

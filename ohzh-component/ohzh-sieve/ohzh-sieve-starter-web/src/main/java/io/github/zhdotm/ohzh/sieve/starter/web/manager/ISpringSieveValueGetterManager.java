@@ -1,6 +1,6 @@
 package io.github.zhdotm.ohzh.sieve.starter.web.manager;
 
-import io.github.zhdotm.ohzh.sieve.core.manager.IValueGetterManager;
+import io.github.zhdotm.ohzh.sieve.core.manager.ISieveValueGetterManager;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.support.BeanNameGenerator;
  * @author zhihao.mao
  */
 
-public interface ISpringValueGetterManager extends IValueGetterManager, BeanNameGenerator {
+public interface ISpringSieveValueGetterManager extends ISieveValueGetterManager, BeanNameGenerator {
 
     String NAME = "springValueGetterManager";
 

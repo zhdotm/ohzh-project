@@ -4,8 +4,8 @@ import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ObjectUtil;
 import io.github.zhdotm.ohzh.sieve.core.getter.value.ISieveValueGetter;
-import io.github.zhdotm.ohzh.sieve.core.manager.IValueGetterManager;
-import io.github.zhdotm.ohzh.sieve.core.manager.impl.CommonValueGetterManagerImpl;
+import io.github.zhdotm.ohzh.sieve.core.manager.ISieveValueGetterManager;
+import io.github.zhdotm.ohzh.sieve.core.manager.impl.CommonSieveValueGetterManagerImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,11 +18,11 @@ import java.util.List;
 
 public class CommonValueGetterManagerImplTest {
 
-    private IValueGetterManager valueGetterManager;
+    private ISieveValueGetterManager valueGetterManager;
 
     @Before
     public void createCommonValueGetterManager() {
-        valueGetterManager = CommonValueGetterManagerImpl.getValueGetterManager();
+        valueGetterManager = CommonSieveValueGetterManagerImpl.getValueGetterManager();
     }
 
     @Test

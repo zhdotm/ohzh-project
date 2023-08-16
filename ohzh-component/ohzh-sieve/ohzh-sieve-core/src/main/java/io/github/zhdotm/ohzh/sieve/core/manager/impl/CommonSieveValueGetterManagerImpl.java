@@ -3,7 +3,7 @@ package io.github.zhdotm.ohzh.sieve.core.manager.impl;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import io.github.zhdotm.ohzh.sieve.core.getter.value.ISieveValueGetter;
-import io.github.zhdotm.ohzh.sieve.core.manager.IValueGetterManager;
+import io.github.zhdotm.ohzh.sieve.core.manager.ISieveValueGetterManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,20 +13,20 @@ import java.util.Optional;
  * @author zhihao.mao
  */
 
-public class CommonValueGetterManagerImpl implements IValueGetterManager {
+public class CommonSieveValueGetterManagerImpl implements ISieveValueGetterManager {
 
     private static final Map<String, ISieveValueGetter> VALUE_GETTER_MAP = new HashMap<>();
 
-    private static CommonValueGetterManagerImpl commonValueGetterManager;
+    private static CommonSieveValueGetterManagerImpl commonValueGetterManager;
 
-    public synchronized static IValueGetterManager getValueGetterManager() {
+    public synchronized static ISieveValueGetterManager getValueGetterManager() {
         commonValueGetterManager = Optional.ofNullable(commonValueGetterManager)
-                .orElse(new CommonValueGetterManagerImpl());
+                .orElse(new CommonSieveValueGetterManagerImpl());
 
         return commonValueGetterManager;
     }
 
-    private CommonValueGetterManagerImpl() {
+    private CommonSieveValueGetterManagerImpl() {
 
     }
 

@@ -11,7 +11,7 @@ import io.github.zhdotm.ohzh.sieve.core.getter.expression.impl.EqualToExpression
 import io.github.zhdotm.ohzh.sieve.core.getter.expression.impl.ExpressionTextGetterImpl;
 import io.github.zhdotm.ohzh.sieve.core.getter.expression.impl.InExpressionGetterImpl;
 import io.github.zhdotm.ohzh.sieve.starter.web.holder.SieveConditionHolder;
-import io.github.zhdotm.ohzh.sieve.starter.web.manager.ISpringValueGetterManager;
+import io.github.zhdotm.ohzh.sieve.starter.web.manager.ISpringSieveValueGetterManager;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import net.sf.jsqlparser.expression.Expression;
@@ -30,7 +30,7 @@ import java.util.List;
 @Aspect
 public class SieveAspect {
 
-    private final ISpringValueGetterManager springValueGetterManager;
+    private final ISpringSieveValueGetterManager springValueGetterManager;
 
     @Pointcut("@annotation(io.github.zhdotm.ohzh.sieve.core.annotation.Sieves)")
     public void sievesPointcut() {
