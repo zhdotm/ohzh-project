@@ -87,6 +87,7 @@ public interface IIdempotentHandler {
                 handleComplete(idempotentPoint, result);
             } catch (Throwable throwable) {
                 handleException(idempotentPoint, throwable);
+                throw throwable;
             } finally {
                 unlock(idempotentPoint);
             }
