@@ -96,4 +96,23 @@ public class IdempotentPoint {
 
         return key;
     }
+
+    public String getMethodName() {
+        if (ObjectUtil.isEmpty(method)) {
+
+            return null;
+        }
+
+        return method.getName();
+    }
+
+    public Class<?> getReturnType() {
+        if (ObjectUtil.isEmpty(method)) {
+
+            return null;
+        }
+
+        return method.getReturnType();
+    }
+    
 }
