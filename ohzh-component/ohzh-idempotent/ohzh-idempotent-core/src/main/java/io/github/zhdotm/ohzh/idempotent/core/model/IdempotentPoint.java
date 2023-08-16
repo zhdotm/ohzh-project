@@ -91,7 +91,7 @@ public class IdempotentPoint {
         }
         if (StrUtil.isBlank(key)) {
 
-            key = keyGetter.get(target, method, args, keyExpressionText);
+            key = keyGetter.get(method, args, keyExpressionText);
         }
 
         return key;

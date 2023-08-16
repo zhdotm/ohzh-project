@@ -7,6 +7,7 @@ import cn.hutool.extra.expression.ExpressionUtil;
 import io.github.zhdotm.ohzh.idempotent.core.getter.IIdempotentKeyGetter;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.Map;
 
 /**
@@ -30,11 +31,17 @@ public class CommonIdempotentKeyGetterImpl implements IIdempotentKeyGetter {
     }
 
     @Override
-    public String get(Object target, Method method, Object[] args, String keyExpressionText) {
+    public String get(Method method, Object[] args, String keyExpressionText) {
         Map<String, Object> context = MapUtil.newHashMap();
-        context.put("target", target);
-        context.put("method", method);
-        context.put("args", args);
+        Parameter[] parameters = method.getParameters();
+        if (ObjectUtil.isNotEmpty(parameters)) {
+            for (int i = 0; i < parameters.length; i++) {
+                Parameter parameter = parameters[i];
+                String parameterName = parameter.getName();
+                Object parameterValue = args[i];
+                context.put(parameterName, parameterValue);
+            }
+        }
 
         return StrUtil.toString(ExpressionUtil.eval(keyExpressionText, context));
     }

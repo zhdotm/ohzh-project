@@ -26,12 +26,11 @@ public interface IIdempotentKeyGetter {
     /**
      * 键
      *
-     * @param target            目标
      * @param method            方法
      * @param args              参数
      * @param keyExpressionText 键表达式文本
      * @return 键
      */
-    String get(Object target, Method method, Object[] args, String keyExpressionText);
+    String get(Method method, Object[] args, String keyExpressionText);
 
 }
