@@ -64,18 +64,18 @@ public class IdempotentManager {
         return NAME_KEY_GETTER_MAP.get(keyGetterName);
     }
 
-    public static void removeIdempotentKeyGetter(String keyGetterName) {
+    public static void removeKeyGetter(String keyGetterName) {
 
         NAME_KEY_GETTER_MAP.remove(keyGetterName);
     }
 
-    public static void removeIdempotentKeyGetter(IIdempotentKeyGetter keyGetter) {
+    public static void removeKeyGetter(IIdempotentKeyGetter keyGetter) {
         if (ObjectUtil.isEmpty(keyGetter)) {
 
             return;
         }
 
-        removeIdempotentKeyGetter(keyGetter.getName());
+        removeKeyGetter(keyGetter.getName());
     }
 
     public static IdempotentInfo createIdempotentInfo(Idempotent idempotent, Object target, Method method, Object[] args) {
