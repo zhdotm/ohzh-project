@@ -14,6 +14,7 @@
     <description>幂等组件</description>
     <modules>
         <module>ohzh-idempotent-core</module>
+        <module>ohzh-idempotent-jdbc</module>
     </modules>
 
     <properties>
