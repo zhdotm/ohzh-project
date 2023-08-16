@@ -1,5 +1,8 @@
 package io.github.zhdotm.ohzh.idempotent.core.getter;
 
+import cn.hutool.core.util.ClassUtil;
+import cn.hutool.core.util.StrUtil;
+
 import java.lang.reflect.Method;
 
 /**
@@ -15,7 +18,10 @@ public interface IIdempotentKeyGetter {
      *
      * @return 名称
      */
-    String getName();
+    default String getName() {
+
+        return StrUtil.lowerFirst(ClassUtil.getClassName(this, Boolean.TRUE));
+    }
 
     /**
      * 键

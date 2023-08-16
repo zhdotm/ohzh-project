@@ -1,6 +1,8 @@
 package io.github.zhdotm.ohzh.idempotent.core.handler;
 
+import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import io.github.zhdotm.ohzh.idempotent.core.model.IdempotentPoint;
 import lombok.SneakyThrows;
 
@@ -19,7 +21,10 @@ public interface IIdempotentHandler {
      *
      * @return 名称
      */
-    String getName();
+    default String getName() {
+
+        return StrUtil.lowerFirst(ClassUtil.getClassName(this, Boolean.TRUE));
+    }
 
     /**
      * 尝试获取锁
