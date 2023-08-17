@@ -65,8 +65,7 @@ public class IdempotentPoint {
                                          Method method,
                                          Object[] args,
                                          String keyExpressionText,
-                                         IIdempotentKeyGetter keyGetter,
-                                         Long lockTimeoutMilli) {
+                                         IIdempotentKeyGetter keyGetter) {
         IdempotentPoint idempotentPoint = new IdempotentPoint();
 
         return idempotentPoint
@@ -75,8 +74,7 @@ public class IdempotentPoint {
                 .setMethod(method)
                 .setArgs(args)
                 .setKeyExpressionText(keyExpressionText)
-                .setKeyGetter(keyGetter)
-                .setLockTimeoutMilli(lockTimeoutMilli);
+                .setKeyGetter(keyGetter);
     }
 
     /**
@@ -114,5 +112,5 @@ public class IdempotentPoint {
 
         return method.getReturnType();
     }
-    
+
 }

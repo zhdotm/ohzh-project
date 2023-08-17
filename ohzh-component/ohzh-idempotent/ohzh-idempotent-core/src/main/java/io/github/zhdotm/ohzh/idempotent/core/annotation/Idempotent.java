@@ -35,13 +35,6 @@ public @interface Idempotent {
     String keyGetterName();
 
     /**
-     * 锁超时时间
-     *
-     * @return 锁超时时间
-     */
-    long lockTimeoutMilli() default 1000L;
-
-    /**
      * 幂等处理器名称
      *
      * @return 幂等处理器名称

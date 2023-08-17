@@ -106,8 +106,7 @@ public interface IIdempotentManager {
                 method,
                 args,
                 idempotent.keyExpressionText(),
-                iIdempotentKeyGetter,
-                idempotent.lockTimeoutMilli());
+                iIdempotentKeyGetter);
 
         return IdempotentInfo.create(idempotentPoint, iIdempotentHandler);
     }
