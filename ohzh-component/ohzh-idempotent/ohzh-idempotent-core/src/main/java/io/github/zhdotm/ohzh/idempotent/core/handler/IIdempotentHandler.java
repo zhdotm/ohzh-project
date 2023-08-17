@@ -26,6 +26,13 @@ public interface IIdempotentHandler {
     }
 
     /**
+     * 处理过期幂等点
+     *
+     * @param idempotentPoint 幂等点
+     */
+    void handleExpire(IdempotentPoint idempotentPoint);
+
+    /**
      * 尝试获取锁
      *
      * @param idempotentPoint 幂等点
@@ -78,6 +85,7 @@ public interface IIdempotentHandler {
         Method method = idempotentPoint.getMethod();
         Object[] args = idempotentPoint.getArgs();
 
+        handleExpire(idempotentPoint);
         if (tryLock(idempotentPoint)) {
             try {
                 Object result = method.invoke(target, args);
