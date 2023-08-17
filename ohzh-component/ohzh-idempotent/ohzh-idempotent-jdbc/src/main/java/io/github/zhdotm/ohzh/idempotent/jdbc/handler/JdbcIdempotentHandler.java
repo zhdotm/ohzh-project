@@ -1,5 +1,6 @@
 package io.github.zhdotm.ohzh.idempotent.jdbc.handler;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import io.github.zhdotm.ohzh.idempotent.core.exception.IdempotentException;
 import io.github.zhdotm.ohzh.idempotent.core.exception.IdempotentExceptionEnum;
@@ -14,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
+
+import java.time.LocalDateTime;
 
 /**
  * 利用数据库的唯一索引做幂等
@@ -32,13 +35,26 @@ public class JdbcIdempotentHandler implements IIdempotentHandler {
     private final JdbcIdempotentProperties jdbcIdempotentProperties;
 
     @Override
-    public Boolean tryLock(IdempotentPoint idempotentPoint) {
+    public void handleExpire(IdempotentPoint idempotentPoint) {
         String bizId = idempotentPoint.getBizId();
         String methodName = idempotentPoint.getMethodName();
         String key = idempotentPoint.getKey();
         if (!TransactionSynchronizationManager.isActualTransactionActive()) {
             throw new IdempotentException(IdempotentExceptionEnum.TRANSACTION_IS_NOT_ACTIVE.getCode(), IdempotentExceptionEnum.TRANSACTION_IS_NOT_ACTIVE.getMessage(bizId, methodName, key));
         }
+
+        Long expire = idempotentPoint.getExpire();
+        if (ObjectUtil.isNotEmpty(expire) && expire > 0) {
+            String deleteSql = jdbcIdempotentProperties.getDeleteSql();
+            jdbcTemplate.update(deleteSql, bizId, key, DateUtil.formatLocalDateTime(LocalDateTime.now().plusSeconds(-expire)));
+        }
+    }
+
+    @Override
+    public Boolean tryLock(IdempotentPoint idempotentPoint) {
+        String bizId = idempotentPoint.getBizId();
+        String methodName = idempotentPoint.getMethodName();
+        String key = idempotentPoint.getKey();
 
         String insertSql = jdbcIdempotentProperties.getInsertSql();
         try {
@@ -62,8 +78,9 @@ public class JdbcIdempotentHandler implements IIdempotentHandler {
         String bizId = idempotentPoint.getBizId();
         String methodName = idempotentPoint.getMethodName();
         String key = idempotentPoint.getKey();
-        String selectSql = jdbcIdempotentProperties.getSelectSql();
 
+        //查询已有的执行结果
+        String selectSql = jdbcIdempotentProperties.getSelectSql();
         ReturnObj returnObj = jdbcTemplate.queryForObject(selectSql, ReturnObj.class, bizId, key);
         if (ObjectUtil.isEmpty(returnObj)) {
 
