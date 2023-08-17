@@ -1,6 +1,5 @@
 package io.github.zhdotm.ohzh.idempotent.jdbc.handler;
 
-import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ObjectUtil;
 import io.github.zhdotm.ohzh.idempotent.core.exception.IdempotentException;
 import io.github.zhdotm.ohzh.idempotent.core.exception.IdempotentExceptionEnum;
@@ -65,7 +64,6 @@ public class JdbcIdempotentHandler implements IIdempotentHandler {
         String key = idempotentPoint.getKey();
         String selectSql = jdbcIdempotentProperties.getSelectSql();
 
-        ThreadUtil.sleep(idempotentPoint.getLockTimeoutMilli());
         ReturnObj returnObj = jdbcTemplate.queryForObject(selectSql, ReturnObj.class, bizId, key);
         if (ObjectUtil.isEmpty(returnObj)) {
 
