@@ -1,6 +1,9 @@
 package io.github.zhdotm.ohzh.idempotent.jdbc.handler;
 
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ObjectUtil;
+import io.github.zhdotm.ohzh.idempotent.core.exception.IdempotentException;
+import io.github.zhdotm.ohzh.idempotent.core.exception.IdempotentExceptionEnum;
 import io.github.zhdotm.ohzh.idempotent.core.handler.IIdempotentHandler;
 import io.github.zhdotm.ohzh.idempotent.core.model.IdempotentPoint;
 import io.github.zhdotm.ohzh.idempotent.core.serializer.Serializer;
@@ -11,6 +14,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 /**
  * 利用数据库的唯一索引做幂等
@@ -31,15 +35,21 @@ public class JdbcIdempotentHandler implements IIdempotentHandler {
     @Override
     public Boolean tryLock(IdempotentPoint idempotentPoint) {
         String bizId = idempotentPoint.getBizId();
-        String key = idempotentPoint.getKey();
         String methodName = idempotentPoint.getMethodName();
+        String key = idempotentPoint.getKey();
+        if (!TransactionSynchronizationManager.isActualTransactionActive()) {
+            throw new IdempotentException(IdempotentExceptionEnum.TRANSACTION_IS_NOT_ACTIVE.getCode(), IdempotentExceptionEnum.TRANSACTION_IS_NOT_ACTIVE.getMessage(bizId, methodName, key));
+        }
+
         String insertSql = jdbcIdempotentProperties.getInsertSql();
         try {
             jdbcTemplate.update(insertSql, bizId, key, methodName);
-            return true;
+
+            return Boolean.TRUE;
         } catch (DuplicateKeyException e) {
             log.debug("获取锁失败: bizId[{}], key[{}], methodName[{}]", bizId, key, methodName);
-            return false;
+
+            return Boolean.FALSE;
         }
     }
 
@@ -50,16 +60,20 @@ public class JdbcIdempotentHandler implements IIdempotentHandler {
 
     @Override
     public Object handlerFail(IdempotentPoint idempotentPoint) {
-        Class<?> returnType = idempotentPoint.getReturnType();
-        if (ObjectUtil.isEmpty(returnType)) {
-
-            return null;
-        }
         String bizId = idempotentPoint.getBizId();
+        String methodName = idempotentPoint.getMethodName();
         String key = idempotentPoint.getKey();
         String selectSql = jdbcIdempotentProperties.getSelectSql();
+
+        ThreadUtil.sleep(idempotentPoint.getLockTimeoutMilli());
         ReturnObj returnObj = jdbcTemplate.queryForObject(selectSql, ReturnObj.class, bizId, key);
         if (ObjectUtil.isEmpty(returnObj)) {
+
+            throw new IdempotentException(IdempotentExceptionEnum.EXEC_IS_NOT_DONE.getCode(), IdempotentExceptionEnum.EXEC_IS_NOT_DONE.getMessage(bizId, methodName, key));
+        }
+
+        Class<?> returnType = idempotentPoint.getReturnType();
+        if (ObjectUtil.isEmpty(returnType)) {
 
             return null;
         }
@@ -90,11 +104,7 @@ public class JdbcIdempotentHandler implements IIdempotentHandler {
     @SneakyThrows
     @Override
     public Object handleException(IdempotentPoint idempotentPoint, Throwable throwable) {
-        String bizId = idempotentPoint.getBizId();
-        String key = idempotentPoint.getKey();
-        String deleteSql = jdbcIdempotentProperties.getDeleteSql();
-        jdbcTemplate.update(deleteSql, bizId, key);
-
+        //由事务控制idempotent记录的原子性
         throw throwable;
     }
 

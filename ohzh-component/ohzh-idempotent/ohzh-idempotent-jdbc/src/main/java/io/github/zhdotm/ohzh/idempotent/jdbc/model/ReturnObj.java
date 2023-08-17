@@ -11,5 +11,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class ReturnObj {
 
+    private String bizId;
+
+    private String idemKey;
+
     private byte[] returnObjBlob;
 }
