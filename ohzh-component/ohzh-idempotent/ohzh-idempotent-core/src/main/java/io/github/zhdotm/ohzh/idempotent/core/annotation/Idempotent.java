@@ -40,4 +40,11 @@ public @interface Idempotent {
      * @return 幂等处理器名称
      */
     String handlerName();
+
+    /**
+     * 过期时间（秒）
+     *
+     * @return 过期时间
+     */
+    long expire() default 60;
 }

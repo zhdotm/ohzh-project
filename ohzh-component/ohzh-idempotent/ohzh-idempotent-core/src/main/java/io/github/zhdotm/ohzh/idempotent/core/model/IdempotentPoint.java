@@ -56,16 +56,17 @@ public class IdempotentPoint {
     private String key;
 
     /**
-     * 锁超时时间
+     * 过期时间（秒）
      */
-    private Long lockTimeoutMilli;
+    private Long expire;
 
     public static IdempotentPoint create(String bizId,
                                          Object target,
                                          Method method,
                                          Object[] args,
                                          String keyExpressionText,
-                                         IIdempotentKeyGetter keyGetter) {
+                                         IIdempotentKeyGetter keyGetter,
+                                         Long expire) {
         IdempotentPoint idempotentPoint = new IdempotentPoint();
 
         return idempotentPoint
@@ -74,7 +75,8 @@ public class IdempotentPoint {
                 .setMethod(method)
                 .setArgs(args)
                 .setKeyExpressionText(keyExpressionText)
-                .setKeyGetter(keyGetter);
+                .setKeyGetter(keyGetter)
+                .setExpire(expire);
     }
 
     /**

@@ -1,7 +1,6 @@
 package io.github.zhdotm.ohzh.idempotent.core.handler;
 
 import cn.hutool.core.util.ClassUtil;
-import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import io.github.zhdotm.ohzh.idempotent.core.model.IdempotentPoint;
 import lombok.SneakyThrows;
@@ -78,10 +77,7 @@ public interface IIdempotentHandler {
         Object target = idempotentPoint.getTarget();
         Method method = idempotentPoint.getMethod();
         Object[] args = idempotentPoint.getArgs();
-        if (ObjectUtil.isEmpty(idempotentPoint)) {
 
-            return method.invoke(target, args);
-        }
         if (tryLock(idempotentPoint)) {
             try {
                 Object result = method.invoke(target, args);
