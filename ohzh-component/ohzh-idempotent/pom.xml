@@ -15,6 +15,7 @@
     <modules>
         <module>ohzh-idempotent-core</module>
         <module>ohzh-idempotent-jdbc</module>
+        <module>ohzh-idempotent-redis</module>
     </modules>
 
     <properties>
