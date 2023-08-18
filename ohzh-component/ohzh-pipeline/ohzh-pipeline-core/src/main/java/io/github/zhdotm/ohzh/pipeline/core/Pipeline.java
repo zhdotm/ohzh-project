@@ -136,7 +136,11 @@ public class Pipeline<Input, Output> implements IPipeline<Input, Output> {
     public Output drawOff(Input input) {
         IValve<Input, Output> valve = firstValveContext.getValve();
 
-        return valve.drawOff(firstValveContext, input);
+        try {
+            return valve.drawOff(firstValveContext, input);
+        } finally {
+            clearAttrs();
+        }
     }
 
 
