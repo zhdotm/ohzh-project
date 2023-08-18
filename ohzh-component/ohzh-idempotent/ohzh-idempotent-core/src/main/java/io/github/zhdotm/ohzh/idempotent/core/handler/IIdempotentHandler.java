@@ -5,8 +5,6 @@ import cn.hutool.core.util.StrUtil;
 import io.github.zhdotm.ohzh.idempotent.core.model.IdempotentPoint;
 import lombok.SneakyThrows;
 
-import java.lang.reflect.Method;
-
 /**
  * 幂等处理器
  *
@@ -53,16 +51,15 @@ public interface IIdempotentHandler {
      * @param idempotentPoint 幂等点
      * @return 执行结果
      */
-    Object handlerFail(IdempotentPoint idempotentPoint);
+    Object handleLockFail(IdempotentPoint idempotentPoint);
 
     /**
      * 处理获取锁成功且业务执行成功逻辑
      *
      * @param idempotentPoint 幂等点
-     * @param result          业务逻辑处理结果
      * @return 执行结果
      */
-    Object handleSuccess(IdempotentPoint idempotentPoint, Object result);
+    Object handleLockSuccess(IdempotentPoint idempotentPoint);
 
     /**
      * 处理异常
@@ -81,16 +78,12 @@ public interface IIdempotentHandler {
      */
     @SneakyThrows
     default Object handle(IdempotentPoint idempotentPoint) {
-        Object target = idempotentPoint.getTarget();
-        Method method = idempotentPoint.getMethod();
-        Object[] args = idempotentPoint.getArgs();
-
         handleExpire(idempotentPoint);
+        
         if (tryLock(idempotentPoint)) {
             try {
-                Object result = method.invoke(target, args);
 
-                return handleSuccess(idempotentPoint, result);
+                return handleLockSuccess(idempotentPoint);
             } catch (Throwable throwable) {
 
                 return handleException(idempotentPoint, throwable);
@@ -100,7 +93,7 @@ public interface IIdempotentHandler {
             }
         }
 
-        return handlerFail(idempotentPoint);
+        return handleLockFail(idempotentPoint);
     }
 
 }
