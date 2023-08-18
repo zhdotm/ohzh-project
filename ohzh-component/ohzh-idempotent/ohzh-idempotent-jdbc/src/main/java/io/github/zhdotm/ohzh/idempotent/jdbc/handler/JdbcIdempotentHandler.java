@@ -16,6 +16,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 
 /**
@@ -74,7 +75,7 @@ public class JdbcIdempotentHandler implements IIdempotentHandler {
     }
 
     @Override
-    public Object handlerFail(IdempotentPoint idempotentPoint) {
+    public Object handleLockFail(IdempotentPoint idempotentPoint) {
         String bizId = idempotentPoint.getBizId();
         String methodName = idempotentPoint.getMethodName();
         String key = idempotentPoint.getKey();
@@ -102,10 +103,15 @@ public class JdbcIdempotentHandler implements IIdempotentHandler {
         return serializer.deserialize(returnObjBlob, returnType);
     }
 
+    @SneakyThrows
     @Override
-    public Object handleSuccess(IdempotentPoint idempotentPoint, Object result) {
+    public Object handleLockSuccess(IdempotentPoint idempotentPoint) {
         String bizId = idempotentPoint.getBizId();
         String key = idempotentPoint.getKey();
+        Object target = idempotentPoint.getTarget();
+        Method method = idempotentPoint.getMethod();
+        Object[] args = idempotentPoint.getArgs();
+        Object result = method.invoke(target, args);
         byte[] returnObjBlob = null;
         if (ObjectUtil.isNotEmpty(result)) {
             returnObjBlob = serializer.serialize(result);
