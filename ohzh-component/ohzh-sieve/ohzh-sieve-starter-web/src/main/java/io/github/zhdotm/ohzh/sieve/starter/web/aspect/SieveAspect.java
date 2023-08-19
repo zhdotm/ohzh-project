@@ -57,7 +57,7 @@ public class SieveAspect {
 
     @SneakyThrows
     @Around("expressionSievePointcut() && @annotation(sieve)")
-    public Object expressionsieveAround(ProceedingJoinPoint pjp, ExpressionSieve sieve) {
+    public Object expressionSieveAround(ProceedingJoinPoint pjp, ExpressionSieve sieve) {
 
         addCondition(sieve);
         Object proceed = pjp.proceed(pjp.getArgs());
