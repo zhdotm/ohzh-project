@@ -3,25 +3,29 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>ohzh-component</artifactId>
+        <artifactId>ohzh-idempotent</artifactId>
         <groupId>io.github.zhdotm</groupId>
         <version>1.0.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ohzh-idempotent</artifactId>
-    <packaging>pom</packaging>
-    <description>幂等组件</description>
-    <modules>
-        <module>ohzh-idempotent-core</module>
-        <module>ohzh-idempotent-jdbc</module>
-        <module>ohzh-idempotent-redis</module>
-        <module>ohzh-idempotent-starter-web</module>
-    </modules>
+    <artifactId>ohzh-idempotent-starter-web</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.github.zhdotm</groupId>
+            <artifactId>ohzh-idempotent-core</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
