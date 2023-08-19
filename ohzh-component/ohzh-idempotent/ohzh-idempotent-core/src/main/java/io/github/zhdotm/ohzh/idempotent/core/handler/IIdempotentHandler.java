@@ -79,7 +79,7 @@ public interface IIdempotentHandler {
     @SneakyThrows
     default Object handle(IdempotentPoint idempotentPoint) {
         handleExpire(idempotentPoint);
-        
+
         if (tryLock(idempotentPoint)) {
             try {
 
