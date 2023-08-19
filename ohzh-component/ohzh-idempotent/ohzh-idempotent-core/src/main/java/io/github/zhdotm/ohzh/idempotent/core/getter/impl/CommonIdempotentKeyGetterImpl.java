@@ -31,7 +31,7 @@ public class CommonIdempotentKeyGetterImpl implements IIdempotentKeyGetter {
     }
 
     @Override
-    public String get(Method method, Object[] args, String keyExpressionText) {
+    public String get(Object target, Method method, Object[] args, String keyExpressionText) {
         Map<String, Object> context = MapUtil.newHashMap();
         Parameter[] parameters = method.getParameters();
         if (ObjectUtil.isNotEmpty(parameters)) {

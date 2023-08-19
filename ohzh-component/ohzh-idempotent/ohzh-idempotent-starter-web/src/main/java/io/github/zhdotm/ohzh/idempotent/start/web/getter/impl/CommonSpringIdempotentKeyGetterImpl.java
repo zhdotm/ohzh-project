@@ -16,11 +16,11 @@ public class CommonSpringIdempotentKeyGetterImpl implements ISpringIdempotentKey
     private IIdempotentKeyGetter innerKeyGetter;
 
     @Override
-    public String get(Method method, Object[] args, String keyExpressionText) {
+    public String get(Object target, Method method, Object[] args, String keyExpressionText) {
         innerKeyGetter = Optional.ofNullable(innerKeyGetter)
                 .orElse(CommonIdempotentKeyGetterImpl.getKeyGetter());
 
-        return innerKeyGetter.get(method, args, keyExpressionText);
+        return innerKeyGetter.get(target, method, args, keyExpressionText);
     }
 
 }
