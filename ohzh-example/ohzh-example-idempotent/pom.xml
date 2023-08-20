@@ -20,17 +20,14 @@
         <dependency>
             <groupId>io.github.zhdotm</groupId>
             <artifactId>ohzh-idempotent-starter-web</artifactId>
-            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>io.github.zhdotm</groupId>
             <artifactId>ohzh-idempotent-redis</artifactId>
-            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>io.github.zhdotm</groupId>
             <artifactId>ohzh-idempotent-jdbc</artifactId>
-            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
