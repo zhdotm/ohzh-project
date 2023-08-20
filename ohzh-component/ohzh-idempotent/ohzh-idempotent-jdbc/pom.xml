@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>ohzh-idempotent-jdbc</artifactId>
+    <version>1.0.2</version>
     <description>幂等组件jdbc实现（不建议使用）</description>
 
     <properties>
@@ -21,7 +22,6 @@
         <dependency>
             <groupId>io.github.zhdotm</groupId>
             <artifactId>ohzh-idempotent-core</artifactId>
-            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

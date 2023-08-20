@@ -30,6 +30,7 @@
         <mybatis-spring.version>2.0.7</mybatis-spring.version>
         <mybatis-spring-boot-starter.version>2.2.2</mybatis-spring-boot-starter.version>
         <jsqlparser.version>4.6</jsqlparser.version>
+        <redisson-spring-boot-starter.version>3.18.1</redisson-spring-boot-starter.version>
         <ohzh-biz.version>1.0.2</ohzh-biz.version>
         <ohzh-biz-dto.version>1.0.2</ohzh-biz-dto.version>
         <ohzh-extension.version>1.0.2</ohzh-extension.version>
@@ -45,6 +46,10 @@
         <ohzh-sieve-core.version>1.0.1-SNAPSHOT</ohzh-sieve-core.version>
         <ohzh-sieve-mybatis.version>1.0.1-SNAPSHOT</ohzh-sieve-mybatis.version>
         <ohzh-sieve-starter-web.version>1.0.1-SNAPSHOT</ohzh-sieve-starter-web.version>
+        <ohzh-idempotent-core.version>1.0.2</ohzh-idempotent-core.version>
+        <ohzh-idempotent-jdbc.version>1.0.2</ohzh-idempotent-jdbc.version>
+        <ohzh-idempotent-redis.version>1.0.2</ohzh-idempotent-redis.version>
+        <ohzh-idempotent-starter-web.version>1.0.2</ohzh-idempotent-starter-web.version>
     </properties>
 
     <dependencyManagement>
@@ -85,6 +90,11 @@
                 <groupId>com.github.jsqlparser</groupId>
                 <artifactId>jsqlparser</artifactId>
                 <version>${jsqlparser.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson-spring-boot-starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.zhdotm</groupId>
@@ -160,6 +170,26 @@
                 <groupId>io.github.zhdotm</groupId>
                 <artifactId>ohzh-sieve-starter-web</artifactId>
                 <version>${ohzh-sieve-starter-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-idempotent-core</artifactId>
+                <version>${ohzh-idempotent-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-idempotent-jdbc</artifactId>
+                <version>${ohzh-idempotent-jdbc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-idempotent-redis</artifactId>
+                <version>${ohzh-idempotent-redis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-idempotent-starter-web</artifactId>
+                <version>${ohzh-idempotent-starter-web.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
