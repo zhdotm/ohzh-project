@@ -60,13 +60,19 @@ public class IdempotentPoint {
      */
     private Long expire;
 
+    /**
+     * 重复请求消息
+     */
+    private String repeatedRequestMessage;
+
     public static IdempotentPoint create(String bizId,
                                          Object target,
                                          Method method,
                                          Object[] args,
                                          String keyExpressionText,
                                          IIdempotentKeyGetter keyGetter,
-                                         Long expire) {
+                                         Long expire,
+                                         String repeatedRequestMessage) {
         IdempotentPoint idempotentPoint = new IdempotentPoint();
 
         return idempotentPoint
@@ -76,7 +82,8 @@ public class IdempotentPoint {
                 .setArgs(args)
                 .setKeyExpressionText(keyExpressionText)
                 .setKeyGetter(keyGetter)
-                .setExpire(expire);
+                .setExpire(expire)
+                .setRepeatedRequestMessage(repeatedRequestMessage);
     }
 
     /**
@@ -97,6 +104,11 @@ public class IdempotentPoint {
         return key;
     }
 
+    /**
+     * 获取方法名
+     *
+     * @return 方法名
+     */
     public String getMethodName() {
         if (ObjectUtil.isEmpty(method)) {
 

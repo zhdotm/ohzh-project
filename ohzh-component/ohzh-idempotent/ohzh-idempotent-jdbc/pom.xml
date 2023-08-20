@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>ohzh-idempotent-jdbc</artifactId>
+    <description>幂等组件jdbc实现（不建议使用）</description>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

@@ -2,6 +2,7 @@ package io.github.zhdotm.ohzh.idempotent.jdbc.handler;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import io.github.zhdotm.ohzh.idempotent.core.exception.IdempotentException;
 import io.github.zhdotm.ohzh.idempotent.core.exception.IdempotentExceptionEnum;
 import io.github.zhdotm.ohzh.idempotent.core.handler.IIdempotentHandler;
@@ -10,6 +11,7 @@ import io.github.zhdotm.ohzh.idempotent.core.serializer.Serializer;
 import io.github.zhdotm.ohzh.idempotent.jdbc.configuration.JdbcIdempotentProperties;
 import io.github.zhdotm.ohzh.idempotent.jdbc.model.ReturnObj;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
@@ -29,6 +31,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class JdbcIdempotentHandler implements IIdempotentHandler {
 
+    @Getter
+    private final String name;
+
     private final JdbcTemplate jdbcTemplate;
 
     private final Serializer serializer;
@@ -41,7 +46,7 @@ public class JdbcIdempotentHandler implements IIdempotentHandler {
         String methodName = idempotentPoint.getMethodName();
         String key = idempotentPoint.getKey();
         if (!TransactionSynchronizationManager.isActualTransactionActive()) {
-            throw new IdempotentException(IdempotentExceptionEnum.TRANSACTION_IS_NOT_ACTIVE.getCode(), IdempotentExceptionEnum.TRANSACTION_IS_NOT_ACTIVE.getMessage(bizId, methodName, key));
+            throw new IdempotentException(IdempotentExceptionEnum.TRANSACTION_IS_NOT_ACTIVE.getCode(), IdempotentExceptionEnum.TRANSACTION_IS_NOT_ACTIVE.getMessage());
         }
 
         Long expire = idempotentPoint.getExpire();
@@ -77,15 +82,19 @@ public class JdbcIdempotentHandler implements IIdempotentHandler {
     @Override
     public Object handleLockFail(IdempotentPoint idempotentPoint) {
         String bizId = idempotentPoint.getBizId();
-        String methodName = idempotentPoint.getMethodName();
         String key = idempotentPoint.getKey();
 
         //查询已有的执行结果
         String selectSql = jdbcIdempotentProperties.getSelectSql();
-        ReturnObj returnObj = jdbcTemplate.queryForObject(selectSql, ReturnObj.class, bizId, key);
+        ReturnObj returnObj = jdbcTemplate.queryForObject(selectSql, (resultSet, i) -> ReturnObj.create(resultSet), bizId, key);
+        //由于数据库临键锁的原因，理论上走不到这一步
         if (ObjectUtil.isEmpty(returnObj)) {
+            String repeatedRequestMessage = idempotentPoint.getRepeatedRequestMessage();
+            if (StrUtil.isBlank(repeatedRequestMessage)) {
+                repeatedRequestMessage = IdempotentExceptionEnum.REPEATED_REQUEST.getMessage();
+            }
 
-            throw new IdempotentException(IdempotentExceptionEnum.EXEC_IS_NOT_DONE.getCode(), IdempotentExceptionEnum.EXEC_IS_NOT_DONE.getMessage(bizId, methodName, key));
+            throw new IdempotentException(IdempotentExceptionEnum.REPEATED_REQUEST.getCode(), repeatedRequestMessage);
         }
 
         Class<?> returnType = idempotentPoint.getReturnType();

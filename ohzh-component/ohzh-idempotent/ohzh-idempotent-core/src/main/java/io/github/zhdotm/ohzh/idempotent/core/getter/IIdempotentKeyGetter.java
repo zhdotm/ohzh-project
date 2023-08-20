@@ -13,6 +13,8 @@ import java.lang.reflect.Method;
 
 public interface IIdempotentKeyGetter {
 
+    String COMMON_NAME = "idempotentKeyGetter";
+
     /**
      * 名称
      *

@@ -1,13 +1,8 @@
 package io.github.zhdotm.ohzh.idempotent.core.manager;
 
 import cn.hutool.core.util.ObjectUtil;
-import io.github.zhdotm.ohzh.idempotent.core.annotation.Idempotent;
 import io.github.zhdotm.ohzh.idempotent.core.getter.IIdempotentKeyGetter;
 import io.github.zhdotm.ohzh.idempotent.core.handler.IIdempotentHandler;
-import io.github.zhdotm.ohzh.idempotent.core.model.IdempotentInfo;
-import io.github.zhdotm.ohzh.idempotent.core.model.IdempotentPoint;
-
-import java.lang.reflect.Method;
 
 /**
  * @author zhihao.mao
@@ -86,30 +81,4 @@ public interface IIdempotentManager {
 
         removeKeyGetter(keyGetter.getName());
     }
-
-    /**
-     * 创建幂等信息
-     *
-     * @param idempotent 幂等注解
-     * @param target     目标
-     * @param method     方法
-     * @param args       参数
-     * @return 幂等信息
-     */
-    default IdempotentInfo createIdempotentInfo(Idempotent idempotent, Object target, Method method, Object[] args) {
-        String keyGetterName = idempotent.keyGetterName();
-        IIdempotentKeyGetter iIdempotentKeyGetter = getKeyGetter(keyGetterName);
-        String handlerName = idempotent.handlerName();
-        IIdempotentHandler iIdempotentHandler = getHandler(handlerName);
-        IdempotentPoint idempotentPoint = IdempotentPoint.create(idempotent.bizId(),
-                target,
-                method,
-                args,
-                idempotent.keyExpressionText(),
-                iIdempotentKeyGetter,
-                idempotent.expire());
-
-        return IdempotentInfo.create(idempotentPoint, iIdempotentHandler);
-    }
-
 }

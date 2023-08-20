@@ -13,6 +13,8 @@ import lombok.SneakyThrows;
 
 public interface IIdempotentHandler {
 
+    String COMMON_NAME = "idempotentHandler";
+
     /**
      * 名称
      *

@@ -1,12 +1,14 @@
 package io.github.zhdotm.ohzh.idempotent.redis.handler;
 
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import io.github.zhdotm.ohzh.idempotent.core.exception.IdempotentException;
 import io.github.zhdotm.ohzh.idempotent.core.exception.IdempotentExceptionEnum;
 import io.github.zhdotm.ohzh.idempotent.core.handler.IIdempotentHandler;
 import io.github.zhdotm.ohzh.idempotent.core.model.IdempotentPoint;
 import io.github.zhdotm.ohzh.idempotent.redis.configuration.RedisIdempotentProperties;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
@@ -24,6 +26,9 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @AllArgsConstructor
 public class RedisIdempotentHandler implements IIdempotentHandler {
+
+    @Getter
+    private final String name;
 
     private final RedissonClient redissonClient;
 
@@ -59,14 +64,16 @@ public class RedisIdempotentHandler implements IIdempotentHandler {
 
     @Override
     public Object handleLockFail(IdempotentPoint idempotentPoint) {
-        String bizId = idempotentPoint.getBizId();
-        String methodName = idempotentPoint.getMethodName();
         String key = idempotentPoint.getKey();
         RMapCache<String, Object> cache = getCache(idempotentPoint);
         Set<String> keySet = cache.keySet();
         if (!keySet.contains(key)) {
+            String repeatedRequestMessage = idempotentPoint.getRepeatedRequestMessage();
+            if (StrUtil.isBlank(repeatedRequestMessage)) {
+                repeatedRequestMessage = IdempotentExceptionEnum.REPEATED_REQUEST.getMessage();
+            }
 
-            throw new IdempotentException(IdempotentExceptionEnum.EXEC_IS_NOT_DONE.getCode(), IdempotentExceptionEnum.EXEC_IS_NOT_DONE.getMessage(bizId, methodName, key));
+            throw new IdempotentException(IdempotentExceptionEnum.REPEATED_REQUEST.getCode(), repeatedRequestMessage);
         }
 
         return cache.get(key);

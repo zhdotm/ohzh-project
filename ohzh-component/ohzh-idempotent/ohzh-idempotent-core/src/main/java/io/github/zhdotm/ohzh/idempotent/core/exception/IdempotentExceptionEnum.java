@@ -16,8 +16,8 @@ public enum IdempotentExceptionEnum {
     /**
      * 异常枚举
      */
-    EXEC_IS_NOT_DONE(400001, "幂等方法执行失败: 业务ID[{}], 方法名[{}], 幂等键[{}], 已抢占锁的线程未在等待时间内完成方法执行"),
-    TRANSACTION_IS_NOT_ACTIVE(400002, "幂等方法执行失败: 业务ID[{}], 方法名[{}], 幂等键[{}], 事务未激活"),
+    REPEATED_REQUEST(400001, "重复请求, 请稍后重试"),
+    TRANSACTION_IS_NOT_ACTIVE(400002, "使用基于JDBC的幂等处理器必须激活事务"),
     ;
 
     /**

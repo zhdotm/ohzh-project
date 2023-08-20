@@ -38,11 +38,32 @@ public class IdempotentAspect {
         IIdempotentKeyGetter keyGetter = idempotentManager.getKeyGetter(keyGetterName);
         String handlerName = idempotent.handlerName();
         IIdempotentHandler handler = idempotentManager.getHandler(handlerName);
-        MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
-        Method method = methodSignature.getMethod();
-        IdempotentPoint idempotentPoint = IdempotentPoint.create(idempotent.bizId(), methodPjp.getTarget(), method, methodPjp.getArgs(), idempotent.keyExpressionText(), keyGetter, idempotent.expire());
+        Method method = getMethod(pjp);
+        IdempotentPoint idempotentPoint = IdempotentPoint.create(idempotent.bizId(),
+                methodPjp.getTarget(),
+                method,
+                methodPjp.getArgs(),
+                idempotent.keyExpressionText(),
+                keyGetter,
+                idempotent.expire(),
+                idempotent.repeatedRequestMessage());
 
         return handler.handle(idempotentPoint);
+    }
+
+    private Method getMethod(ProceedingJoinPoint pjp) {
+        MethodSignature signature = (MethodSignature) pjp.getSignature();
+        Method method = signature.getMethod();
+        if (method.getDeclaringClass().isInterface()) {
+            try {
+                method = pjp.getTarget().getClass().getDeclaredMethod(pjp.getSignature().getName(),
+                        method.getParameterTypes());
+            } catch (SecurityException | NoSuchMethodException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return method;
     }
 
 }
