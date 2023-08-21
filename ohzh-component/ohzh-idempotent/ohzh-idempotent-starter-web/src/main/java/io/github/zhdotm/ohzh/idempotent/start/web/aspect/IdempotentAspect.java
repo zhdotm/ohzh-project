@@ -3,7 +3,7 @@ package io.github.zhdotm.ohzh.idempotent.start.web.aspect;
 import io.github.zhdotm.ohzh.idempotent.core.annotation.Idempotent;
 import io.github.zhdotm.ohzh.idempotent.core.getter.IIdempotentKeyGetter;
 import io.github.zhdotm.ohzh.idempotent.core.handler.IIdempotentHandler;
-import io.github.zhdotm.ohzh.idempotent.core.model.IdempotentPoint;
+import io.github.zhdotm.ohzh.idempotent.core.point.IdempotentPoint;
 import io.github.zhdotm.ohzh.idempotent.start.web.manager.ISpringIdempotentManager;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;

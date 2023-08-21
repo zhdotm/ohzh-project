@@ -2,7 +2,7 @@ package io.github.zhdotm.ohzh.idempotent.core.handler;
 
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.StrUtil;
-import io.github.zhdotm.ohzh.idempotent.core.model.IdempotentPoint;
+import io.github.zhdotm.ohzh.idempotent.core.point.IdempotentPoint;
 import lombok.SneakyThrows;
 
 /**

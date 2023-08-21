@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.idempotent.core.model;
+package io.github.zhdotm.ohzh.idempotent.core.point;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;

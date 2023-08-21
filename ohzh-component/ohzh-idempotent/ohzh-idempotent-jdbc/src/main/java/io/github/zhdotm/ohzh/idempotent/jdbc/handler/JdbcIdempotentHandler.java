@@ -6,7 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import io.github.zhdotm.ohzh.idempotent.core.exception.IdempotentException;
 import io.github.zhdotm.ohzh.idempotent.core.exception.IdempotentExceptionEnum;
 import io.github.zhdotm.ohzh.idempotent.core.handler.IIdempotentHandler;
-import io.github.zhdotm.ohzh.idempotent.core.model.IdempotentPoint;
+import io.github.zhdotm.ohzh.idempotent.core.point.IdempotentPoint;
 import io.github.zhdotm.ohzh.idempotent.core.serializer.Serializer;
 import io.github.zhdotm.ohzh.idempotent.jdbc.configuration.JdbcIdempotentProperties;
 import io.github.zhdotm.ohzh.idempotent.jdbc.model.ReturnObj;
