@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.event.core;
+package io.github.zhdotm.ohzh.event.core.model;
 
 /**
  * 事件追踪

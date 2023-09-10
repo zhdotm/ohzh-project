@@ -1,10 +1,13 @@
-package io.github.zhdotm.ohzh.event.core;
+package io.github.zhdotm.ohzh.event.core.model;
 
 import java.util.Map;
 
 /**
  * 事件
+ * 状态变化的数据记录。
+ * <p>
  * https://www.alibabacloud.com/help/zh/eventbridge/latest/event-overview?spm=a2c63.p38356.0.0.9f4c5c78wgwrYA
+ * https://cloud.tencent.com/document/product/1359/54357
  *
  * @author zhihao.mao
  */
@@ -37,7 +40,7 @@ public interface IEvent {
      *
      * @return 1.0
      */
-    default String getSpecversion() {
+    default String getSpecVersion() {
 
         return "1.0";
     }
@@ -58,7 +61,7 @@ public interface IEvent {
      *
      * @return application/json;charset=utf-8
      */
-    default String getDatacontenttype() {
+    default String getDataContentType() {
 
         return "application/json;charset=utf-8";
     }
@@ -68,10 +71,7 @@ public interface IEvent {
      *
      * @return dataschema
      */
-    default <T extends IEventSchema> T getDataschema() {
-
-        return null;
-    }
+    <T extends IDataSchema> T getDataSchema();
 
     /**
      * 事件主题。
