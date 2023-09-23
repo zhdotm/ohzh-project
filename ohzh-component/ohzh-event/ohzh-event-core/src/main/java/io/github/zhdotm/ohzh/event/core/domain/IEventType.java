@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.event.core.domain.event;
+package io.github.zhdotm.ohzh.event.core.domain;
 
 /**
  * 事件类型

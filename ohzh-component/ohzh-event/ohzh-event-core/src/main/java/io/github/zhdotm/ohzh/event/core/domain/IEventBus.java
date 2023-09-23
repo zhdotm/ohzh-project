@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.event.core.domain.bus;
+package io.github.zhdotm.ohzh.event.core.domain;
 
 
 import java.time.LocalDateTime;
@@ -33,9 +33,9 @@ public interface IEventBus {
     String getDescription();
 
     /**
-     * 创建事件
+     * 创建时间
      *
-     * @return 创建事件
+     * @return 创建时间
      */
     LocalDateTime getGmtCreate();
 
@@ -45,5 +45,25 @@ public interface IEventBus {
      * @return 修改时间
      */
     LocalDateTime getGmtModify();
-    
+
+    /**
+     * 注册监听者
+     *
+     * @param listener 监听者
+     */
+    void register(IEventListener listener);
+
+    /**
+     * 取消注册监听者
+     *
+     * @param listener 监听者
+     */
+    void unregister(IEventListener listener);
+
+    /**
+     * 发布事件
+     *
+     * @param event 事件
+     */
+    <T> void post(IEvent<T> event);
 }

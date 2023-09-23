@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.event.core.domain.stream;
+package io.github.zhdotm.ohzh.event.core.domain;
 
 /**
  * 事件流
