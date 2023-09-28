@@ -1,9 +1,9 @@
 package io.github.zhdotm.ohzh.statemachine.core.domain.impl;
 
-import io.github.zhdotm.ohzh.statemachine.core.constant.TransitionTypeEnum;
 import io.github.zhdotm.ohzh.statemachine.core.domain.IAction;
 import io.github.zhdotm.ohzh.statemachine.core.domain.ICondition;
 import io.github.zhdotm.ohzh.statemachine.core.domain.ITransition;
+import io.github.zhdotm.ohzh.statemachine.core.enums.TransitionTypeEnum;
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -18,7 +18,7 @@ import java.util.List;
 public class TransitionImpl<S, E, C, A> implements ITransition<S, E, C, A> {
 
     @Getter
-    private final Collection<S> fromStateIds = new HashSet<>();
+    private final Collection<S> fromStateCodes = new HashSet<>();
 
     @Getter
     private TransitionTypeEnum type;
@@ -27,10 +27,10 @@ public class TransitionImpl<S, E, C, A> implements ITransition<S, E, C, A> {
     private Integer sort = Integer.MAX_VALUE;
 
     @Getter
-    private S toStateId;
+    private S toStateCode;
 
     @Getter
-    private E eventId;
+    private E eventCode;
 
     @Getter
     private ICondition<S, E, C> condition;
@@ -58,22 +58,22 @@ public class TransitionImpl<S, E, C, A> implements ITransition<S, E, C, A> {
     }
 
     @Override
-    public TransitionImpl<S, E, C, A> from(@NonNull List<S> stateIds) {
-        fromStateIds.addAll(stateIds);
+    public TransitionImpl<S, E, C, A> from(@NonNull List<S> stateCodes) {
+        fromStateCodes.addAll(stateCodes);
 
         return this;
     }
 
     @Override
-    public ITransition<S, E, C, A> on(@NonNull E eventId) {
-        this.eventId = eventId;
+    public ITransition<S, E, C, A> on(@NonNull E eventCode) {
+        this.eventCode = eventCode;
 
         return this;
     }
 
     @Override
-    public ITransition<S, E, C, A> to(@NonNull S stateId) {
-        toStateId = stateId;
+    public ITransition<S, E, C, A> to(@NonNull S stateCode) {
+        toStateCode = stateCode;
 
         return this;
     }

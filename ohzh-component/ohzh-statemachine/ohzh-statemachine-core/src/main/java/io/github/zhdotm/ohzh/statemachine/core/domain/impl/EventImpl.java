@@ -1,8 +1,12 @@
 package io.github.zhdotm.ohzh.statemachine.core.domain.impl;
 
+import cn.hutool.core.util.IdUtil;
 import io.github.zhdotm.ohzh.statemachine.core.domain.IEvent;
 import lombok.Getter;
 import lombok.NonNull;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author zhihao.mao
@@ -11,8 +15,10 @@ import lombok.NonNull;
 public class EventImpl<E> implements IEvent<E> {
 
     @Getter
-    private E eventId;
-
+    private final Map<String, String> extraProperties = new HashMap<>();
+    private String eventId;
+    @Getter
+    private E eventCode;
     @Getter
     private Object[] payload;
 
@@ -21,8 +27,14 @@ public class EventImpl<E> implements IEvent<E> {
         return new EventImpl<>();
     }
 
-    public EventImpl<E> eventId(@NonNull E eventId) {
+    public EventImpl<E> eventId(@NonNull String eventId) {
         this.eventId = eventId;
+
+        return this;
+    }
+
+    public EventImpl<E> eventCode(@NonNull E eventCode) {
+        this.eventCode = eventCode;
 
         return this;
     }
@@ -31,6 +43,15 @@ public class EventImpl<E> implements IEvent<E> {
         this.payload = payload;
 
         return this;
+    }
+
+    @Override
+    public String getEventId() {
+        if (eventId == null) {
+            eventId = IdUtil.getSnowflakeNextIdStr();
+        }
+
+        return eventId;
     }
 
 }

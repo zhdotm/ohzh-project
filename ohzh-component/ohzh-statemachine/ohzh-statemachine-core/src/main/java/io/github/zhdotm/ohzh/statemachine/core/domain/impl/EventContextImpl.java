@@ -12,7 +12,7 @@ import lombok.NonNull;
 public class EventContextImpl<S, E> implements IEventContext<S, E> {
 
     @Getter
-    private S stateId;
+    private S stateCode;
 
     @Getter
     private IEvent<E> event;
@@ -22,8 +22,8 @@ public class EventContextImpl<S, E> implements IEventContext<S, E> {
         return new EventContextImpl<>();
     }
 
-    public EventContextImpl<S, E> from(@NonNull S stateId) {
-        this.stateId = stateId;
+    public EventContextImpl<S, E> from(@NonNull S stateCode) {
+        this.stateCode = stateCode;
 
         return this;
     }

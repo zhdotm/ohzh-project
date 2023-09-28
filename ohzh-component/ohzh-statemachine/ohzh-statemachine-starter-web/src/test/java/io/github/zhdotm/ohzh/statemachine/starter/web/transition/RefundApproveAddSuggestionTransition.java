@@ -1,6 +1,6 @@
 package io.github.zhdotm.ohzh.statemachine.starter.web.transition;
 
-import io.github.zhdotm.ohzh.statemachine.core.constant.TransitionTypeEnum;
+import io.github.zhdotm.ohzh.statemachine.core.enums.TransitionTypeEnum;
 import io.github.zhdotm.ohzh.statemachine.starter.web.ISpringTransition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineAction;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineCondition;
@@ -16,7 +16,7 @@ import io.github.zhdotm.ohzh.statemachine.starter.web.constant.StateMachineConst
  */
 
 @StateMachineTransition(
-        stateMachineId = StateMachineConstant.REFUND_STATEMACHINE,
+        stateMachineCode = StateMachineConstant.REFUND_STATEMACHINE,
         type = TransitionTypeEnum.INTERNAL,
         from = RefundStateConstant.WAIT_APPROVE,
         on = RefundEventConstant.HAPPEN_APPROVE_ADD_SUGGESTION

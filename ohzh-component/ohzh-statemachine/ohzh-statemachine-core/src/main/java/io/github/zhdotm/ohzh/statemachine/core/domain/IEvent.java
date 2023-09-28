@@ -1,6 +1,8 @@
 package io.github.zhdotm.ohzh.statemachine.core.domain;
 
 
+import java.util.Map;
+
 /**
  * 事件
  *
@@ -14,7 +16,14 @@ public interface IEvent<E> {
      *
      * @return 事件ID
      */
-    E getEventId();
+    String getEventId();
+
+    /**
+     * 获取事件编码
+     *
+     * @return 事件编码
+     */
+    E getEventCode();
 
     /**
      * 获取参数负载
@@ -23,4 +32,10 @@ public interface IEvent<E> {
      */
     Object[] getPayload();
 
+    /**
+     * 额外属性
+     *
+     * @return 额外属性
+     */
+    Map<String, String> getExtraProperties();
 }

@@ -1,9 +1,9 @@
 package io.github.zhdotm.ohzh.statemachine.starter.web.processor;
 
-import io.github.zhdotm.ohzh.statemachine.core.constant.CharacterEnum;
-import io.github.zhdotm.ohzh.statemachine.core.constant.TransitionTypeEnum;
+import io.github.zhdotm.ohzh.statemachine.core.enums.CharacterEnum;
+import io.github.zhdotm.ohzh.statemachine.core.enums.TransitionTypeEnum;
 import io.github.zhdotm.ohzh.statemachine.core.exception.StateMachineException;
-import io.github.zhdotm.ohzh.statemachine.core.exception.util.ExceptionUtil;
+import io.github.zhdotm.ohzh.statemachine.core.util.ExceptionUtil;
 import io.github.zhdotm.ohzh.statemachine.starter.web.ISpringTransition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTransition;
 import org.springframework.beans.BeansException;

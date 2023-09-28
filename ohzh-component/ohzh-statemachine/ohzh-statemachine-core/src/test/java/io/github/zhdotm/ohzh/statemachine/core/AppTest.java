@@ -2,8 +2,8 @@ package io.github.zhdotm.ohzh.statemachine.core;
 
 import io.github.zhdotm.ohzh.statemachine.core.domain.IStateContext;
 import io.github.zhdotm.ohzh.statemachine.core.domain.IStateMachine;
-import io.github.zhdotm.ohzh.statemachine.core.support.StateMachineFactory;
-import io.github.zhdotm.ohzh.statemachine.core.support.builder.machine.IStateMachineBuilder;
+import io.github.zhdotm.ohzh.statemachine.core.support.factory.StateMachineFactory;
+import io.github.zhdotm.ohzh.statemachine.core.support.factory.builder.machine.IStateMachineBuilder;
 
 import java.util.Arrays;
 
@@ -120,6 +120,7 @@ public class AppTest {
         //发布事件
         IStateContext<RefundStateEnum, RefundEventEnum> stateContext = stateMachine.fireEvent(RefundStateEnum.STATE_REFUND_INIT, RefundEventEnum.EVENT_INIT, "xxxzzz");
         System.out.println(stateContext.getPayload() + "");
+
     }
 
     /**

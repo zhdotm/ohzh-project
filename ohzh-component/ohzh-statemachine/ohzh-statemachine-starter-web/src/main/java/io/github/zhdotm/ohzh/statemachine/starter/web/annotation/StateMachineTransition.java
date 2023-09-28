@@ -1,6 +1,6 @@
 package io.github.zhdotm.ohzh.statemachine.starter.web.annotation;
 
-import io.github.zhdotm.ohzh.statemachine.core.constant.TransitionTypeEnum;
+import io.github.zhdotm.ohzh.statemachine.core.enums.TransitionTypeEnum;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.*;
@@ -17,7 +17,7 @@ import java.lang.annotation.*;
 @Component
 public @interface StateMachineTransition {
 
-    String stateMachineId();
+    String stateMachineCode();
 
     TransitionTypeEnum type();
 

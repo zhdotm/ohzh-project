@@ -12,6 +12,6 @@ public class StateMachineConstant {
     /**
      * 退款订单状态机器
      */
-    public static final String REFUND_STATEMACHINE = "refund_statemachine";
+    public static final String REFUND_STATEMACHINE = "refund_statemachine_test";
 
 }

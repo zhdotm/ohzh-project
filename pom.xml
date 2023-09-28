@@ -50,6 +50,8 @@
         <ohzh-idempotent-jdbc.version>1.0.2</ohzh-idempotent-jdbc.version>
         <ohzh-idempotent-redis.version>1.0.2</ohzh-idempotent-redis.version>
         <ohzh-idempotent-starter-web.version>1.0.2</ohzh-idempotent-starter-web.version>
+        <rocketmq-client.version>4.9.5</rocketmq-client.version>
+        <rocketmq-spring-boot-starter.version>2.2.0</rocketmq-spring-boot-starter.version>
     </properties>
 
     <dependencyManagement>
@@ -100,6 +102,16 @@
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>${redisson-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>${rocketmq-client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq-spring-boot-starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.zhdotm</groupId>

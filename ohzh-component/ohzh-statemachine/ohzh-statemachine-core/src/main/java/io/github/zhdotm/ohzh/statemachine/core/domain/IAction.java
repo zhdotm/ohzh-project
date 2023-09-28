@@ -14,7 +14,14 @@ public interface IAction<A> {
      *
      * @return 动作ID
      */
-    A getActionId();
+    String getActionId();
+
+    /**
+     * 获取动作编码
+     *
+     * @return 动作编码
+     */
+    A getActionCode();
 
     /**
      * 执行动作

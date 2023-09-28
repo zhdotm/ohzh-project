@@ -1,6 +1,5 @@
 package io.github.zhdotm.ohzh.statemachine.starter.web;
 
-import io.github.zhdotm.ohzh.statemachine.core.constant.TransitionTypeEnum;
 import io.github.zhdotm.ohzh.statemachine.core.domain.IEvent;
 import io.github.zhdotm.ohzh.statemachine.core.domain.IEventContext;
 import io.github.zhdotm.ohzh.statemachine.core.domain.IStateMachine;
@@ -8,8 +7,9 @@ import io.github.zhdotm.ohzh.statemachine.core.domain.ITransition;
 import io.github.zhdotm.ohzh.statemachine.core.domain.impl.ActionImpl;
 import io.github.zhdotm.ohzh.statemachine.core.domain.impl.ConditionImpl;
 import io.github.zhdotm.ohzh.statemachine.core.domain.impl.TransitionImpl;
+import io.github.zhdotm.ohzh.statemachine.core.enums.TransitionTypeEnum;
 import io.github.zhdotm.ohzh.statemachine.core.exception.StateMachineException;
-import io.github.zhdotm.ohzh.statemachine.core.exception.util.ExceptionUtil;
+import io.github.zhdotm.ohzh.statemachine.core.util.ExceptionUtil;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineAction;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineCondition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTransition;
@@ -48,7 +48,7 @@ public interface ISpringTransition {
 
         TransitionImpl<String, String, String, String> transition = TransitionImpl.getInstance();
         ConditionImpl<String, String, String> condition = ConditionImpl.getInstance();
-        condition.conditionId(getConditionId())
+        condition.conditionCode(getConditionCode())
                 .check(new Function<IEventContext<String, String>, Boolean>() {
                     @SneakyThrows
                     @Override
@@ -60,7 +60,7 @@ public interface ISpringTransition {
                     }
                 });
         ActionImpl<String> action = ActionImpl.getInstance();
-        action.actionId(getActionId())
+        action.actionCode(getActionCode())
                 .execute(new Function<Object[], Object>() {
                     @SneakyThrows
                     @Override
@@ -101,21 +101,26 @@ public interface ISpringTransition {
         return Boolean.TRUE;
     }
 
-    default String getStateMachineId() {
+    default StateMachineTransition getTransitionAnnotation() {
         Class<?> clazz = this.getClass();
         String clazzName = clazz.getName();
         StateMachineTransition stateMachineTransition = clazz.getDeclaredAnnotation(StateMachineTransition.class);
-        ExceptionUtil.isTrue(stateMachineTransition != null, StateMachineException.class, "获取stateMachineId失败: 类[%s]不存在@StateMachineComponent", clazzName);
+        ExceptionUtil.isTrue(stateMachineTransition != null, StateMachineException.class, "获取stateMachineCode失败: 类[%s]不存在@StateMachineComponent", clazzName);
 
-        return stateMachineTransition.stateMachineId();
+        return stateMachineTransition;
     }
 
-    default String getConditionId() {
+    default String getStateMachineCode() {
+
+        return getTransitionAnnotation().stateMachineCode();
+    }
+
+    default String getConditionCode() {
         Method conditionMethod = getConditionMethod();
         StateMachineCondition stateMachineCondition = conditionMethod.getDeclaredAnnotation(StateMachineCondition.class);
-        String conditionId = stateMachineCondition.conditionId();
+        String conditionCode = stateMachineCondition.conditionCode();
 
-        return conditionId.length() == 0 ? conditionMethod.getName() : conditionId;
+        return conditionCode.length() == 0 ? conditionMethod.getName() : conditionCode;
     }
 
     default Method getConditionMethod() {
@@ -129,12 +134,12 @@ public interface ISpringTransition {
         return method;
     }
 
-    default String getActionId() {
+    default String getActionCode() {
         Method actionMethod = getActionMethod();
         StateMachineAction stateMachineAction = actionMethod.getDeclaredAnnotation(StateMachineAction.class);
-        String actionId = stateMachineAction.actionId();
+        String actionCode = stateMachineAction.actionCode();
 
-        return actionId.length() == 0 ? actionMethod.getName() : actionId;
+        return actionCode.length() == 0 ? actionMethod.getName() : actionCode;
     }
 
     default Method getActionMethod() {

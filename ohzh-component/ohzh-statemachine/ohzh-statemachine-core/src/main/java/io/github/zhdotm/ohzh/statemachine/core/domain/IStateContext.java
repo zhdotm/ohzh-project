@@ -9,11 +9,11 @@ package io.github.zhdotm.ohzh.statemachine.core.domain;
 public interface IStateContext<S, E> {
 
     /**
-     * 获取状态ID
+     * 获取状态编码
      *
-     * @return 状态ID
+     * @return 状态编码
      */
-    S getStateId();
+    S getStateCode();
 
     /**
      * 获取结果负载

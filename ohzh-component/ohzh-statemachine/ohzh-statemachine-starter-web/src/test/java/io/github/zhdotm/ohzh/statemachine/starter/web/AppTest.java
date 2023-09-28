@@ -20,6 +20,11 @@ public class AppTest {
     }
 
     @Test
+    public void fireRemoteEvent() {
+        StateMachineSupport.fireRemoteEvent(StateMachineConstant.REFUND_STATEMACHINE, RefundStateConstant.REFUND_INIT, RefundEventConstant.HAPPEN_INIT, "123456789");
+    }
+
+    @Test
     public void print() {
         System.out.println(StateMachineSupport
                 .getStateMachine(StateMachineConstant.REFUND_STATEMACHINE)

@@ -12,32 +12,39 @@ import java.util.Collection;
 public interface IState<S, E> {
 
     /**
-     * 获取状态唯一ID
+     * 获取状态ID
      *
-     * @return 状态唯一ID
+     * @return 状态ID
      */
-    S getStateId();
+    String getStateId();
 
     /**
-     * 设置状态ID
+     * 获取状态唯一编码
      *
-     * @param stateId 状态ID
+     * @return 状态唯一编码
+     */
+    S getStateCode();
+
+    /**
+     * 设置状态编码
+     *
+     * @param stateCode 状态编码
      * @return 状态
      */
-    IState<S, E> stateId(S stateId);
+    IState<S, E> stateCode(S stateCode);
 
     /**
-     * 添加事件ID
+     * 添加事件编码
      *
-     * @param eventId 事件ID
+     * @param eventCode 事件编码
      * @return 状态
      */
-    IState<S, E> addEventId(E eventId);
+    IState<S, E> addEventCode(E eventCode);
 
     /**
-     * 获取所有事件ID
+     * 获取所有事件编码
      *
-     * @return 事件ID
+     * @return 事件编码
      */
-    Collection<E> getEventIds();
+    Collection<E> getEventCodes();
 }

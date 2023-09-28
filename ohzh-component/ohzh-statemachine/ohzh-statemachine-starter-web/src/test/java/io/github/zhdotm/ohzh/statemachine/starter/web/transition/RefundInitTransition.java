@@ -1,6 +1,6 @@
 package io.github.zhdotm.ohzh.statemachine.starter.web.transition;
 
-import io.github.zhdotm.ohzh.statemachine.core.constant.TransitionTypeEnum;
+import io.github.zhdotm.ohzh.statemachine.core.enums.TransitionTypeEnum;
 import io.github.zhdotm.ohzh.statemachine.starter.web.ISpringTransition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineAction;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineCondition;
@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 
 @StateMachineTransition(
-        stateMachineId = StateMachineConstant.REFUND_STATEMACHINE,
+        stateMachineCode = StateMachineConstant.REFUND_STATEMACHINE,
         type = TransitionTypeEnum.EXTERNAL,
         from = RefundStateConstant.REFUND_INIT,
         to = RefundStateConstant.WAIT_APPROVE,

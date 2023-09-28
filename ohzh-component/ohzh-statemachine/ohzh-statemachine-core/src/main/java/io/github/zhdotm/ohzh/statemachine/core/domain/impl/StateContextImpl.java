@@ -5,10 +5,14 @@ import io.github.zhdotm.ohzh.statemachine.core.domain.IStateContext;
 import lombok.Getter;
 import lombok.NonNull;
 
+/**
+ * @author zhihao.mao
+ */
+
 public class StateContextImpl<S, E> implements IStateContext<S, E> {
 
     @Getter
-    private S stateId;
+    private S stateCode;
 
     @Getter
     private Object payload;
@@ -21,8 +25,8 @@ public class StateContextImpl<S, E> implements IStateContext<S, E> {
         return new StateContextImpl<>();
     }
 
-    public StateContextImpl<S, E> to(@NonNull S stateId) {
-        this.stateId = stateId;
+    public StateContextImpl<S, E> to(@NonNull S stateCode) {
+        this.stateCode = stateCode;
 
         return this;
     }

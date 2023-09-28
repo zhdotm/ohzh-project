@@ -83,26 +83,26 @@ builder.externalTransitions()
         stateMachineBuilder
                 .createInternalTransition()
                 .from(StateEnum.STATE_WAIT_PROMO,
-                        StateEnum.STATE_WAIT_BALANCE,
-                        StateEnum.STATE_WAIT_PAY)
+                StateEnum.STATE_WAIT_BALANCE,
+                StateEnum.STATE_WAIT_PAY)
                 .on(EventEnum.EVENT_MODIFY_PRICE)
                 .when(ConditionEnum.IS_ABLE_MODIFY_PRICE,
-                        eventContext -> {
-                            System.out.println("检查能否修改订单金额");
-                            IEvent<EventEnum> event = eventContext.getEvent();
-                            Object[] payload = event.getPayload();
-                            System.out.println("收到事件参数负载: " + Arrays.toString(payload));
+                eventContext->{
+                System.out.println("检查能否修改订单金额");
+                IEvent<EventEnum> event=eventContext.getEvent();
+        Object[]payload=event.getPayload();
+        System.out.println("收到事件参数负载: "+Arrays.toString(payload));
 
-                            return Boolean.TRUE;
-                        })
-                .perform(ActionEnum.ACTION_MODIFY_PRICE,
-                        args -> {
-                            System.out.println("执行修改订单金额动作");
-                            System.out.println("收到事件参数负载: " + Arrays.toString(args));
+        return Boolean.TRUE;
+        })
+        .perform(ActionEnum.ACTION_MODIFY_PRICE,
+        args->{
+        System.out.println("执行修改订单金额动作");
+        System.out.println("收到事件参数负载: "+Arrays.toString(args));
 
-                            return "动作修改订单金额执行成功";
-                        })
-                .build();
+        return"动作修改订单金额执行成功";
+        })
+        .build();
 ```
 
 创建批量流转
@@ -170,7 +170,7 @@ public void promo1(){
 
         IStateContext<StateEnum, EventEnum> stateContext=stateMachine.fireEvent(eventContext);
 
-        System.out.printf("执行后的状态[%s], 执行后的结果[%s]%n",stateContext.getStateId(),stateContext.getPayload());
+        System.out.printf("执行后的状态[%s], 执行后的结果[%s]%n",stateContext.getStateCode(),stateContext.getPayload());
         }
 ```
 
@@ -191,25 +191,25 @@ States target=stateMachine.fireEvent(States.STATE1,Events.EVENT1,new Context());
 
 ```java
     /**
-     * 02、营销（事件上下文方式）
-     */
-    @Test
-    public void promo1() {
-        IEventContextBuilder<StateEnum, EventEnum> eventContextBuilder = EventContextFactory.create();
-        IEventBuilder<EventEnum> eventBuilder = EventFactory.create();
-        IEvent<EventEnum> event = eventBuilder
-                .payload("订单: xxxxxxx", "营销方案: 满100减50")
-                .id(EventEnum.EVENT_PROMO)
-                .build();
-        IEventContext<StateEnum, EventEnum> eventContext = eventContextBuilder
-                .from(StateEnum.STATE_WAIT_PROMO)
-                .on(event)
-                .build();
+ * 02、营销（事件上下文方式）
+ */
+@Test
+public void promo1(){
+        IEventContextBuilder<StateEnum, EventEnum> eventContextBuilder=EventContextFactory.create();
+        IEventBuilder<EventEnum> eventBuilder=EventFactory.create();
+        IEvent<EventEnum> event=eventBuilder
+        .payload("订单: xxxxxxx","营销方案: 满100减50")
+        .id(EventEnum.EVENT_PROMO)
+        .build();
+        IEventContext<StateEnum, EventEnum> eventContext=eventContextBuilder
+        .from(StateEnum.STATE_WAIT_PROMO)
+        .on(event)
+        .build();
 
-        IStateContext<StateEnum, EventEnum> stateContext = stateMachine.fireEvent(eventContext);
+        IStateContext<StateEnum, EventEnum> stateContext=stateMachine.fireEvent(eventContext);
 
-        System.out.printf("执行后的状态[%s], 执行后的结果[%s]%n", stateContext.getStateId(), stateContext.getPayload());
-    }
+        System.out.printf("执行后的状态[%s], 执行后的结果[%s]%n",stateContext.getStateCode(),stateContext.getPayload());
+        }
 ```
 
 #### 4、声明式定义状态机
@@ -220,7 +220,7 @@ States target=stateMachine.fireEvent(States.STATE1,Events.EVENT1,new Context());
 
 ##### ohzh-statemachine语法
 
-引入@EnableStateMachine、@StateMachineTransition、@StateMachineAction、@StateMachineCondition注解用于声明一个状态机组件。多个相同stateMachineId的状态机组件构成一个状态机。
+引入@EnableStateMachine、@StateMachineTransition、@StateMachineAction、@StateMachineCondition注解用于声明一个状态机组件。多个相同stateMachineCode的状态机组件构成一个状态机。
 
 ```java
 /**
@@ -231,7 +231,7 @@ States target=stateMachine.fireEvent(States.STATE1,Events.EVENT1,new Context());
 
 
 @StateMachineTransition(
-        stateMachineId = "RENT_ORDER",
+        stateMachineCode = "RENT_ORDER",
         type = TransitionTypeEnum.EXTERNAL,
         from = {"STATE_WAIT_BALANCE"},
         on = "EVENT_BALANCE",
@@ -239,14 +239,14 @@ States target=stateMachine.fireEvent(States.STATE1,Events.EVENT1,new Context());
 )
 public class OrderBalanceService implements ISpringTransition {
 
-    @StateMachineCondition(conditionId = "IS_ABLE_BALANCE")
+    @StateMachineCondition(conditionCode = "IS_ABLE_BALANCE")
     public Boolean check(String orderId) {
         System.out.println("检查能否结算订单");
 
         return Boolean.TRUE;
     }
 
-    @StateMachineAction(actionId = "ACTION_BALANCE")
+    @StateMachineAction(actionCode = "ACTION_BALANCE")
     public String execute(String orderId) {
         System.out.println("执行订单结算动作");
         System.out.println("订单" + orderId + "结算后的金额为50");
@@ -313,44 +313,44 @@ public class OrderBalanceService implements ISpringTransition {
 
 ```java
 //1、利用状态机工厂创建一个状态机构造器
-IStateMachineBuilder<String, String, String, String, String> stateMachineBuilder = StateMachineFactory.create();
+IStateMachineBuilder<String, String, String, String, String> stateMachineBuilder=StateMachineFactory.create();
 
 //2、创建转换
 //2.1、创建外部转换
-stateMachineBuilder
+        stateMachineBuilder
         .createExternalTransition()
         //2.1.1、排序
         .sort(1)
         //2.1.2、来源状态
-        .from("state1", "state2")
+        .from("state1","state2")
         //2.1.3、发生的事件
         .on("event1")
         //2.1.4、条件判断（判断事件能否通过）
         .when("condition1",
-                eventContext -> {
-                    //收到的事件
-                    IEvent<String> event = eventContext.getEvent();
-                    //事件ID
-                    String eventId = event.getEventId();
-                    //事件携带的参数
-                    Object[] objs = event.getPayload();
-                    //收到事件时候的状态ID
-                    String stateId = eventContext.getStateId();
+        eventContext->{
+        //收到的事件
+        IEvent<String> event=eventContext.getEvent();
+        //事件ID
+        String eventCode=event.getEventCode();
+        //事件携带的参数
+        Object[]objs=event.getPayload();
+        //收到事件时候的状态ID
+        String stateCode=eventContext.getStateCode();
 
-                    return Boolean.TRUE;
-                })
+        return Boolean.TRUE;
+        })
         //2.1.5、条件通过后，要执行的动作
-        .perform("action1", objs -> {
-            //objs是事件携带的参数
-            //经过一系列处理后，返回处理结果
+        .perform("action1",objs->{
+        //objs是事件携带的参数
+        //经过一系列处理后，返回处理结果
 
-            return "ok";
+        return"ok";
         })
         //2.1.6、转换后的状态
         .to("state3")
         .build();
 //2.2、创建内部转换
-stateMachineBuilder.createInternalTransition()
+        stateMachineBuilder.createInternalTransition()
         //2.2.1、排序
         .sort(2)
         //2.2.2、来源状态
@@ -359,16 +359,16 @@ stateMachineBuilder.createInternalTransition()
         .on("event2")
         //2.2.4、条件判断
         .when("condition2",
-                eventContext -> {
-                    return Boolean.TRUE;
-                })
+        eventContext->{
+        return Boolean.TRUE;
+        })
         //2.2.5、动作
         .perform("action2",
-                objs -> null)
+        objs->null)
         .build();
 
 //设置状态机ID
-IStateMachine<String, String, String, String, String> stateMachine = stateMachineBuilder
+        IStateMachine<String, String, String, String, String> stateMachine=stateMachineBuilder
         .build("stateMachine1");
 ```
 
@@ -376,13 +376,13 @@ IStateMachine<String, String, String, String, String> stateMachine = stateMachin
 
 ```java
 //发送事件
-IStateContext<String, String> stateContext = stateMachine.fireEvent("state1", "event1", "参数1", "参数2", "参数3");
+IStateContext<String, String> stateContext=stateMachine.fireEvent("state1","event1","参数1","参数2","参数3");
 //事件上下文
-IEventContext<String, String> eventContext = stateContext.getEventContext();
+        IEventContext<String, String> eventContext=stateContext.getEventContext();
 //转换后的状态
-String stateId = stateContext.getStateId();
+        String stateCode=stateContext.getStateCode();
 //动作执行结果
-Object payload = stateContext.getPayload();
+        Object payload=stateContext.getPayload();
 ```
 
 ##### 1.4、生成uml状态图文件
@@ -399,6 +399,7 @@ stateMachine.exportPlantUml("./uml/");
 ##### 2.1、引入依赖
 
 ```xml
+
 <dependency>
     <groupId>io.github.zhdotm</groupId>
     <artifactId>ohzh-statemachine-starter-web</artifactId>
@@ -409,6 +410,7 @@ stateMachine.exportPlantUml("./uml/");
 ##### 2.2、启用注解配置
 
 ```java
+
 @EnableStateMachine
 @SpringBootApplication
 public class App {
@@ -426,7 +428,7 @@ public class App {
 ```java
 
 @StateMachineTransition(
-        stateMachineId = "stateMachine1",
+        stateMachineCode = "stateMachine1",
         type = TransitionTypeEnum.EXTERNAL,
         from = {"state1", "state2"},
         on = "event1",
@@ -434,14 +436,14 @@ public class App {
 )
 public class AStateMachineComponent implements ISpringTransition {
 
-    @StateMachineCondition(conditionId = "isAbleToDoThis")
+    @StateMachineCondition(conditionCode = "isAbleToDoThis")
     public Boolean check(String input) {
         System.out.println("检查能否做某个事");
 
         return Boolean.TRUE;
     }
 
-    @StateMachineAction(actionId = "doSomething")
+    @StateMachineAction(actionCode = "doSomething")
     public String execute(String input) {
         System.out.println("做某个事");
 
@@ -454,7 +456,7 @@ public class AStateMachineComponent implements ISpringTransition {
 ##### 2.4、获取状态机
 
 ```java
-IStateMachine<String, String, String, String, String> stateMachine = StateMachineSupport.getStateMachine("statemachineId001");
+IStateMachine<String, String, String, String, String> stateMachine=StateMachineSupport.getStateMachine("statemachineId001");
 ```
 
 ##### 2.5、发布事件到指定状态机
@@ -462,14 +464,14 @@ IStateMachine<String, String, String, String, String> stateMachine = StateMachin
 方式一：先获取状态机，后由状态机发布事件
 
 ```java
-IStateMachine<String, String, String, String, String> stateMachine = StateMachineSupport.getStateMachine("statemachineId001");
-IStateContext<String, String> stateContext = stateMachine.fireEvent("state001", "event001", "payload001");
+IStateMachine<String, String, String, String, String> stateMachine=StateMachineSupport.getStateMachine("statemachineId001");
+        IStateContext<String, String> stateContext=stateMachine.fireEvent("state001","event001","payload001");
 ```
 
 方式二：利用状态机辅助类，直接发布事件
 
 ```java
-IStateContext<String, String> stateContext = StateMachineSupport.fireEvent("statemachineId001", "state001", "event001", "payload001");
+IStateContext<String, String> stateContext=StateMachineSupport.fireEvent("statemachineId001","state001","event001","payload001");
 ```
 
 ##### 2.6、生成uml状态图文件

@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: statemachine-demo
+rocketmq:
+  name-server: 192.168.10.8:9876
+  producer:
+    group: statemachine-demo-producer-group
+server:
+  port: 8888
+ohzh:
+  statemachine:
+    scope: remote
+    remote-codes:
+      - statemachine_001
+      - statemachine_002
+      - refund_statemachine_test
+
