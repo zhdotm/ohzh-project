@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.zhdotm.ohzh.statemachine.starter.web.mq.message;
+package io.github.zhdotm.ohzh.statemachine.mq.message;
 
 import cn.hutool.core.util.SystemPropsUtil;
 import cn.hutool.extra.spring.SpringUtil;
@@ -22,10 +22,9 @@ import cn.hutool.json.JSONUtil;
 import io.github.zhdotm.ohzh.statemachine.core.domain.IEvent;
 import io.github.zhdotm.ohzh.statemachine.core.domain.IEventContext;
 import io.github.zhdotm.ohzh.statemachine.core.enums.ContextEnum;
-import io.github.zhdotm.ohzh.statemachine.starter.web.enums.StateMachineMQEnum;
+import io.github.zhdotm.ohzh.statemachine.mq.enums.StateMachineMQEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.apache.rocketmq.common.message.MessageExt;
 
 import java.io.Serializable;
 import java.util.*;
@@ -44,11 +43,6 @@ public class EventContextMessage implements Serializable {
      * 主题
      */
     private String topic;
-
-    /**
-     * 标签过滤
-     */
-    private String tags;
 
     /**
      * 消息体
@@ -84,21 +78,13 @@ public class EventContextMessage implements Serializable {
         extraProperties.put(StateMachineMQEnum.STATE_MACHINE_CODE.getCode(), stateMachineCode);
         extraProperties.put(StateMachineMQEnum.STATE_CODE.getCode(), stateCode);
         extraProperties.put(StateMachineMQEnum.EVENT_CODE.getCode(), eventCode);
+        extraProperties.put(StateMachineMQEnum.TAGS.getCode(), tags);
+        extraProperties.put(StateMachineMQEnum.KEYS.getCode(), tags);
 
         return new EventContextMessage()
                 .setTopic(stateMachineCode)
-                .setTags(tags)
                 .setBody(body)
                 .setExtraProperties(extraProperties);
-    }
-
-    public static EventContextMessage create(MessageExt messageExt) {
-        String messageExtBody = new String(messageExt.getBody());
-        if (!JSONUtil.isTypeJSON(messageExtBody)) {
-
-            return null;
-        }
-        return JSONUtil.toBean(messageExtBody, EventContextMessage.class);
     }
 
 }

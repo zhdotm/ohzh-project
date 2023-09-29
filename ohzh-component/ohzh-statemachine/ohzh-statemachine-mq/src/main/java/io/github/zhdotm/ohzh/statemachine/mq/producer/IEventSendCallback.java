@@ -14,18 +14,27 @@
  * limitations under the License.
  */
 
-package io.github.zhdotm.ohzh.statemachine.starter.web.mq.producer;
+package io.github.zhdotm.ohzh.statemachine.mq.producer;
 
 /**
  * 消息发送回调接口
  *
- * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
- * @since 2.4.13
+ * @author zhihao.mao
  */
 public interface IEventSendCallback {
 
 
+    /**
+     * 成功
+     *
+     * @param result 发送结果
+     */
     void onSuccess(EventSendResult result);
 
-    void onException(Throwable e);
+    /**
+     * 异常
+     *
+     * @param throwable 异常
+     */
+    void onException(Throwable throwable);
 }

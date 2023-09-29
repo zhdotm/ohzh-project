@@ -20,8 +20,10 @@ public class StateMachineProperties {
 
     private String scope = StateMachineScopeEnum.LOCAL.getCode();
 
-    private List<String> remoteCodes;
+    private String remoteType;
 
-    private List<String> localCodes;
+    private List<String> remoteStatemachines;
+
+    private List<String> localStatemachines;
 
 }

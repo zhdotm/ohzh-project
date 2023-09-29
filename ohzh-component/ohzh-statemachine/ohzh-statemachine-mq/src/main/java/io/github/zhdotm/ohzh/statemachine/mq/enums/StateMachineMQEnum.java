@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.statemachine.starter.web.enums;
+package io.github.zhdotm.ohzh.statemachine.mq.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +17,9 @@ public enum StateMachineMQEnum {
     STATE_CODE("stateCode", "状态编码"),
     EVENT_CODE("eventCode", "事件编码"),
     TOPIC_NAME_SPACE("ohzh_statemachine", "命名空间"),
-    TAG_STATE_CONCAT_EVENT("_on_", "tag连接符"),
+    TAGS("tags", "tags"),
+    TAG_STATE_CONCAT_EVENT("_onEvent_", "tag连接符"),
+    KEYS("keys", "keys"),
     EVENT_SOURCE("event_source", "事件来源"),
     PAYLOAD_CLAZZ_NAME_ARRAY("payload_clazz_name_array", "负载数据类名数组"),
     PRODUCER_GROUP_NAME_SUFFIX("_producer_group", "生产者组名尾缀"),

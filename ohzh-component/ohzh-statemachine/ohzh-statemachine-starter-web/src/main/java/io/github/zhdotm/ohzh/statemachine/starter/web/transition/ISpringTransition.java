@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.statemachine.starter.web;
+package io.github.zhdotm.ohzh.statemachine.starter.web.transition;
 
 import io.github.zhdotm.ohzh.statemachine.core.domain.IEvent;
 import io.github.zhdotm.ohzh.statemachine.core.domain.IEventContext;

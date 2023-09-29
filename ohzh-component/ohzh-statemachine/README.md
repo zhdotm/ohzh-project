@@ -302,6 +302,7 @@ public class OrderBalanceService implements ISpringTransition {
 ##### 1.1、引入依赖
 
 ```xml
+
 <dependency>
     <groupId>io.github.zhdotm</groupId>
     <artifactId>ohzh-statemachine-core</artifactId>

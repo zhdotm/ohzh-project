@@ -1,18 +1,13 @@
-package io.github.zhdotm.ohzh.statemachine.starter.web.mq.consumer.rocketmq;
+package io.github.zhdotm.ohzh.statemachine.rocketmq.consumer;
 
-import cn.hutool.core.collection.ListUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONUtil;
-import io.github.zhdotm.ohzh.statemachine.starter.web.configuration.properties.StateMachineProperties;
-import io.github.zhdotm.ohzh.statemachine.starter.web.enums.StateMachineMQEnum;
-import io.github.zhdotm.ohzh.statemachine.starter.web.enums.StateMachineScopeEnum;
-import io.github.zhdotm.ohzh.statemachine.starter.web.mq.consumer.IEventConsumer;
-import io.github.zhdotm.ohzh.statemachine.starter.web.mq.message.EventContextMessage;
-import io.github.zhdotm.ohzh.statemachine.starter.web.support.StateMachineSupport;
+import io.github.zhdotm.ohzh.statemachine.mq.consumer.IEventConsumer;
+import io.github.zhdotm.ohzh.statemachine.mq.enums.StateMachineMQEnum;
+import io.github.zhdotm.ohzh.statemachine.mq.message.EventContextMessage;
+import io.github.zhdotm.ohzh.statemachine.rocketmq.message.RocketMQEventContextMessage;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.acl.common.AclClientRPCHook;
@@ -31,32 +26,31 @@ import org.springframework.beans.factory.SmartInitializingSingleton;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * @author zhihao.mao
  */
 
 @Slf4j
-public class RocketMQEventConsumer implements SmartInitializingSingleton, DisposableBean, IEventConsumer {
+public class RocketMQEventConsumer implements IEventConsumer, SmartInitializingSingleton, DisposableBean {
 
     private final Map<String, DefaultMQPushConsumer> topicConsumer = MapUtil.newConcurrentHashMap();
+
+    private final List<String> stateMachineCodes;
+    private final IEventConsumer eventConsumer;
+
+    public RocketMQEventConsumer(List<String> stateMachineCodes, IEventConsumer eventConsumer) {
+        this.stateMachineCodes = stateMachineCodes;
+        this.eventConsumer = eventConsumer;
+    }
 
     @SneakyThrows
     @Override
     public void afterSingletonsInstantiated() {
-        StateMachineProperties stateMachineProperties = SpringUtil.getBean(StateMachineProperties.class);
-        String scope = stateMachineProperties.getScope();
-        if (!StateMachineScopeEnum.REMOTE.getCode().equalsIgnoreCase(scope)) {
+        RocketMQProperties rocketMQProperties = SpringUtil.getBean(RocketMQProperties.class);
+        if (CollectionUtil.isEmpty(stateMachineCodes)) {
             return;
         }
-        RocketMQProperties rocketMQProperties = SpringUtil.getBean(RocketMQProperties.class);
-        List<String> stateMachineCodes = Optional.ofNullable(stateMachineProperties.getRemoteCodes())
-                .orElse(ListUtil.empty())
-                .stream()
-                .distinct()
-                .collect(Collectors.toList());
         for (String stateMachineCode : stateMachineCodes) {
             String consumerGroup = stateMachineCode + StrUtil.UNDERLINE + SpringUtil.getApplicationName() + StateMachineMQEnum.CONSUMER_GROUP_NAME_SUFFIX.getCode();
             RocketMQProperties.Consumer mqPropertiesConsumer = rocketMQProperties.getConsumer();
@@ -87,30 +81,9 @@ public class RocketMQEventConsumer implements SmartInitializingSingleton, Dispos
         log.info("关闭状态机事件消费者");
     }
 
-    @SneakyThrows
     @Override
     public void consume(EventContextMessage message) {
-        if (ObjectUtil.isEmpty(message)) {
-            return;
-        }
-        Map<String, String> extraProperties = message.getExtraProperties();
-        String stateMachineCode = extraProperties.get(StateMachineMQEnum.STATE_MACHINE_CODE.getCode());
-        String stateCode = extraProperties.get(StateMachineMQEnum.STATE_CODE.getCode());
-        String eventCode = extraProperties.get(StateMachineMQEnum.EVENT_CODE.getCode());
-        String payloadClazzNameArrayStr = extraProperties.get(StateMachineMQEnum.PAYLOAD_CLAZZ_NAME_ARRAY.getCode());
-        if (StrUtil.isBlank(payloadClazzNameArrayStr)) {
-            StateMachineSupport.fireEvent(stateMachineCode, stateCode, eventCode);
-        }
-        String bodyStr = message.getBody();
-        JSONArray bodyArray = JSONUtil.parseArray(bodyStr);
-        JSONArray payloadClazzNameArray = JSONUtil.parseArray(payloadClazzNameArrayStr);
-        Object[] payload = new Object[payloadClazzNameArray.size()];
-        for (int i = 0; i < payloadClazzNameArray.size(); i++) {
-            String payloadClazzName = payloadClazzNameArray.get(i, String.class);
-            Class<?> clazz = Class.forName(payloadClazzName);
-            payload[i] = bodyArray.get(i, clazz);
-        }
-        StateMachineSupport.fireEvent(stateMachineCode, stateCode, eventCode, payload);
+        eventConsumer.consume(message);
     }
 
     public class DefaultMessageListenerConcurrently implements MessageListenerConcurrently {
@@ -121,7 +94,7 @@ public class RocketMQEventConsumer implements SmartInitializingSingleton, Dispos
                 log.debug("received msg: {}", messageExt);
                 try {
                     long now = System.currentTimeMillis();
-                    consume(EventContextMessage.create(messageExt));
+                    consume(RocketMQEventContextMessage.create(messageExt));
                     long costTime = System.currentTimeMillis() - now;
                     log.debug("consume {} cost: {} ms", messageExt.getMsgId(), costTime);
                 } catch (Exception e) {
@@ -134,4 +107,5 @@ public class RocketMQEventConsumer implements SmartInitializingSingleton, Dispos
             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         }
     }
+
 }

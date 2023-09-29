@@ -14,24 +14,23 @@
  * limitations under the License.
  */
 
-package io.github.zhdotm.ohzh.statemachine.starter.web.mq.producer;
+package io.github.zhdotm.ohzh.statemachine.mq.producer;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
  * 消息发送结果
  *
- * @author <a href="mailto:shiyindaxiaojie@gmail.com">gyl</a>
- * @since 2.4.13
+ * @author zhihao.mao
  */
+
+@Data
 @Accessors(chain = true)
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@ToString
-@Data
 public class EventSendResult {
 
 
@@ -54,5 +53,5 @@ public class EventSendResult {
      * 偏移量
      */
     private Long offset;
-    
+
 }

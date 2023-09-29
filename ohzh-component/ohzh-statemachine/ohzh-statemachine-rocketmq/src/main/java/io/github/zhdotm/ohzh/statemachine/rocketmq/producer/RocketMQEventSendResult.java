@@ -1,6 +1,6 @@
-package io.github.zhdotm.ohzh.statemachine.starter.web.mq.producer.rocketmq;
+package io.github.zhdotm.ohzh.statemachine.rocketmq.producer;
 
-import io.github.zhdotm.ohzh.statemachine.starter.web.mq.producer.EventSendResult;
+import io.github.zhdotm.ohzh.statemachine.mq.producer.EventSendResult;
 import lombok.experimental.Accessors;
 import org.apache.rocketmq.client.producer.SendResult;
 

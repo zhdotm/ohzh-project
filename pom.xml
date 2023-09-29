@@ -160,6 +160,16 @@
             </dependency>
             <dependency>
                 <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-statemachine-mq</artifactId>
+                <version>${ohzh-statemachine-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
+                <artifactId>ohzh-statemachine-rocketmq</artifactId>
+                <version>${ohzh-statemachine-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.zhdotm</groupId>
                 <artifactId>ohzh-statemachine-starter-web</artifactId>
                 <version>${ohzh-statemachine-starter-web.version}</version>
             </dependency>

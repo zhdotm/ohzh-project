@@ -1,7 +1,6 @@
 package io.github.zhdotm.ohzh.statemachine.starter.web.transition;
 
 import io.github.zhdotm.ohzh.statemachine.core.enums.TransitionTypeEnum;
-import io.github.zhdotm.ohzh.statemachine.starter.web.ISpringTransition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineAction;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineCondition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTransition;

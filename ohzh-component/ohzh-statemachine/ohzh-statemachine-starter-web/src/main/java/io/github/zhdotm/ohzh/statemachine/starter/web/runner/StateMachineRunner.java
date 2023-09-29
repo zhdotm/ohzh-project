@@ -6,11 +6,11 @@ import io.github.zhdotm.ohzh.statemachine.core.domain.IStateMachine;
 import io.github.zhdotm.ohzh.statemachine.core.domain.ITransition;
 import io.github.zhdotm.ohzh.statemachine.core.support.factory.StateMachineFactory;
 import io.github.zhdotm.ohzh.statemachine.core.support.factory.builder.machine.IStateMachineBuilder;
-import io.github.zhdotm.ohzh.statemachine.starter.web.ISpringTransition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTransition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.configuration.properties.StateMachineProperties;
 import io.github.zhdotm.ohzh.statemachine.starter.web.enums.StateMachineScopeEnum;
 import io.github.zhdotm.ohzh.statemachine.starter.web.support.StateMachineSupport;
+import io.github.zhdotm.ohzh.statemachine.starter.web.transition.ISpringTransition;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.ApplicationArguments;
@@ -30,10 +30,10 @@ public class StateMachineRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         StateMachineProperties stateMachineProperties = SpringUtil.getBean(StateMachineProperties.class);
         String scope = stateMachineProperties.getScope();
-        List<String> stateMachineCodes = Optional.ofNullable(stateMachineProperties.getLocalCodes())
+        List<String> stateMachineCodes = Optional.ofNullable(stateMachineProperties.getLocalStatemachines())
                 .orElse(ListUtil.list(Boolean.FALSE));
         if (StateMachineScopeEnum.REMOTE.getCode().equalsIgnoreCase(scope)) {
-            List<String> remoteStateMachineCodes = Optional.ofNullable(stateMachineProperties.getRemoteCodes())
+            List<String> remoteStateMachineCodes = Optional.ofNullable(stateMachineProperties.getRemoteStatemachines())
                     .orElse(ListUtil.list(Boolean.FALSE));
             stateMachineCodes.addAll(remoteStateMachineCodes);
         }

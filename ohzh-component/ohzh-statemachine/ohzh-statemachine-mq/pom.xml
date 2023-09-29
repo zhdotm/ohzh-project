@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ohzh-statemachine-starter-web</artifactId>
+    <artifactId>ohzh-statemachine-mq</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -22,15 +22,6 @@
             <artifactId>ohzh-statemachine-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.github.zhdotm</groupId>
-            <artifactId>ohzh-statemachine-mq</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.github.zhdotm</groupId>
-            <artifactId>ohzh-statemachine-rocketmq</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-json</artifactId>
         </dependency>
@@ -41,16 +32,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 

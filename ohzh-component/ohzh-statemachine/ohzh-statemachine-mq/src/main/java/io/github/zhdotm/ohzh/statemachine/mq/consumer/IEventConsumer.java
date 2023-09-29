@@ -1,6 +1,7 @@
-package io.github.zhdotm.ohzh.statemachine.starter.web.mq.consumer;
+package io.github.zhdotm.ohzh.statemachine.mq.consumer;
 
-import io.github.zhdotm.ohzh.statemachine.starter.web.mq.message.EventContextMessage;
+
+import io.github.zhdotm.ohzh.statemachine.mq.message.EventContextMessage;
 
 /**
  * @author zhihao.mao

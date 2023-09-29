@@ -10,7 +10,7 @@ server:
 ohzh:
   statemachine:
     scope: remote
-    remote-codes:
+    remote-statemachines:
       - statemachine_001
       - statemachine_002
       - refund_statemachine_test

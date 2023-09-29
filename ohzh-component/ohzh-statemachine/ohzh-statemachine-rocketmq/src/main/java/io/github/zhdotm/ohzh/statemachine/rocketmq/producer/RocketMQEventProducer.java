@@ -1,16 +1,14 @@
-package io.github.zhdotm.ohzh.statemachine.starter.web.mq.producer.rocketmq;
+package io.github.zhdotm.ohzh.statemachine.rocketmq.producer;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
-import io.github.zhdotm.ohzh.statemachine.starter.web.configuration.properties.StateMachineProperties;
-import io.github.zhdotm.ohzh.statemachine.starter.web.enums.StateMachineMQEnum;
-import io.github.zhdotm.ohzh.statemachine.starter.web.enums.StateMachineScopeEnum;
-import io.github.zhdotm.ohzh.statemachine.starter.web.mq.message.EventContextMessage;
-import io.github.zhdotm.ohzh.statemachine.starter.web.mq.producer.EventSendResult;
-import io.github.zhdotm.ohzh.statemachine.starter.web.mq.producer.IEventProducer;
-import io.github.zhdotm.ohzh.statemachine.starter.web.mq.producer.IEventSendCallback;
+import io.github.zhdotm.ohzh.statemachine.mq.enums.StateMachineMQEnum;
+import io.github.zhdotm.ohzh.statemachine.mq.message.EventContextMessage;
+import io.github.zhdotm.ohzh.statemachine.mq.producer.EventSendResult;
+import io.github.zhdotm.ohzh.statemachine.mq.producer.IEventProducer;
+import io.github.zhdotm.ohzh.statemachine.mq.producer.IEventSendCallback;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.acl.common.AclClientRPCHook;
@@ -25,6 +23,7 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.SmartInitializingSingleton;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 /**
  * @author zhihao.mao
@@ -70,8 +69,9 @@ public class RocketMQEventProducer implements SmartInitializingSingleton, Dispos
      * @return mq消息
      */
     private Message transfer(EventContextMessage message) {
+        Map<String, String> extraProperties = message.getExtraProperties();
 
-        return new Message(message.getTopic(), message.getTags(), null, JSONUtil.toJsonStr(message).getBytes(StandardCharsets.UTF_8));
+        return new Message(message.getTopic(), extraProperties.get(StateMachineMQEnum.TAGS.getCode()), extraProperties.get(StateMachineMQEnum.KEYS.getCode()), JSONUtil.toJsonStr(message).getBytes(StandardCharsets.UTF_8));
     }
 
     @Override
@@ -85,11 +85,6 @@ public class RocketMQEventProducer implements SmartInitializingSingleton, Dispos
     @SneakyThrows
     @Override
     public void afterSingletonsInstantiated() {
-        StateMachineProperties stateMachineProperties = SpringUtil.getBean(StateMachineProperties.class);
-        String scope = stateMachineProperties.getScope();
-        if (!StateMachineScopeEnum.REMOTE.getCode().equalsIgnoreCase(scope)) {
-            return;
-        }
         RocketMQProperties rocketMQProperties = SpringUtil.getBean(RocketMQProperties.class);
         RocketMQProperties.Producer producerConfig = rocketMQProperties.getProducer();
         String nameServer = rocketMQProperties.getNameServer();

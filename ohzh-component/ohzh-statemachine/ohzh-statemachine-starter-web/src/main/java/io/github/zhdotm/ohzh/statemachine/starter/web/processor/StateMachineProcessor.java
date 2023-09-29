@@ -4,8 +4,8 @@ import io.github.zhdotm.ohzh.statemachine.core.enums.CharacterEnum;
 import io.github.zhdotm.ohzh.statemachine.core.enums.TransitionTypeEnum;
 import io.github.zhdotm.ohzh.statemachine.core.exception.StateMachineException;
 import io.github.zhdotm.ohzh.statemachine.core.util.ExceptionUtil;
-import io.github.zhdotm.ohzh.statemachine.starter.web.ISpringTransition;
 import io.github.zhdotm.ohzh.statemachine.starter.web.annotation.StateMachineTransition;
+import io.github.zhdotm.ohzh.statemachine.starter.web.transition.ISpringTransition;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.SmartInstantiationAwareBeanPostProcessor;
 
