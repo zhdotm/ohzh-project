@@ -24,6 +24,7 @@ import org.springframework.beans.factory.SmartInitializingSingleton;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author zhihao.mao
@@ -88,7 +89,8 @@ public class RocketMQEventProducer implements SmartInitializingSingleton, Dispos
         RocketMQProperties rocketMQProperties = SpringUtil.getBean(RocketMQProperties.class);
         RocketMQProperties.Producer producerConfig = rocketMQProperties.getProducer();
         String nameServer = rocketMQProperties.getNameServer();
-        String groupName = SpringUtil.getApplicationName() + StateMachineMQEnum.PRODUCER_GROUP_NAME_SUFFIX.getCode();
+        String groupName = Optional.ofNullable(producerConfig.getGroup())
+                .orElse(SpringUtil.getApplicationName() + StateMachineMQEnum.PRODUCER_GROUP_NAME_SUFFIX.getCode());
 
         DefaultMQProducer producer;
         String accessKey = rocketMQProperties.getProducer().getAccessKey();

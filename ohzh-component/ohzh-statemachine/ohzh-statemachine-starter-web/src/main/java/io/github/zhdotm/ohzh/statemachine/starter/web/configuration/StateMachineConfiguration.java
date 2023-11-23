@@ -45,7 +45,19 @@ public class StateMachineConfiguration {
 
     @ConditionalOnProperty(prefix = "ohzh.statemachine", name = "scope", havingValue = "remote")
     @Bean
-    public IEventProducer eventProducer() {
+    public IEventProducer eventProducer(StateMachineProperties stateMachineProperties) {
+        String remoteType = Optional.ofNullable(stateMachineProperties.getRemoteType())
+                .orElse(StateMachineRemoteTypeEnum.ROECKTMQ.getCode());
+        StateMachineRemoteTypeEnum stateMachineRemoteTypeEnum = Optional.ofNullable(StateMachineRemoteTypeEnum.getByCode(remoteType))
+                .orElse(StateMachineRemoteTypeEnum.ROECKTMQ);
+        if (stateMachineRemoteTypeEnum == StateMachineRemoteTypeEnum.ROECKTMQ) {
+
+            return new RocketMQEventProducer();
+        }
+        if (stateMachineRemoteTypeEnum == StateMachineRemoteTypeEnum.KAFKA) {
+
+            //TODO kafka的状态机插件尚未实现
+        }
 
         return new RocketMQEventProducer();
     }
@@ -62,6 +74,9 @@ public class StateMachineConfiguration {
             case ROECKTMQ: {
                 eventConsumer = new RocketMQEventConsumer(stateMachineProperties.getRemoteStatemachines(), new DefaultEventConsumer());
                 break;
+            }
+            case KAFKA:{
+                //TODO kafka的状态机插件尚未实现
             }
             default: {
                 eventConsumer = new RocketMQEventConsumer(stateMachineProperties.getRemoteStatemachines(), new DefaultEventConsumer());
