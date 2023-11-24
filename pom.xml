@@ -10,6 +10,7 @@
     <modules>
         <module>ohzh-component</module>
         <module>ohzh-example</module>
+        <module>ohzh-archetypes</module>
     </modules>
     <packaging>pom</packaging>
     <name>ohzh-project</name>
