@@ -10,6 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>ohzh-flow-server</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>ohzh-flow-server-infrastructure</module>
+        <module>ohzh-flow-server-domain</module>
+        <module>ohzh-flow-server-application</module>
+        <module>ohzh-flow-server-inbound</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
