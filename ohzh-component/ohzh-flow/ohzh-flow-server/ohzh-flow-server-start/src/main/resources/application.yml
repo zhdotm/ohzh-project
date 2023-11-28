@@ -1,0 +1,19 @@
+server:
+  port: 8081
+
+# camunda登录信息配置
+camunda.bpm:
+  admin-user:
+    id: admin  #用户名
+    password: 123456  #密码
+
+# mysql连接信息
+spring:
+  application:
+    name: ohzh-flow-server
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ohzh_flow
+    username: root
+    password: root
+    type: com.mysql.cj.jdbc.MysqlDataSource
