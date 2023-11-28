@@ -21,6 +21,7 @@
         <module>ohzh-sieve</module>
         <module>ohzh-idempotent</module>
         <module>ohzh-cache</module>
+        <module>ohzh-flow</module>
     </modules>
 
     <properties>
