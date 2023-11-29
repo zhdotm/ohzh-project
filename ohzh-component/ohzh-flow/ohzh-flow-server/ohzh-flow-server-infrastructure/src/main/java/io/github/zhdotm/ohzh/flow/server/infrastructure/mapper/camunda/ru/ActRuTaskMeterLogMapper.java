@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.flow.server.infrastructure.mapper.camunda.ru;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ru.ActRuTaskMeterLog;
+import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ru.ActRuTaskMeterLogDO;
 
 /**
  * @author zhihao.mao
@@ -9,7 +9,7 @@ import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ru.Ac
  * @createDate 2023-11-29 15:04:13
  * @Entity io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.ActRuTaskMeterLog
  */
-public interface ActRuTaskMeterLogMapper extends BaseMapper<ActRuTaskMeterLog> {
+public interface ActRuTaskMeterLogMapper extends BaseMapper<ActRuTaskMeterLogDO> {
 
 }
 

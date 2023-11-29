@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.ru.imp;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ru.ActRuVariable;
+import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ru.ActRuVariableDO;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.mapper.camunda.ru.ActRuVariableMapper;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.ru.ActRuVariableRepository;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @createDate 2023-11-29 15:04:13
  */
 @Repository
-public class ActRuVariableRepositoryImpl extends ServiceImpl<ActRuVariableMapper, ActRuVariable>
+public class ActRuVariableRepositoryImpl extends ServiceImpl<ActRuVariableMapper, ActRuVariableDO>
         implements ActRuVariableRepository {
 
 }

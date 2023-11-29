@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.flow.server.infrastructure.mapper.camunda.re;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.re.ActReProcdef;
+import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.re.ActReProcdefDO;
 
 /**
  * @author zhihao.mao
@@ -9,7 +9,7 @@ import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.re.Ac
  * @createDate 2023-11-29 15:04:13
  * @Entity io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.ActReProcdef
  */
-public interface ActReProcdefMapper extends BaseMapper<ActReProcdef> {
+public interface ActReProcdefMapper extends BaseMapper<ActReProcdefDO> {
 
 }
 

@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.ru.imp;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ru.ActRuFilter;
+import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ru.ActRuFilterDO;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.mapper.camunda.ru.ActRuFilterMapper;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.ru.ActRuFilterRepository;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @createDate 2023-11-29 15:04:13
  */
 @Repository
-public class ActRuFilterRepositoryImpl extends ServiceImpl<ActRuFilterMapper, ActRuFilter>
+public class ActRuFilterRepositoryImpl extends ServiceImpl<ActRuFilterMapper, ActRuFilterDO>
         implements ActRuFilterRepository {
 
 }

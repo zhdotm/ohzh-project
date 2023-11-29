@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.re.imp;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.re.ActReCamformdef;
+import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.re.ActReCamformdefDO;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.mapper.camunda.re.ActReCamformdefMapper;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.re.ActReCamformdefRepository;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @createDate 2023-11-29 15:04:13
  */
 @Repository
-public class ActReCamformdefRepositoryImpl extends ServiceImpl<ActReCamformdefMapper, ActReCamformdef>
+public class ActReCamformdefRepositoryImpl extends ServiceImpl<ActReCamformdefMapper, ActReCamformdefDO>
         implements ActReCamformdefRepository {
 
 }

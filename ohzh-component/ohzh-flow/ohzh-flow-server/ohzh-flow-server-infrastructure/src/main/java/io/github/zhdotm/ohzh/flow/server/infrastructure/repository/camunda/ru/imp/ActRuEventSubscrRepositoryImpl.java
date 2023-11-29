@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.ru.imp;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ru.ActRuEventSubscr;
+import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ru.ActRuEventSubscrDO;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.mapper.camunda.ru.ActRuEventSubscrMapper;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.ru.ActRuEventSubscrRepository;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @createDate 2023-11-29 15:04:13
  */
 @Repository
-public class ActRuEventSubscrRepositoryImpl extends ServiceImpl<ActRuEventSubscrMapper, ActRuEventSubscr>
+public class ActRuEventSubscrRepositoryImpl extends ServiceImpl<ActRuEventSubscrMapper, ActRuEventSubscrDO>
         implements ActRuEventSubscrRepository {
 
 }

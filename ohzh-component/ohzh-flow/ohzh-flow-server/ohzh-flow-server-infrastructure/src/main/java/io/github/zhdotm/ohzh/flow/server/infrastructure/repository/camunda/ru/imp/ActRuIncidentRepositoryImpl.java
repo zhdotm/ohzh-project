@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.ru.imp;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ru.ActRuIncident;
+import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ru.ActRuIncidentDO;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.mapper.camunda.ru.ActRuIncidentMapper;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.ru.ActRuIncidentRepository;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @createDate 2023-11-29 15:04:13
  */
 @Repository
-public class ActRuIncidentRepositoryImpl extends ServiceImpl<ActRuIncidentMapper, ActRuIncident>
+public class ActRuIncidentRepositoryImpl extends ServiceImpl<ActRuIncidentMapper, ActRuIncidentDO>
         implements ActRuIncidentRepository {
 
 }

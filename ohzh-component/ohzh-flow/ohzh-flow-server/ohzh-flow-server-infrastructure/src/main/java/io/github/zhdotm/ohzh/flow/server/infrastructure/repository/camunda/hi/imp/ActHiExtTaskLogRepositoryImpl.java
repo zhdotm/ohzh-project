@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.hi.imp;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.hi.ActHiExtTaskLog;
+import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.hi.ActHiExtTaskLogDO;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.mapper.camunda.hi.ActHiExtTaskLogMapper;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.hi.ActHiExtTaskLogRepository;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @createDate 2023-11-29 15:04:13
  */
 @Repository
-public class ActHiExtTaskLogRepositoryImpl extends ServiceImpl<ActHiExtTaskLogMapper, ActHiExtTaskLog>
+public class ActHiExtTaskLogRepositoryImpl extends ServiceImpl<ActHiExtTaskLogMapper, ActHiExtTaskLogDO>
         implements ActHiExtTaskLogRepository {
 
 }

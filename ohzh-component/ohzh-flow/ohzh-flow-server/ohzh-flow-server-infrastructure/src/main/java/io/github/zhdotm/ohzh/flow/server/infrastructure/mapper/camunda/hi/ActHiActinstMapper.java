@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.flow.server.infrastructure.mapper.camunda.hi;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.hi.ActHiActinst;
+import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.hi.ActHiActinstDO;
 
 /**
  * @author zhihao.mao
@@ -9,7 +9,7 @@ import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.hi.Ac
  * @createDate 2023-11-29 15:04:12
  * @Entity io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.ActHiActinst
  */
-public interface ActHiActinstMapper extends BaseMapper<ActHiActinst> {
+public interface ActHiActinstMapper extends BaseMapper<ActHiActinstDO> {
 
 }
 

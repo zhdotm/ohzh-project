@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.flow.server.infrastructure.mapper.camunda.ge;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ge.ActGeProperty;
+import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ge.ActGePropertyDO;
 
 /**
  * @author zhihao.mao
@@ -9,7 +9,7 @@ import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ge.Ac
  * @createDate 2023-11-29 15:04:12
  * @Entity io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.ActGeProperty
  */
-public interface ActGePropertyMapper extends BaseMapper<ActGeProperty> {
+public interface ActGePropertyMapper extends BaseMapper<ActGePropertyDO> {
 
 }
 

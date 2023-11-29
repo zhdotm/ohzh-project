@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.ru.imp;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ru.ActRuCaseSentryPart;
+import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.ru.ActRuCaseSentryPartDO;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.mapper.camunda.ru.ActRuCaseSentryPartMapper;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.ru.ActRuCaseSentryPartRepository;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @createDate 2023-11-29 15:04:13
  */
 @Repository
-public class ActRuCaseSentryPartRepositoryImpl extends ServiceImpl<ActRuCaseSentryPartMapper, ActRuCaseSentryPart>
+public class ActRuCaseSentryPartRepositoryImpl extends ServiceImpl<ActRuCaseSentryPartMapper, ActRuCaseSentryPartDO>
         implements ActRuCaseSentryPartRepository {
 
 }

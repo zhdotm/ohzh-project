@@ -1,7 +1,7 @@
 package io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.hi.imp;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.hi.ActHiAttachment;
+import io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.camunda.hi.ActHiAttachmentDO;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.mapper.camunda.hi.ActHiAttachmentMapper;
 import io.github.zhdotm.ohzh.flow.server.infrastructure.repository.camunda.hi.ActHiAttachmentRepository;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * @createDate 2023-11-29 15:04:12
  */
 @Repository
-public class ActHiAttachmentRepositoryImpl extends ServiceImpl<ActHiAttachmentMapper, ActHiAttachment>
+public class ActHiAttachmentRepositoryImpl extends ServiceImpl<ActHiAttachmentMapper, ActHiAttachmentDO>
         implements ActHiAttachmentRepository {
 
 }
