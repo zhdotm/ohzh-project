@@ -38,6 +38,11 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.5.3.1</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.zhdotm</groupId>
+            <artifactId>ohzh-flow-server-domain</artifactId>
+            <version>1.0.2</version>
+        </dependency>
     </dependencies>
 
 </project>
