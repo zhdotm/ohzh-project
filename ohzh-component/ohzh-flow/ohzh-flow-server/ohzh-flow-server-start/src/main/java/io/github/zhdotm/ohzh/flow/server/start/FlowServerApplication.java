@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.flow.server.domain.start;
+package io.github.zhdotm.ohzh.flow.server.start;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,5 +13,5 @@ public class FlowServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(FlowServerApplication.class, args);
     }
-    
+
 }
