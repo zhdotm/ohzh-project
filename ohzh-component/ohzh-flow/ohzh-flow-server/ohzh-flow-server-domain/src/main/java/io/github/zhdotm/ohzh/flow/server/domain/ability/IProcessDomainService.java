@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.flow.server.domain.camunda.ability;
+package io.github.zhdotm.ohzh.flow.server.domain.ability;
 
 /**
  * 流程领域服务
