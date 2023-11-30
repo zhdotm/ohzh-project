@@ -1,18 +1,23 @@
 package io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.extra;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Data;
 
 /**
  * 流程实例信息
+ *
  * @TableName ACT_EXTRA_PROC_INST
  */
-@TableName(value ="ACT_EXTRA_PROC_INST")
+@TableName(value = "ACT_EXTRA_PROC_INST")
 @Data
 public class ActExtraProcInstDO implements Serializable {
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
     /**
      * 物理主键
      */
@@ -50,10 +55,10 @@ public class ActExtraProcInstDO implements Serializable {
     private String businessTypeId;
 
     /**
-     * 业务类型名称
+     * 业务类型快照
      */
-    @TableField(value = "BUSINESS_TYPE_NAME")
-    private String businessTypeName;
+    @TableField(value = "BUSINESS_TYPE_SNAPSHOT")
+    private String businessTypeSnapshot;
 
     /**
      * 流程分类逻辑主键
@@ -62,16 +67,10 @@ public class ActExtraProcInstDO implements Serializable {
     private String procCategoryId;
 
     /**
-     * 分类名称
+     * 流程分类快照
      */
-    @TableField(value = "PROC_CATEGORY_NAME")
-    private String procCategoryName;
-
-    /**
-     * 分类展示图标
-     */
-    @TableField(value = "PROC_CATEGORY_ICON_URL")
-    private String procCategoryIconUrl;
+    @TableField(value = "PROC_CATEGORY_SNAPSHOT")
+    private String procCategorySnapshot;
 
     /**
      * CAMUNDA中的流程定义ID，关联到ACT_RE_PROCDEF
@@ -80,28 +79,10 @@ public class ActExtraProcInstDO implements Serializable {
     private String procDefId;
 
     /**
-     * CAMUNDA中的流程定义KEY，关联到ACT_RE_PROCDEF的KEY
+     * 流程定义快照
      */
-    @TableField(value = "PROC_DEF_KEY")
-    private String procDefKey;
-
-    /**
-     * CAMUNDA中的流程定义版本，关联到ACT_RE_PROCDEF的VERSION
-     */
-    @TableField(value = "PROC_DEF_VERSION")
-    private Integer procDefVersion;
-
-    /**
-     * 流程定义名称
-     */
-    @TableField(value = "PROC_DEF_NAME")
-    private String procDefName;
-
-    /**
-     * 分类展示图标
-     */
-    @TableField(value = "PROC_DEF_ICON_URL")
-    private String procDefIconUrl;
+    @TableField(value = "PROC_DEF_SNAPSHOT")
+    private String procDefSnapshot;
 
     /**
      * 额外信息
@@ -148,10 +129,8 @@ public class ActExtraProcInstDO implements Serializable {
     /**
      * 逻辑删除标志位
      */
-    @TableField(value = "IS_DELETED")
     @TableLogic(value = "0", delval = "id")
+    @TableField(value = "IS_DELETED")
     private String isDeleted;
 
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 }

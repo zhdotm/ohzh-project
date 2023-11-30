@@ -1,18 +1,23 @@
 package io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.extra;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Data;
 
 /**
  * 流程定义
+ *
  * @TableName ACT_EXTRA_PROC_DEF
  */
-@TableName(value ="ACT_EXTRA_PROC_DEF")
+@TableName(value = "ACT_EXTRA_PROC_DEF")
 @Data
 public class ActExtraProcDefDO implements Serializable {
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
     /**
      * 物理主键
      */
@@ -47,7 +52,7 @@ public class ActExtraProcDefDO implements Serializable {
      * 流程定义的状态，0-禁用 1-启用
      */
     @TableField(value = "DEF_STATUS")
-    private Integer defStatus;
+    private Boolean defStatus;
 
     /**
      * 流程分类ID
@@ -72,6 +77,12 @@ public class ActExtraProcDefDO implements Serializable {
      */
     @TableField(value = "EXTRA_ATTRS")
     private String extraAttrs;
+
+    /**
+     * 流程定义描述
+     */
+    @TableField(value = "DEF_DESC")
+    private String defDesc;
 
     /**
      * 创建人ID
@@ -112,10 +123,8 @@ public class ActExtraProcDefDO implements Serializable {
     /**
      * 逻辑删除标志位
      */
-    @TableField(value = "IS_DELETED")
     @TableLogic(value = "0", delval = "id")
+    @TableField(value = "IS_DELETED")
     private String isDeleted;
 
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 }

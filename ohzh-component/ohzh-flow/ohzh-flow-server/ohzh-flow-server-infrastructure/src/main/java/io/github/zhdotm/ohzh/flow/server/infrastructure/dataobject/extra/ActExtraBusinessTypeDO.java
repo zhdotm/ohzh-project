@@ -14,6 +14,10 @@ import java.time.LocalDateTime;
 @TableName(value = "ACT_EXTRA_BUSINESS_TYPE")
 @Data
 public class ActExtraBusinessTypeDO implements Serializable {
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
     /**
      * 物理主键
      */
@@ -83,10 +87,8 @@ public class ActExtraBusinessTypeDO implements Serializable {
     /**
      * 逻辑删除标志位
      */
-    @TableField(value = "IS_DELETED")
     @TableLogic(value = "0", delval = "id")
+    @TableField(value = "IS_DELETED")
     private String isDeleted;
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
+    
 }

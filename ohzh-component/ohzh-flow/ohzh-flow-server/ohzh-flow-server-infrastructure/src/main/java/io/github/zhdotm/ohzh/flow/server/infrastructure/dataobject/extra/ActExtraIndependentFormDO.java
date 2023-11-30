@@ -1,18 +1,23 @@
 package io.github.zhdotm.ohzh.flow.server.infrastructure.dataobject.extra;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Data;
 
 /**
  * 独立表单信息
+ *
  * @TableName ACT_EXTRA_INDEPENDENT_FORM
  */
-@TableName(value ="ACT_EXTRA_INDEPENDENT_FORM")
+@TableName(value = "ACT_EXTRA_INDEPENDENT_FORM")
 @Data
 public class ActExtraIndependentFormDO implements Serializable {
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
     /**
      * 物理主键
      */
@@ -100,10 +105,8 @@ public class ActExtraIndependentFormDO implements Serializable {
     /**
      * 逻辑删除标志位
      */
-    @TableField(value = "IS_DELETED")
     @TableLogic(value = "0", delval = "id")
+    @TableField(value = "IS_DELETED")
     private String isDeleted;
 
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 }

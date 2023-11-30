@@ -1,5 +1,11 @@
 package io.github.zhdotm.ohzh.flow.server.domain.model;
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.extra.spring.SpringUtil;
+import io.github.zhdotm.ohzh.flow.server.domain.facade.gateway.IBusinessTypeGateway;
+import io.github.zhdotm.ohzh.flow.server.domain.facade.gateway.IProcessCategoryGateway;
+import io.github.zhdotm.ohzh.flow.server.domain.model.valueobject.BusinessType;
+import io.github.zhdotm.ohzh.flow.server.domain.model.valueobject.ProcessCategory;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -52,9 +58,19 @@ public class ProcessDefinition {
     private String procCategoryId;
 
     /**
+     * 流程分类
+     */
+    private ProcessCategory processCategory;
+
+    /**
      * 当前流程定义所属的业务类型，用于关联具体业务
      */
     private String businessTypeId;
+
+    /**
+     * 业务类型
+     */
+    private BusinessType businessType;
 
     /**
      * 分类展示图标
@@ -65,6 +81,11 @@ public class ProcessDefinition {
      * 额外信息
      */
     private String extraAttrs;
+
+    /**
+     * 流程定义描述
+     */
+    private String defDesc;
 
     /**
      * 创建人ID
@@ -99,6 +120,24 @@ public class ProcessDefinition {
     /**
      * 逻辑删除标志位
      */
-    private Boolean isDeleted;
+    private String isDeleted;
+
+    public synchronized ProcessCategory getProcessCategory() {
+        if (ObjectUtil.isEmpty(processCategory)) {
+            IProcessCategoryGateway processCategoryRepository = SpringUtil.getBean(IProcessCategoryGateway.class);
+            processCategory = processCategoryRepository.findByProcCategoryId(procCategoryId);
+        }
+
+        return processCategory;
+    }
+
+    public synchronized BusinessType getBusinessType() {
+        if (ObjectUtil.isEmpty(businessType)) {
+            IBusinessTypeGateway businessTypeRepository = SpringUtil.getBean(IBusinessTypeGateway.class);
+            businessType = businessTypeRepository.findByBusinessTypeId(businessTypeId);
+        }
+
+        return businessType;
+    }
 
 }
