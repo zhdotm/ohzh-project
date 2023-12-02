@@ -1,10 +1,12 @@
-package io.github.zhdotm.ohzh.ddd.domain.event;
+package io.github.zhdotm.ohzh.ddd.infrastructure.event;
 
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.context.ApplicationEvent;
 
 /**
+ * 领域事件抽象
+ *
  * @author zhihao.mao
  */
 

@@ -1,7 +1,6 @@
 package io.github.zhdotm.ohzh.ddd.annotation;
 
-import cn.hutool.extra.spring.SpringUtil;
-import org.springframework.context.annotation.Import;
+import io.github.zhdotm.ohzh.extension.starter.web.annotation.EnableSpringExtension;
 
 import java.lang.annotation.*;
 
@@ -14,7 +13,7 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(value = {SpringUtil.class})
-public @interface EnableDDD {
+@EnableSpringExtension
+public @interface EnableSpringDDD {
 
 }
