@@ -1,4 +1,4 @@
-package io.github.zhdotm.ohzh.ddd.domain.aggregation.root;
+package io.github.zhdotm.ohzh.ddd.domain.aggregation.entity;
 
 import io.github.zhdotm.ohzh.ddd.domain.aggregation.entity.IEntity;
 
