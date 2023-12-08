@@ -1,7 +1,5 @@
 package io.github.zhdotm.ohzh.ddd.domain.aggregation.entity;
 
-import io.github.zhdotm.ohzh.ddd.domain.aggregation.entity.IEntity;
-
 /**
  * 聚合根
  * 聚合根是实体，作为聚合的管理者，它有实体的特点，具有全局唯一标识，有独立的生命周期。
