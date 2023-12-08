@@ -16,10 +16,10 @@ import org.springframework.context.ApplicationListener;
 public interface IDomainEventListener<E extends AbstractDomainEvent<?>> extends ApplicationListener<E> {
 
     /**
-     * 获取领域服务
+     * 获取应用服务
      *
      * @param clazz 类
-     * @param <T>   领域服务类型
+     * @param <T>   应用服务类型
      * @return 领域服务
      */
     default <T extends IApplicationService> T getApplicationService(Class<T> clazz) {

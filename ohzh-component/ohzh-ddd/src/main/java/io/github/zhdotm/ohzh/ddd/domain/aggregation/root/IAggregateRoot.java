@@ -15,5 +15,5 @@ import io.github.zhdotm.ohzh.ddd.domain.aggregation.entity.IEntity;
  */
 
 public interface IAggregateRoot<Id> extends IEntity<Id> {
-    
+
 }
